@@ -1,10 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
-import { Plan } from '../types/Plan'
-import { User } from '../types/User'
+import 'dotenv/config';
+
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import styles from '../styles/Home.module.css';
+import { Plan } from '../types/Plan';
+import { User } from '../types/User';
+
+import axios from 'axios';
+import mariadb from 'mariadb';
+import qs from 'qs';
+
+const pool = mariadb.createPool({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  connectionLimit: 5
+});
 
 type Props = {
   user: User,
@@ -16,10 +30,24 @@ export default function Home(data: Props) {
   // get email from the input and save it in the setEmail state
   const [email, setEmail] = useState('');
   const [plans, setPlans] = useState<Plan[]>([]);
+  const [user, setUser] = useState<User>();
+  const [paymentLink, setPaymentLink] = useState('');
 
-  // URL to get the plans from the API
-  // GET https://psadns.xyz/plans.php
 
+
+  // async function getUserByEmail(email) {
+  const getUserByEmail = async (email: string) => {
+
+    const conn = await pool.getConnection();
+
+    const rows = await conn.query('SELECT * FROM users WHERE email = ?', [email]);
+
+    await conn.end();
+
+    console.table(rows[0]);
+
+    return setUser(rows[0]);
+  }
 
   // URL to post the user id, plan id and payment method to the MercadoPago API
   // POST https://psadns.xyz/payment-url.php
@@ -38,23 +66,72 @@ export default function Home(data: Props) {
    * the cURL command to get the payment URL is:
    * 
    * curl --location --request POST 'https://psadns.xyz/payment-url.php' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'userId=123' \
---data-urlencode 'planId=1' \
---data-urlencode 'type=boleto'
-
-
-Se tudo estiver OK, será retornado um JSON no seguinte formato:
-
-{
-  "url": "{url que o user deve abrir para pagar}",
-  "sandbox_url": "{url que devemos usar para testar na sandbox}"
-}
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'userId=123' \
+    --data-urlencode 'planId=1' \
+    --data-urlencode 'type=boleto'
+    
+    
+    Se tudo estiver OK, será retornado um JSON no seguinte formato:
+    
+    {
+      "url": "{url que o user deve abrir para pagar}",
+      "sandbox_url": "{url que devemos usar para testar na sandbox}"
+    }
    */
 
+  const getPaymentLink = (userId: number, planId: number, type: string) => {
+    const data = qs.stringify({
+      'userId': userId,
+      'planId': planId,
+      'type': type
+    });
+    var config = {
+      method: 'post',
+      url: `https://psadns.xyz/payment-url.php`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
 
+    return axios(config)
+      .then(function (response) {
+        // return JSON.stringify(response.data);
+        const { data } = response;
+
+        console.table(data);
+
+        return data;
+      })
+      .then((data) => {
+        setPaymentLink(data);
+      })
+      .catch(function (err) {
+        return {
+          error: true,
+          message: {
+            code: err.response?.status || err,
+            text: err.response?.statusText || ''
+          }
+        }
+      });
+  }
   useEffect(() => {
-    // setPlans(res);
+    // URL to get the plans from the API
+    // GET https://psadns.xyz/plans.php
+
+    async () => {
+      await axios.get('https://psadns.xyz/plans.php')
+        .then((res) => {
+          const { data } = res;
+
+          console.table(data);
+
+          return data;
+        })
+        .then((data) => setPlans(data));
+    }
   }, [])
 
   return (
