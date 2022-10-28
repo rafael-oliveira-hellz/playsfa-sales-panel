@@ -78,45 +78,44 @@ export default function Home(data: Props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col justify-center items-center h-full'>
-        <h1 className='font-bold text-5xl my-6'>
+      <main className='flex flex-col justify-center items-center h-full '>
+        <h1 className='font-bold text-5xl mt-4 mb-5 '>
           <Link href='http://link-do-app-na-play-store.com'>
             Play Séries, Filmes e Animes
           </Link>
         </h1>
-        <section className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'>
-          <Input className='my-5' autoFocus />
+        <section
+          id='section'
+          className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
+        >
+          <Input autoFocus />
           <div
+            id='map-wrapper'
             style={{ justifyContent: 'space-evenly' }}
             className='flex flex-row pb-3'
           >
             {plans &&
               plans.map((plan) => (
+                // w-90
                 <div
-                  className='border border-double rounded border-zinc-800 w-90 h-auto mx-3 p-2'
+                  className='map-wrapper_div-card border border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
                   key={plan.id}
                   style={{ backgroundColor: '#ffffff' }}
                 >
-                  <h2 className='text-center font-semibold text-2xl underline mb-2'>
+                  <h2 className='div-card_title text-center font-semibold text-2xl underline mb-2'>
                     {plan.name}
                   </h2>
                   <p className='text-justify w-auto px-2'>
                     <strong>{plan.description}</strong>
                   </p>
-                  <div
-                    className='flex my-2 w-full pr-3'
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center'
-                    }}
-                  >
-                    <p className='text-center font-bold'>
+                  <div className='flex flex-col justify-start w-full h-fit pr-3 my-2 ml-1'>
+                    <p className='text-left font-bold '>
                       Boleto: R${plan.billet_price},00
                     </p>
-                    <p className='text-center font-bold'>
+                    <p className='text-left font-bold '>
                       Cartão de Crédito: R${plan.price},00
                     </p>
-                    <p className='text-center font-bold'>
+                    <p className='text-left font-bold '>
                       PIX: R${plan.pix_price},00
                     </p>
                   </div>
