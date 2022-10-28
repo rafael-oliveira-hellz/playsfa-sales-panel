@@ -3,21 +3,23 @@ import styled, { css } from 'styled-components';
 export const Input = styled.div`
   ${() => css`
     display: flex;
+    flex-direction: column;: ;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
 
     & label {
       color: #ffffff;
       font-size: 1.5rem;
       font-weight: 600;
       text-align: left;
-      width: 8%;
+      margin-bottom:10px;
     }
 
     & input {
-      /* background-color: #333333; */
       background-color: #fff;
       border: 1px inset #c0c0c0;
       border-radius: 1.5rem;
@@ -29,6 +31,12 @@ export const Input = styled.div`
       width: 60%;
       height: 2rem;
       outline: none;
+    }
+
+    @media screen and (max-width: 400px) {
+      input{
+        font-size: 0.8rem;
+      }
     }
   `}
 `;
