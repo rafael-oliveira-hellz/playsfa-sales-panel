@@ -85,26 +85,44 @@ export default function Home(data: Props) {
             Play Séries, Filmes e Animes
           </Link>
         </h1>
-        <section className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 h-full'>
+        <section className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'>
           <Input className='my-5' autoFocus />
-          <div className='flex flex-row w-full mb-5'>
+          <div
+            style={{ justifyContent: 'space-evenly' }}
+            className='flex flex-row pb-3'
+          >
             {plans &&
               plans.map((plan) => (
                 <div
-                  className='border border-double rounded border-zinc-800 w-1/5 h-auto++++ mx-3 py-2 px-2'
+                  className='border border-double rounded border-zinc-800 w-90 h-auto mx-3 p-2'
                   key={plan.id}
-                  style={{ backgroundColor: '#7a7a7a' }}
+                  style={{ backgroundColor: '#ffffff' }}
                 >
-                  <h2 className='text-center font-semibold text-xl'>
+                  <h2 className='text-center font-semibold text-2xl underline mb-2'>
                     {plan.name}
                   </h2>
-                  <p>
-                    <span style={{ color: 'red' }}>{plan.description}</span>
+                  <p className='text-justify w-auto px-2'>
+                    <strong>{plan.description}</strong>
                   </p>
-                  <p>Cartão de Crédito: {plan.price}</p>
-                  <p>Boleto: {plan.billet_price}</p>
-                  <p>PIX: {plan.pix_price}</p>
-                  <div className='flex'>
+                  <div
+                    className='flex my-2 w-full pr-3'
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <p className='text-center font-bold'>
+                      Boleto: R${plan.billet_price},00
+                    </p>
+                    <p className='text-center font-bold'>
+                      Cartão de Crédito: R${plan.price},00
+                    </p>
+                    <p className='text-center font-bold'>
+                      PIX: R${plan.pix_price},00
+                    </p>
+                  </div>
+
+                  <div className='flex flex-col w-full h-auto'>
                     <button
                       onClick={() =>
                         getPaymentLink(
@@ -114,7 +132,7 @@ export default function Home(data: Props) {
                         )
                       }
                     >
-                      Pagar com boleto
+                      PAGAR COM <em>Boleto</em>
                     </button>
                     <button
                       onClick={() =>
@@ -125,14 +143,14 @@ export default function Home(data: Props) {
                         )
                       }
                     >
-                      Pagar com cartão de crédito
+                      PAGAR COM <em>Cartão de Crédito</em>
                     </button>
                     <button
                       onClick={() =>
                         getPaymentLink('luannbr004@gmail.com', plan.id, 'pix')
                       }
                     >
-                      Pagar com PIX
+                      PAGAR COM <em>PIX</em>
                     </button>
                   </div>
                 </div>
@@ -167,7 +185,7 @@ export default function Home(data: Props) {
         )} */}
       </main>
 
-      <footer>
+      {/* <footer>
         <a
           href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
           target='_blank'
@@ -178,7 +196,7 @@ export default function Home(data: Props) {
             <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
           </span>
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }

@@ -9,15 +9,19 @@ export const Input = styled.div`
     height: 3rem;
 
     & label {
-      color: #000000;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 600;
       text-align: left;
-      width: 10%;
+      width: 8%;
     }
+
     & input {
-      background-color: #333333;
+      /* background-color: #333333; */
+      background-color: #fff;
       border: 1px inset #c0c0c0;
       border-radius: 1.5rem;
-      color: #fff;
+      color: #000;
       font-style: italic;
       font-weight: 700;
       letter-spacing: 2px;

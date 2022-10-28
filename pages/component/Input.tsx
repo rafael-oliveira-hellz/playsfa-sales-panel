@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as Styled from './styles';
 
 type InputProps = {
@@ -13,6 +13,19 @@ export const Input = ({
   onChange,
   autoFocus
 }: InputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const onEnter = (e: any) => {
+    e.target.focus();
+  };
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    });
+  }, []);
+
   return (
     <>
       <Styled.Input className={className}>
@@ -25,6 +38,8 @@ export const Input = ({
           autoFocus={autoFocus}
           onChange={onChange}
           value={value}
+          ref={inputRef}
+          onMouseEnter={onEnter}
         />
       </Styled.Input>
     </>

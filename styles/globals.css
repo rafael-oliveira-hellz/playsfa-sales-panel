@@ -26,7 +26,7 @@ body {
 }
 
 section {
-  background-color: #ffffff;
+  background-color: #18042d;
   border-radius: 1rem;
 }
 
@@ -34,8 +34,8 @@ span,
 p,
 h2,
 button {
-  /* color: #000000; */
-  color: #fff;
+  color: #000000;
+  /* color: #fff; */
 }
 
 p {
@@ -45,6 +45,20 @@ p {
 }
 
 button {
+  color: #fff;
   border: 1px solid #f8f9fa;
   border-radius: 5px;
+  background-color: #371f8b;
+  height: 2.5rem;
+  width: 100%;
+  margin-bottom: 2px;
+  transition: all 350ms ease-in-out;
+}
+button:hover {
+  background-color: #911308;
+}
+strong,
+em {
+  font-weight: normal;
+  font-style: normal;
 }
