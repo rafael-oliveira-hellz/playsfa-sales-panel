@@ -80,7 +80,7 @@ export default function Home(data: Props) {
         {plans && plans.map((plan) => (
           <div key={plan.id}>
             <h2>{plan.name}</h2>
-            <p>{plan.description}</p>
+            <p><pre>{plan.description}</pre></p>
             <p>Cartão de Crédito: {plan.price}</p>
             <p>Boleto: {plan.billet_price}</p>
             <p>PIX: {plan.pix_price}</p>
