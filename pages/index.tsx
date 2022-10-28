@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
 import { Input } from './component/Input';
+import { SignUpMessage } from './component/SignUpMessage';
 
 export async function getStaticProps() {
   const plansUrl = 'https://psadns.xyz/plans.php';
@@ -33,7 +33,7 @@ export default function Home(data: Props) {
   const [user, setUser] = useState<User>();
   const [paymentLink, setPaymentLink] = useState('');
   const [type, setType] = useState('');
-
+  const [error, setError] = useState(false);
   const getPaymentLink = async (
     email: string,
     planId: number,
@@ -58,6 +58,7 @@ export default function Home(data: Props) {
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
+        setError(true);
       }
     }
   };
@@ -67,7 +68,7 @@ export default function Home(data: Props) {
   }, [data.plans]);
 
   return (
-    <div>
+    <>
       <Head>
         <meta charSet='utf-8' />
         <title>Play SFA | Renovar Plano de Streaming</title>
@@ -75,11 +76,11 @@ export default function Home(data: Props) {
           name='description'
           content='Página para renovação de planos de streaming dos usuários da Play Séries, Filmes e Animes'
         />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/p-icon.svg' />
       </Head>
 
-      <main className='flex flex-col justify-center items-center h-full '>
-        <h1 className='font-bold text-5xl mt-4 mb-5 '>
+      <main className='flex flex-col justify-center items-center h-full pb-4'>
+        <h1 className='font-bold text-5xl mt-5 mb-5 '>
           <Link href='http://link-do-app-na-play-store.com'>
             Play Séries, Filmes e Animes
           </Link>
@@ -89,6 +90,8 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
           <Input autoFocus />
+          {error && <SignUpMessage />}
+
           <div
             id='map-wrapper'
             style={{ justifyContent: 'space-evenly' }}
@@ -195,6 +198,6 @@ export default function Home(data: Props) {
           </span>
         </a>
       </footer> */}
-    </div>
+    </>
   );
 }
