@@ -56,7 +56,11 @@ export default function Home(data: Props) {
           console.log(res.data);
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
-        });
+        }).then(() => {
+          setTimeout(function () {
+            setVisible(false);
+          }, 33000);
+        })
     } catch (error: any) {
       // debugger;
       if (error.response) {
@@ -100,9 +104,6 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
-    setTimeout(function () {
-      setVisible(false);
-    }, 33000);
   }, [data.plans]);
 
   return (
