@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import * as Styled from './styles';
+import Input from './Input.style';
 
 type InputProps = {
   className?: string;
@@ -7,7 +7,7 @@ type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autoFocus: boolean;
 };
-const Input = ({
+const InputComponent = ({
   className,
   value,
   onChange,
@@ -28,7 +28,7 @@ const Input = ({
 
   return (
     <>
-      <Styled.Input className={className}>
+      <Input className={className}>
         <label htmlFor='email'>
           E-mail
         </label>
@@ -42,9 +42,9 @@ const Input = ({
           onMouseEnter={onEnter}
           placeholder='Digite seu e-mail cadastrado'
         />
-      </Styled.Input>
+      </Input>
     </>
   );
 };
 
-export default Input;
+export default InputComponent;

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import QRCode from '../assets/qr-code-styling.png';
-import * as Styled from './styles';
+import SignUpMessageWrapper from './SignUpMessageWrapper.style';
 
 const SignUpMessage = () => {
   const [counter, setCounter] = useState(30);
@@ -12,7 +12,7 @@ const SignUpMessage = () => {
 
   return (
     <>
-      <Styled.SignUpMessageWrapper>
+      <SignUpMessageWrapper>
         <p>
           Email inválido! Não possui uma conta? Faça a leitura do nosso QR Code e cadastre-se!
         </p>
@@ -21,7 +21,7 @@ const SignUpMessage = () => {
         <p>
           Tempo restante: {counter} segundos.
         </p>
-      </Styled.SignUpMessageWrapper>
+      </SignUpMessageWrapper>
     </>
   );
 };

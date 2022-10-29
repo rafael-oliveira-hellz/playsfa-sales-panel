@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
-import * as Styled from './styles';
+import PurchaseCardWrapper from './PurchaseCardWrapper.style';
 
 type Props = {
   userName: string;
@@ -31,7 +31,7 @@ const PurchaseCard = ({
     const phoneArr = phone.split('');
     const phoneMasked = phoneArr.map((item, index) => {
       if (index === 0) {
-        return `+(${item}`;
+        return `+ (${item}`;
       }
       if (index === 1) {
         return `${item}) `;
@@ -55,7 +55,7 @@ const PurchaseCard = ({
 
   return (
     <>
-      <Styled.PurchaseCardWrapper>
+      <PurchaseCardWrapper>
         <div className="purchase-card">
           <div className="purchase-card__header">
             <h2 className="purchase-card__title">Resumo da Compra</h2>
@@ -107,7 +107,7 @@ const PurchaseCard = ({
             </div>
           </div>
         </div>
-      </Styled.PurchaseCardWrapper>
+      </PurchaseCardWrapper>
     </>
   );
 };
