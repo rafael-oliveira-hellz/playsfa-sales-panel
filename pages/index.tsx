@@ -73,6 +73,7 @@ export default function Home(data: Props) {
     payment_type: string,
     plan_price: string
   ) => {
+    setVisible(true);
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
     getPaymentLink(
