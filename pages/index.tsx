@@ -56,11 +56,7 @@ export default function Home(data: Props) {
           console.log(res.data);
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
-        }).then(() => {
-          setTimeout(function () {
-            setVisible(false);
-          }, 33000);
-        })
+        });
     } catch (error: any) {
       // debugger;
       if (error.response) {
@@ -104,6 +100,9 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
+    setTimeout(function () {
+      setVisible(false);
+    }, 33000);
   }, [data.plans]);
 
   return (
@@ -129,7 +128,7 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
           <Input value={email} autoFocus onChange={(e) => setEmail(e.target.value)} />
-          {error && visible ? <SignUpMessage /> : null}
+          {error ? <SignUpMessage /> : null}
 
           <div
             id='map-wrapper'
