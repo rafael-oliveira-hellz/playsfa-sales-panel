@@ -36,6 +36,7 @@ export default function Home(data: Props) {
   const [error, setError] = useState(false);
   const [visible, setVisible] = useState(true);
   const [planChosen, setPlanChosen] = useState('');
+  const [planPrice, setPlanPrice] = useState('');
 
   const getPaymentLink = async (
     email: string,
@@ -69,9 +70,11 @@ export default function Home(data: Props) {
     plan_name: string,
     plan_id: number,
     user_email: string,
-    payment_type: string
+    payment_type: string,
+    plan_price: string
   ) => {
     setPlanChosen(plan_name);
+    setPlanPrice(plan_price);
     getPaymentLink(
       user_email,
       plan_id,
@@ -93,7 +96,6 @@ export default function Home(data: Props) {
       );
     });
   };
-
 
   useEffect(() => {
     setPlans(data.plans);
@@ -143,10 +145,10 @@ export default function Home(data: Props) {
                   <h2 className='div-card_title text-center font-semibold text-2xl underline mb-2'>
                     {plan.name}
                   </h2>
-                  <p className='text-left px-2'>
+                  <p className='text-left px-2 py-5'>
                     <strong>{breakLine(plan.description)}</strong>
                   </p>
-                  <div className='flex flex-col justify-start w-full h-fit pr-3 my-2 ml-1'>
+                  <div className='flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1'>
                     <p className='text-left font-bold '>
                       Boleto: R${plan.billet_price},00
                     </p>
@@ -165,7 +167,8 @@ export default function Home(data: Props) {
                           plan.name,
                           plan.id,
                           email,
-                          'boleto'
+                          'boleto',
+                          plan.price
                         )
                       }
                     >
@@ -177,7 +180,8 @@ export default function Home(data: Props) {
                           plan.name,
                           plan.id,
                           email,
-                          'normal'
+                          'normal',
+                          plan.price
                         )
                       }
                     >
@@ -189,7 +193,8 @@ export default function Home(data: Props) {
                           plan.name,
                           plan.id,
                           email,
-                          'pix'
+                          'pix',
+                          plan.price
                         )
                       }
                     >
@@ -213,6 +218,7 @@ export default function Home(data: Props) {
             userTelegram={user.id_telegram}
             userDiscord={user.id_discord}
             planName={planChosen}
+            planPrice={planPrice}
             paymentUrl={paymentLink}
           />}
         </section>

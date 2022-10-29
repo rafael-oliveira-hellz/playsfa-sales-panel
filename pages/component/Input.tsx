@@ -29,7 +29,7 @@ export const Input = ({
   return (
     <>
       <Styled.Input className={className}>
-        <label htmlFor='email' placeholder='Digite seu e-mail cadastrado'>
+        <label htmlFor='email'>
           E-mail
         </label>
         <input
@@ -40,6 +40,7 @@ export const Input = ({
           value={value}
           ref={inputRef}
           onMouseEnter={onEnter}
+          placeholder='Digite seu e-mail cadastrado'
         />
       </Styled.Input>
     </>

@@ -10,6 +10,7 @@ type Props = {
   userDiscord: string | null;
   paymentUrl: string;
   planName: string;
+  planPrice: string;
 };
 
 export const PurchaseCard = ({
@@ -20,8 +21,35 @@ export const PurchaseCard = ({
   userTelegram,
   userDiscord,
   paymentUrl,
-  planName
+  planName,
+  planPrice
 }: Props) => {
+  // create a phone number mask in the format (+55) 11 99999-9999 or (+55) 11 9999-9999
+  const phoneMask = (phone: string) => {
+    const phoneArr = phone.split('');
+    const phoneMasked = phoneArr.map((item, index) => {
+      if (index === 0) {
+        return `+(${item}`;
+      }
+      if (index === 1) {
+        return `${item}) `;
+      }
+      if (index === 2) {
+        return ` ${item}`;
+      }
+      if (index === 3 || index === 4) {
+        return `${item} `;
+      }
+      if (index === 8) {
+        return `${item}-`;
+      }
+      if (index === 12) {
+        return `${item}`;
+      }
+      return item;
+    });
+    return phoneMasked.join('');
+  };
 
   return (
     <>
@@ -42,7 +70,7 @@ export const PurchaseCard = ({
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Whatsapp: </p>
               <p className="purchase-card__body__info__value">{userWhatsapp
-                && userWhatsapp ? userWhatsapp : 'Não Possui'}</p>
+                && userWhatsapp ? phoneMask(userWhatsapp) : 'Não Possui'}</p>
             </div>
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Telegram: </p>
@@ -61,6 +89,10 @@ export const PurchaseCard = ({
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Plano Escolhido: </p>
               <p className="purchase-card__body__info__value">{planName}</p>
+            </div>
+            <div className="purchase-card__body__info">
+              <p className="purchase-card__body__info__title">Valor do Plano Escolhido: </p>
+              <p className="purchase-card__body__info__value">R${planPrice},00</p>
             </div>
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Link de Pagamento: </p>

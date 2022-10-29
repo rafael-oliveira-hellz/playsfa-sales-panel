@@ -33,6 +33,11 @@ export const Input = styled.div`
       outline: none;
     }
 
+    & input::placeholder {
+      color: #1B1B1B;
+      font-weight: 700;
+    }
+
     @media screen and (max-width: 400px) {
       input{
         font-size: 0.8rem;
