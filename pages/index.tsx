@@ -34,7 +34,6 @@ export default function Home(data: Props) {
   const [user, setUser] = useState<User>();
   const [paymentLink, setPaymentLink] = useState('');
   const [error, setError] = useState(false);
-  const [visible, setVisible] = useState(true);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
 
@@ -73,7 +72,6 @@ export default function Home(data: Props) {
     payment_type: string,
     plan_price: string
   ) => {
-    setVisible(true);
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
     getPaymentLink(
@@ -129,9 +127,9 @@ export default function Home(data: Props) {
             value={email}
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={() => { setVisible(false) }}
+            onKeyDown={() => { setError(false) }}
           />
-          {error && visible ? <SignUpMessage /> : null}
+          {error ? <SignUpMessage /> : null}
 
           <div
             id='map-wrapper'
