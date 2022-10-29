@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import QRCode from '../assets/qr-code-styling.png';
 import * as Styled from './styles';
 
-export const SignUpMessage = () => {
+const SignUpMessage = () => {
   const [counter, setCounter] = useState(30);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ export const SignUpMessage = () => {
     </>
   );
 };
+
+export default SignUpMessage;

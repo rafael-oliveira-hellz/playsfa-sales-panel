@@ -15,7 +15,7 @@ type Props = {
   planPrice: string;
 };
 
-export const PurchaseCard = ({
+const PurchaseCard = ({
   userName,
   userEmail,
   userWhatsapp,
@@ -112,3 +112,4 @@ export const PurchaseCard = ({
   );
 };
 
+export default PurchaseCard;

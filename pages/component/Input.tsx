@@ -7,7 +7,7 @@ type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autoFocus: boolean;
 };
-export const Input = ({
+const Input = ({
   className,
   value,
   onChange,
@@ -46,3 +46,5 @@ export const Input = ({
     </>
   );
 };
+
+export default Input;

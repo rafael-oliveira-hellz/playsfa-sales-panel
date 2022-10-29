@@ -36,6 +36,7 @@ export const Input = styled.div`
     & input::placeholder {
       color: #1B1B1B;
       font-weight: 700;
+      letter-spacing: 2px;
     }
 
     @media screen and (max-width: 400px) {
