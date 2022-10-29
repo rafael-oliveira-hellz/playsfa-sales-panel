@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
-import { Input } from './component/Input';
-import { PurchaseCard } from './component/PurchaseCard';
-import { SignUpMessage } from './component/SignUpMessage';
+import Input from './component/Input';
+import PurchaseCard from './component/PurchaseCard';
+import SignUpMessage from './component/SignUpMessage';
 
 export async function getStaticProps() {
   const plansUrl = 'https://psadns.xyz/plans.php';
