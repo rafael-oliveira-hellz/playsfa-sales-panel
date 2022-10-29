@@ -79,7 +79,9 @@ export default function Home(data: Props) {
       user_email,
       plan_id,
       payment_type
-    )
+    );
+    // clean input
+    setEmail('');
   };
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
