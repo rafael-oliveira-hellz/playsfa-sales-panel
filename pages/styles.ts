@@ -1,3 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Div = styled.section``;
+const Div = styled.section``;
+
+export default Div;
