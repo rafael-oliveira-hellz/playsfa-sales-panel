@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
 import * as Styled from './styles';
 
 type Props = {
@@ -96,7 +98,12 @@ export const PurchaseCard = ({
             </div>
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Link de Pagamento: </p>
-              <p className="purchase-card__body__info__value"><Link href={paymentUrl} target='_blank'>{paymentUrl}</Link></p>
+              <p className="purchase-card__body__info__value">
+                <Link href={paymentUrl} target='_blank'>
+                  {paymentUrl}
+                  <Image src={AbrirEmNovaGuia} alt="Abrir em nova guia" width={100} />
+                </Link>
+              </p>
             </div>
           </div>
         </div>
