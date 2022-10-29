@@ -79,6 +79,22 @@ export default function Home(data: Props) {
     )
   };
 
+  // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
+
+  const breakLine = (str: string) => {
+    const arr = str.split('!');
+    return arr.map((item, index) => {
+      return (
+        <span key={index}>
+          {item}
+          {index !== arr.length - 1 && ' !'}
+          {index !== arr.length - 1 && <br />}
+        </span>
+      );
+    });
+  };
+
+
   useEffect(() => {
     setPlans(data.plans);
     setTimeout(function () {
@@ -127,8 +143,8 @@ export default function Home(data: Props) {
                   <h2 className='div-card_title text-center font-semibold text-2xl underline mb-2'>
                     {plan.name}
                   </h2>
-                  <p className='text-justify px-2'>
-                    <strong><pre>{plan.description}</pre></strong>
+                  <p className='text-left px-2'>
+                    <strong>{breakLine(plan.description)}</strong>
                   </p>
                   <div className='flex flex-col justify-start w-full h-fit pr-3 my-2 ml-1'>
                     <p className='text-left font-bold '>
