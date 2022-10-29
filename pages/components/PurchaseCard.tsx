@@ -58,7 +58,7 @@ const PurchaseCard = ({
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Link de Pagamento: </p>
               <p className="purchase-card__body__info__value">
-                <a href={paymentUrl} target='_blank'>
+                <a href={paymentUrl} target='_blank' rel='noreferrer'>
                   {paymentUrl}
                   <Image src={AbrirEmNovaGuia} alt="Abrir em nova guia" width={100} />
                 </a>
