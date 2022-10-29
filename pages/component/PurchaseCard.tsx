@@ -49,7 +49,7 @@ export const PurchaseCard = ({
               <p className="purchase-card__body__info__value">{userTelegram && userTelegram ? userTelegram : 'Não Possui'}</p>
             </div>
             <div className="purchase-card__body__info">
-              <p className="purchase-card__body__info__title">Discord: </p>
+              <p className="purchase-card__body__info__title">ID Discord: </p>
               <p className="purchase-card__body__info__value">{userDiscord && userDiscord ? userDiscord : 'Não Possui'}</p>
             </div>
             <div className="purchase-card__body__info">

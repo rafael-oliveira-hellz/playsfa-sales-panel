@@ -127,8 +127,8 @@ export default function Home(data: Props) {
                   <h2 className='div-card_title text-center font-semibold text-2xl underline mb-2'>
                     {plan.name}
                   </h2>
-                  <p className='text-justify w-auto px-2'>
-                    <strong>{plan.description}</strong>
+                  <p className='text-justify px-2'>
+                    <strong><pre>{plan.description}</pre></strong>
                   </p>
                   <div className='flex flex-col justify-start w-full h-fit pr-3 my-2 ml-1'>
                     <p className='text-left font-bold '>
