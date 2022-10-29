@@ -80,7 +80,6 @@ export default function Home(data: Props) {
       plan_id,
       payment_type
     );
-    // clean input
     setEmail('');
   };
 
@@ -128,7 +127,7 @@ export default function Home(data: Props) {
           id='section'
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
-          <Input autoFocus onChange={(e) => setEmail(e.target.value)} />
+          <Input value={email} autoFocus onChange={(e) => setEmail(e.target.value)} />
           {error && visible ? <SignUpMessage /> : null}
 
           <div

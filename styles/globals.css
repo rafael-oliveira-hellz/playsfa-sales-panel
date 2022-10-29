@@ -53,9 +53,11 @@ button {
   margin-bottom: 2px;
   transition: all 350ms ease-in-out;
 }
+
 button:hover {
   background-color: #911308;
 }
+
 strong,
 em {
   font-weight: normal;
@@ -69,10 +71,12 @@ em {
     align-items: center;
     width: 100%;
   }
+
   h1 a {
     font-size: 2.5rem;
     text-align: center;
   }
+
   #section {
     display: block;
     margin-bottom: 1.5rem;
