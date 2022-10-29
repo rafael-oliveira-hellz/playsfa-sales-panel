@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
 import PurchaseCardWrapper from './PurchaseCardWrapper.style';
 
@@ -26,33 +25,6 @@ const PurchaseCard = ({
   planName,
   planPrice
 }: Props) => {
-  // create a phone number mask in the format (+55) 11 99999-9999 or (+55) 11 9999-9999
-  const phoneMask = (phone: string) => {
-    const phoneArr = phone.split('');
-    const phoneMasked = phoneArr.map((item, index) => {
-      if (index === 0) {
-        return `+ (${item}`;
-      }
-      if (index === 1) {
-        return `${item}) `;
-      }
-      if (index === 2) {
-        return ` ${item}`;
-      }
-      if (index === 3 || index === 4) {
-        return `${item} `;
-      }
-      if (index === 8) {
-        return `${item}-`;
-      }
-      if (index === 12) {
-        return `${item}`;
-      }
-      return item;
-    });
-    return phoneMasked.join('');
-  };
-  //
   return (
     <>
       <PurchaseCardWrapper>
@@ -86,10 +58,10 @@ const PurchaseCard = ({
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Link de Pagamento: </p>
               <p className="purchase-card__body__info__value">
-                <Link href={paymentUrl} target='_blank'>
+                <a href={paymentUrl} target='_blank'>
                   {paymentUrl}
                   <Image src={AbrirEmNovaGuia} alt="Abrir em nova guia" width={100} />
-                </Link>
+                </a>
               </p>
             </div>
           </div>
