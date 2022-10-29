@@ -74,16 +74,11 @@ export default function Home(data: Props) {
   ) => {
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
-    getPaymentLink(
-      user_email,
-      plan_id,
-      payment_type
-    );
+    getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
   };
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
-
   const breakLine = (str: string) => {
     const arr = str.split('!');
     return arr.map((item, index) => {
@@ -99,7 +94,7 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
-  }, [data.plans]);
+  }, [data.plans, error, user]);
 
   return (
     <>
@@ -121,13 +116,15 @@ export default function Home(data: Props) {
         </h1>
         <section
           id='section'
-          className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
+          className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
           <Input
             value={email}
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={() => { setError(false) }}
+            onKeyDown={() => {
+              setError(false);
+            }}
           />
           {error ? <SignUpMessage /> : null}
 
@@ -140,7 +137,7 @@ export default function Home(data: Props) {
               plans.map((plan) => (
                 // w-90
                 <div
-                  className='map-wrapper_div-card border border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
+                  className='map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
                   key={plan.id}
                   style={{ backgroundColor: '#ffffff' }}
                 >
@@ -207,12 +204,13 @@ export default function Home(data: Props) {
               ))}
           </div>
         </section>
-
         <section
-          id='section'
-          className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
-        >
-          {!error && user && <PurchaseCard
+          id='sec'
+          className='flex flex-col justify-items-center items-center border  border-slate-700 w-full h-screen'
+        ></section>
+        {!error && user && (
+          <PurchaseCard
+            className='border rounded-2xl border-slate-700'
             userName={user.name}
             userEmail={user.email}
             userWhatsapp={user.id_whatsapp}
@@ -222,8 +220,8 @@ export default function Home(data: Props) {
             planName={planChosen}
             planPrice={planPrice}
             paymentUrl={paymentLink}
-          />}
-        </section>
+          />
+        )}
       </main>
     </>
   );
