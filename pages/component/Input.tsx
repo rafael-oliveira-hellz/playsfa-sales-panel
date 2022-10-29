@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import * as Styled from './styles';
 
 type InputProps = {
@@ -29,7 +29,7 @@ export const Input = ({
   return (
     <>
       <Styled.Input className={className}>
-        <label htmlFor='email' placeholder='Email'>
+        <label htmlFor='email' placeholder='Digite seu e-mail cadastrado'>
           E-mail
         </label>
         <input

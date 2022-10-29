@@ -51,6 +51,8 @@ export type User = {
   card_last_four: string | null;
   trial_ends_at: string | null;
   id_discord: string | null;
+  id_whatsapp: string | null;
+  id_telegram: string | null;
   manual_premuim: number;
   provider_name: string;
   provider_id: string;

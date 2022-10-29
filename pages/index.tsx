@@ -5,6 +5,7 @@ import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
 import { Input } from './component/Input';
+import { PurchaseCard } from './component/PurchaseCard';
 import { SignUpMessage } from './component/SignUpMessage';
 
 export async function getStaticProps() {
@@ -32,9 +33,9 @@ export default function Home(data: Props) {
   const [plans, setPlans] = useState<Plan[]>();
   const [user, setUser] = useState<User>();
   const [paymentLink, setPaymentLink] = useState('');
-  const [type, setType] = useState('');
   const [error, setError] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [planChosen, setPlanChosen] = useState('');
 
   const getPaymentLink = async (
     email: string,
@@ -52,6 +53,7 @@ export default function Home(data: Props) {
         })
         .then((res: any) => {
           console.log(res.data);
+          setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
         });
     } catch (error: any) {
@@ -61,6 +63,20 @@ export default function Home(data: Props) {
         setError(true);
       }
     }
+  };
+
+  const handlePlanChosen = (
+    plan_name: string,
+    plan_id: number,
+    user_email: string,
+    payment_type: string
+  ) => {
+    setPlanChosen(plan_name);
+    getPaymentLink(
+      user_email,
+      plan_id,
+      payment_type
+    )
   };
 
   useEffect(() => {
@@ -92,7 +108,7 @@ export default function Home(data: Props) {
           id='section'
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
-          <Input autoFocus />
+          <Input autoFocus onChange={(e) => setEmail(e.target.value)} />
           {error && visible ? <SignUpMessage /> : null}
 
           <div
@@ -129,9 +145,10 @@ export default function Home(data: Props) {
                   <div className='flex flex-col w-full h-auto'>
                     <button
                       onClick={() =>
-                        getPaymentLink(
-                          'ds4ds545sd45sd@gmail.com',
+                        handlePlanChosen(
+                          plan.name,
                           plan.id,
+                          email,
                           'boleto'
                         )
                       }
@@ -140,9 +157,10 @@ export default function Home(data: Props) {
                     </button>
                     <button
                       onClick={() =>
-                        getPaymentLink(
-                          'luannbr004@gmail.com',
+                        handlePlanChosen(
+                          plan.name,
                           plan.id,
+                          email,
                           'normal'
                         )
                       }
@@ -151,7 +169,12 @@ export default function Home(data: Props) {
                     </button>
                     <button
                       onClick={() =>
-                        getPaymentLink('luannbr004@gmail.com', plan.id, 'pix')
+                        handlePlanChosen(
+                          plan.name,
+                          plan.id,
+                          email,
+                          'pix'
+                        )
                       }
                     >
                       PAGAR COM <em>PIX</em>
@@ -161,46 +184,23 @@ export default function Home(data: Props) {
               ))}
           </div>
         </section>
-        {/* <div>
-          <h2>Renovar Plano</h2>
-          <p>Insira o seu e-mail para renovar o seu plano</p>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <button onClick={() => getUserByEmail(email)}>Renovar</button>
-        </div> */}
 
-        {/* <button onClick={ }>link</button> */}
-
-        {/* <input type="email" name="email" id="email" /> */}
-
-        {/* planos: {plans.map(plan => (
-          <div key={plan.id}>
-            <h1>{plan.name}</h1>
-            <h2>{plan.description}</h2>
-            <h3>{plan.price}</h3>
-          </div>
-        ))}
-
-        {user && (
-          <div>
-            <h1>{user.name}</h1>
-            <h2>{user.email}</h2>
-            <h3>{user.id}</h3>
-          </div>
-        )} */}
-      </main>
-
-      {/* <footer>
-        <a
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
+        <section
+          id='section'
+          className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
-          Powered by{' '}
-          <span>
-            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
-          </span>
-        </a>
-      </footer> */}
+          {user && <PurchaseCard
+            userName={user.name}
+            userEmail={user.email}
+            userWhatsapp={user.id_whatsapp}
+            userPremium={user.premuim}
+            userTelegram={user.id_telegram}
+            userDiscord={user.id_discord}
+            planName={planChosen}
+            paymentUrl={paymentLink}
+          />}
+        </section>
+      </main>
     </>
   );
 }
