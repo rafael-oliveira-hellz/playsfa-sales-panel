@@ -34,6 +34,8 @@ export default function Home(data: Props) {
   const [paymentLink, setPaymentLink] = useState('');
   const [type, setType] = useState('');
   const [error, setError] = useState(false);
+  const [visible, setVisible] = useState(true);
+
   const getPaymentLink = async (
     email: string,
     planId: number,
@@ -56,8 +58,6 @@ export default function Home(data: Props) {
       // debugger;
       if (error.response) {
         console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
         setError(true);
       }
     }
@@ -65,6 +65,9 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
+    setTimeout(function () {
+      setVisible(false);
+    }, 33000);
   }, [data.plans]);
 
   return (
@@ -90,7 +93,7 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
           <Input autoFocus />
-          {error && <SignUpMessage />}
+          {error && visible ? <SignUpMessage /> : null}
 
           <div
             id='map-wrapper'
@@ -127,7 +130,7 @@ export default function Home(data: Props) {
                     <button
                       onClick={() =>
                         getPaymentLink(
-                          'luannbr004@gmail.com',
+                          'ds4ds545sd45sd@gmail.com',
                           plan.id,
                           'boleto'
                         )
