@@ -52,7 +52,7 @@ const PurchaseCard = ({
     });
     return phoneMasked.join('');
   };
-
+  //
   return (
     <>
       <PurchaseCardWrapper>
@@ -68,19 +68,6 @@ const PurchaseCard = ({
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Email: </p>
               <p className="purchase-card__body__info__value">{userEmail}</p>
-            </div>
-            <div className="purchase-card__body__info">
-              <p className="purchase-card__body__info__title">Whatsapp: </p>
-              <p className="purchase-card__body__info__value">{userWhatsapp
-                && userWhatsapp ? phoneMask(userWhatsapp) : 'Não Possui'}</p>
-            </div>
-            <div className="purchase-card__body__info">
-              <p className="purchase-card__body__info__title">Telegram: </p>
-              <p className="purchase-card__body__info__value">{userTelegram && userTelegram ? userTelegram : 'Não Possui'}</p>
-            </div>
-            <div className="purchase-card__body__info">
-              <p className="purchase-card__body__info__title">ID Discord: </p>
-              <p className="purchase-card__body__info__value">{userDiscord && userDiscord ? userDiscord : 'Não Possui'}</p>
             </div>
             <div className="purchase-card__body__info">
               <p className="purchase-card__body__info__title">Já Possui Premium? </p>
