@@ -212,7 +212,7 @@ export default function Home(data: Props) {
           id='section'
           className='flex flex-col justify-items-center items-center border border-slate-700 w-11/12 min-h-full'
         >
-          {user && <PurchaseCard
+          {!error && user && <PurchaseCard
             userName={user.name}
             userEmail={user.email}
             userWhatsapp={user.id_whatsapp}
