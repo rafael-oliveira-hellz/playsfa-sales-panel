@@ -97,9 +97,3 @@ export const PurchaseCardWrapper = styled.div`
     }
   `}
 `;
-
-export default {
-  Input,
-  SignUpMessageWrapper,
-  PurchaseCardWrapper,
-};
