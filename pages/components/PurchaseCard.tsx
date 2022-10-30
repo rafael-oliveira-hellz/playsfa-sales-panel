@@ -1,6 +1,6 @@
-import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
-import styled, { css, keyframes } from 'styled-components';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import styled, { css, keyframes } from 'styled-components';
+import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 
 const animation = keyframes`
 from {
@@ -50,7 +50,7 @@ type Props = {
   planName: string;
   planPrice: string;
   className?: string;
-  customClass?: string | undefined;
+  customClass?: any;
   onClick?: () => void;
 };
 

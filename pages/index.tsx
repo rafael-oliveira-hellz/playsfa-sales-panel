@@ -77,6 +77,7 @@ export default function Home(data: Props) {
     setPlanPrice(plan_price);
     getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
+    setCloseModal(false);
   };
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
@@ -208,8 +209,8 @@ export default function Home(data: Props) {
 
         {!error && user && (
           <PurchaseCard
-            customClass={closeModal ? 'modal-closed' : undefined}
-            onClick={() => setCloseModal(!closeModal)}
+            customClass={closeModal ? 'modal-closed' : ''}
+            onClick={() => setCloseModal(true)}
             userName={user.name}
             userEmail={user.email}
             userWhatsapp={user.id_whatsapp}
