@@ -124,10 +124,8 @@ export default function Home(data: Props) {
       </Head>
 
       <main className='flex flex-col justify-center items-center h-full mb-11'>
-        <h1 className='font-bold text-5xl mt-5 mb-5 '>
-          <Link href='http://link-do-app-na-play-store.com'>
-            Play Séries, Filmes e Animes
-          </Link>
+        <h1 className='font-bold text-5xl mt-5 mb-5'>
+          Play Séries, Filmes e Animes
         </h1>
         <section
           id='section'
