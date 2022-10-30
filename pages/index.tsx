@@ -76,15 +76,9 @@ export default function Home(data: Props) {
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
     getPaymentLink(user_email, plan_id, payment_type);
-    setCloseModal(false);
     setEmail('');
+    setCloseModal(false);
   };
-
-  const handleClick = () => {
-    setPlanChosen('');
-    setPlanPrice('');
-    setCloseModal(true);
-  }
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
@@ -216,7 +210,7 @@ export default function Home(data: Props) {
         {!error && user && (
           <PurchaseCard
             customClass={closeModal ? 'modal-closed' : ''}
-            onClick={handleClick}
+            onClick={() => setCloseModal(true)}
             userName={user.name}
             userEmail={user.email}
             userWhatsapp={user.id_whatsapp}
