@@ -91,7 +91,7 @@ export default function Home(data: Props) {
     setPlanPrice('');
     setPaymentMethod('');
     setError(false);
-  }
+  };
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
@@ -123,7 +123,7 @@ export default function Home(data: Props) {
         <link rel='icon' href='/p-icon.svg' />
       </Head>
 
-      <main className='flex flex-col justify-center items-center h-full pb-4'>
+      <main className='flex flex-col justify-center items-center h-full mb-11'>
         <h1 className='font-bold text-5xl mt-5 mb-5 '>
           <Link href='http://link-do-app-na-play-store.com'>
             Play Séries, Filmes e Animes
