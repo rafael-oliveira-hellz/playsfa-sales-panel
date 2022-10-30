@@ -1,7 +1,7 @@
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css } from 'styled-components';
-import Animation from './Animation.style';
-import PurchaseCardWrapper from './PurchaseCardWrapper.style';
+import Animation from './styles/Animation.style';
+import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 
 const Section = styled.section`
   ${({ }) => css`

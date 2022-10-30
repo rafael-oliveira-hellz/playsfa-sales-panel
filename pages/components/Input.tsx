@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import Input from './Input.style';
+import Input from './styles/Input.style';
 
 type InputProps = {
   className?: string;
@@ -31,9 +31,7 @@ const InputComponent = ({
   return (
     <>
       <Input className={className}>
-        <label htmlFor='email'>
-          E-mail
-        </label>
+        <label htmlFor='email'>E-mail</label>
         <input
           type='email'
           id='email'
