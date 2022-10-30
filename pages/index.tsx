@@ -36,6 +36,7 @@ export default function Home(data: Props) {
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
+  const [closeModal, setCloseModal] = useState(false);
 
   const getPaymentLink = async (
     email: string,
@@ -204,13 +205,11 @@ export default function Home(data: Props) {
               ))}
           </div>
         </section>
-        <section
-          id='sec'
-          className='flex flex-col justify-items-center items-center border  border-slate-700 w-full h-screen'
-        ></section>
+
         {!error && user && (
           <PurchaseCard
-            className='border rounded-2xl border-slate-700'
+            customClass={closeModal ? 'modal-closed' : undefined}
+            onClick={() => setCloseModal(!closeModal)}
             userName={user.name}
             userEmail={user.email}
             userWhatsapp={user.id_whatsapp}
