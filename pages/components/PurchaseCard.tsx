@@ -1,6 +1,6 @@
-import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
-import styled, { css, keyframes } from 'styled-components';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import styled, { css, keyframes } from 'styled-components';
+import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 
 const animation = keyframes`
 from {
@@ -60,32 +60,38 @@ const Section = styled.section`
 type Props = {
   userName: string;
   userEmail: string;
-  userWhatsapp: string | null;
   userPremium: number;
-  userTelegram: string | null;
-  userDiscord: string | null;
   paymentUrl: string;
   planName: string;
   planPrice: string;
-  className?: string;
-  customClass?: string | undefined;
+  customClass?: any;
+  paymentMethod: string;
   onClick?: () => void;
 };
 
 const PurchaseCard = ({
   userName,
   userEmail,
-  userWhatsapp,
   userPremium,
-  userTelegram,
-  userDiscord,
   paymentUrl,
   planName,
   planPrice,
-  className,
   customClass,
-  onClick
+  onClick,
+  paymentMethod
 }: Props) => {
+  const handlePay = (paymentMethod: string) => {
+    if (paymentMethod === 'boleto') {
+      paymentMethod = 'BOLETO';
+    } else if (paymentMethod === 'pix') {
+      paymentMethod = 'PIX';
+    } else {
+      paymentMethod = 'CARTÃO DE CRÉDITO';
+    }
+
+    return paymentMethod;
+  };
+
   return (
     <>
       <Section className={customClass}>
@@ -115,6 +121,12 @@ const PurchaseCard = ({
           <div className='purchase-card'>
             <p className='purchase-card__body__info'>Plano Escolhido: </p>
             <p className='purchase-card__body__info__value'>{planName}</p>
+          </div>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>Forma de Pagamento: </p>
+            <p className='purchase-card__body__info__value'>
+              {handlePay(paymentMethod)}
+            </p>
           </div>
           <div className='purchase-card'>
             <p className='purchase-card__body__info'>

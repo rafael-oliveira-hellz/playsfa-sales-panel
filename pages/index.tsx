@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
+import PageFooter from './components/Footer';
 import Input from './components/Input';
 import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
@@ -36,6 +37,7 @@ export default function Home(data: Props) {
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
 
   const getPaymentLink = async (
@@ -75,9 +77,21 @@ export default function Home(data: Props) {
   ) => {
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
+    setPaymentMethod(payment_type);
     getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
+    setCloseModal(false);
   };
+
+  const handleClick = () => {
+    setCloseModal(true);
+    setUser(undefined);
+    setPaymentLink('');
+    setPlanChosen('');
+    setPlanPrice('');
+    setPaymentMethod('');
+    setError(false);
+  }
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
@@ -168,7 +182,7 @@ export default function Home(data: Props) {
                           plan.id,
                           email,
                           'boleto',
-                          plan.price
+                          plan.billet_price
                         )
                       }
                     >
@@ -194,7 +208,7 @@ export default function Home(data: Props) {
                           plan.id,
                           email,
                           'pix',
-                          plan.price
+                          plan.pix_price
                         )
                       }
                     >
@@ -208,20 +222,19 @@ export default function Home(data: Props) {
 
         {!error && user && (
           <PurchaseCard
-            customClass={closeModal ? 'modal-closed' : undefined}
-            onClick={() => setCloseModal(!closeModal)}
+            customClass={closeModal ? 'modal-closed' : ''}
+            onClick={handleClick}
             userName={user.name}
             userEmail={user.email}
-            userWhatsapp={user.id_whatsapp}
             userPremium={user.premuim}
-            userTelegram={user.id_telegram}
-            userDiscord={user.id_discord}
             planName={planChosen}
             planPrice={planPrice}
+            paymentMethod={paymentMethod}
             paymentUrl={paymentLink}
           />
         )}
       </main>
+      <PageFooter />
     </>
   );
 }
