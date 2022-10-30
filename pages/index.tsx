@@ -73,17 +73,17 @@ export default function Home(data: Props) {
     payment_type: string,
     plan_price: string
   ) => {
-    setCloseModal(false);
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
-    setEmail('');
     getPaymentLink(user_email, plan_id, payment_type);
+    setCloseModal(false);
+    setEmail('');
   };
 
   const handleClick = () => {
-    setCloseModal(true);
     setPlanChosen('');
     setPlanPrice('');
+    setCloseModal(true);
   }
 
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
