@@ -82,6 +82,16 @@ export default function Home(data: Props) {
     setCloseModal(false);
   };
 
+  const handleClick = () => {
+    setCloseModal(true);
+    setUser(undefined);
+    setPaymentLink('');
+    setPlanChosen('');
+    setPlanPrice('');
+    setPaymentMethod('');
+    setError(false);
+  }
+
   // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
     const arr = str.split('!');
@@ -98,7 +108,7 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
-  }, [data.plans, error]);
+  }, [data.plans, error, user]);
 
   return (
     <>
@@ -212,7 +222,7 @@ export default function Home(data: Props) {
         {!error && user && (
           <PurchaseCard
             customClass={closeModal ? 'modal-closed' : ''}
-            onClick={() => setCloseModal(true)}
+            onClick={handleClick}
             userName={user.name}
             userEmail={user.email}
             userPremium={user.premuim}
