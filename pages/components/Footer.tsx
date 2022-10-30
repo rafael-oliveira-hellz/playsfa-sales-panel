@@ -9,11 +9,19 @@ const PageFooter = () => {
       <div className='site-developers'>
         <p className='site-developers__names'>
           <em>Desenvolvido por </em>{' '}
-          <a href='https://www.linkedin.com/in/rafael-de-oliveira-s/'>
+          <a
+            href='https://www.linkedin.com/in/rafael-de-oliveira-s/'
+            target='_blank'
+            rel='noreferrer'
+          >
             Rafael de Oliveira
           </a>
           <span>e</span>
-          <a href='https://www.linkedin.com/in/natanboanafina/'>
+          <a
+            href='https://www.linkedin.com/in/natanboanafina/'
+            target='_blank'
+            rel='noreferrer'
+          >
             Natan Boanafina
           </a>
         </p>
