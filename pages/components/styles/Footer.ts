@@ -6,49 +6,70 @@ const Footer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-self: center;
     width: 100%;
     height: 8rem;
     background-color: #transparent;
     border-top: 1px solid rgb(51 65 85);
   `}
-  & p {
+
+  & div {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    line-height: 1.8;
-
-    /* & a:hover {
-      color: #791BDD;
-    } */
+    align-self: center;
   }
-
-  & p:first-child {
+  & div p,
+  & .site-developers .site-developers__names span {
+    color: #fff;
+    text-align: center;
+  }
+  & .site-name,
+  & .site-developers {
+    padding: 0.3rem;
+  }
+  & .site-name .site-name__text {
     font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
   }
-  & p:nth-child(2) {
+
+  & .site-developers .site-developers__names {
     font-size: 1.2rem;
+    font-weight: 500;
   }
-  & p:nth-child(2) em {
-    margin-right: 0.3rem;
-  }
-  & p:nth-child(2) span {
-    color: #fff;
+
+  & .site-developers .site-developers__names span {
     margin: 0 0.3rem;
   }
-  & p:nth-child(2) a {
-    text-decoration: underline;
+  & .site-developers .site-developers__names a {
     transition: all 0.3s ease-in-out;
   }
-
-  & p:nth-child(2) a:hover {
-    color: #005fff;
+  & .site-developers .site-developers__names a:hover {
+    color: #007fffff;
+    text-decoration: underline;
   }
 
-  & p:nth-child(3) {
-    font-size: 1rem;
+  & .site-copyrights {
+    padding-bottom: 0.2rem;
   }
+
+  @media screen and (max-width: 350px) {
+    & .site-name,
+    & .site-developers,
+    & .site-copyrights {
+      padding: 0;
+    }
+    & .site-name .site-name__text {
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+    }
+    & .site-developers .site-developers__names {
+      font-size: 1rem;
+    }
+    & .site-copyrights .site-copyrights__text {
+      font-size: 1rem;
+    }
+  } ;
 `;
 
 export default Footer;
