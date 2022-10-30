@@ -64,12 +64,11 @@ const PurchaseCard = ({
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'boleto') {
-      paymentMethod.toUpperCase();
+      paymentMethod = 'BOLETO';
     } else if (paymentMethod === 'pix') {
-      paymentMethod.toUpperCase();
+      paymentMethod = 'PIX';
     } else {
-      paymentMethod = 'Cartão de Crédito';
-      paymentMethod.toUpperCase();
+      paymentMethod = 'CARTÃO DE CRÉDITO';
     }
 
     return paymentMethod;
