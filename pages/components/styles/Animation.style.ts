@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Animation = keyframes`
 from {
