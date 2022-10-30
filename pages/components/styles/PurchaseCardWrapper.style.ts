@@ -24,8 +24,8 @@ const PurchaseCardWrapper = styled.div`
     padding: 0.3rem 1rem;
     top: 0;
     bottom: 0;
-    animation: ${animation} 250ms linear;
-    transition: all 250ms ease-in-out;
+    animation: ${animation} 0.3s linear;
+    transition: all 0.3s ease-in-out;
 
     & h2 {
       display: flex;
@@ -69,6 +69,10 @@ const PurchaseCardWrapper = styled.div`
     & .close-box svg {
       font-size: 1.8rem;
       cursor: pointer;
+    }
+
+    & .close-box svg:hover {
+      color: #791bdd;
     }
 
     & .purchase-card {
@@ -131,7 +135,7 @@ const PurchaseCardWrapper = styled.div`
       display: hidden !important;
       opacity: 0;
       z-index: -2;
-      transition: all 250ms ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
 
     @media screen and (min-width: 300px) and (max-width: 400px) {

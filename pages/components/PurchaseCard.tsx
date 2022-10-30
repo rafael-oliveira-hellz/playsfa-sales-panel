@@ -27,14 +27,14 @@ const Section = styled.section`
     min-height: calc(100vh + 9vh);
     z-index: 1;
     opacity: 0.95;
-    animation: ${animation} 250ms linear;
-    transition: all 250ms ease-in-out;
+    animation: ${animation} 0.3s linear;
+    transition: all 0.3s ease-in-out;
 
     &.modal-closed {
       display: hidden !important;
       opacity: 0;
       z-index: -2;
-      transition: all 250ms ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
     @media screen and (min-width: 300px) and (max-width: 750px) {
       & {
