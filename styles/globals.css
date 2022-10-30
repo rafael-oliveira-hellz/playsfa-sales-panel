@@ -61,17 +61,6 @@ em {
   font-weight: normal;
   font-style: normal;
 }
-#sec {
-  /* display: none; */
-  position: absolute;
-  background-color: #350b63;
-  border-radius: 0;
-  top: 0;
-  bottom: 0;
-  height: calc(100vh + 9vh);
-  z-index: 1;
-  opacity: 0.9;
-}
 
 @media screen and (max-width: 750px) {
   h1 {
