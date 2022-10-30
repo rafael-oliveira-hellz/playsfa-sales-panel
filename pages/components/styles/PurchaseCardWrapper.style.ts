@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import animation from './Animation.style';
 
 const PurchaseCardWrapper = styled.div`
