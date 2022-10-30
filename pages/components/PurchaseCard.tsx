@@ -62,6 +62,19 @@ const PurchaseCard = ({
   onClick,
   paymentMethod
 }: Props) => {
+  const handlePay = (paymentMethod: string) => {
+    if (paymentMethod === 'boleto') {
+      paymentMethod.toUpperCase();
+    } else if (paymentMethod === 'pix') {
+      paymentMethod.toUpperCase();
+    } else {
+      paymentMethod = 'Cartão de Crédito';
+      paymentMethod.toUpperCase();
+    }
+
+    return paymentMethod;
+  }
+
   return (
     <>
       <Section className={customClass}></Section>
@@ -94,7 +107,7 @@ const PurchaseCard = ({
         </div>
         <div className='purchase-card'>
           <p className='purchase-card__body__info'>Forma de Pagamento: </p>
-          <p className='purchase-card__body__info__value'>{paymentMethod}</p>
+          <p className='purchase-card__body__info__value'>{handlePay(paymentMethod)}</p>
         </div>
         <div className='purchase-card'>
           <p className='purchase-card__body__info'>
