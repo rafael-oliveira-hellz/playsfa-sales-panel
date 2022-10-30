@@ -98,7 +98,7 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
-  }, [data.plans, error, user]);
+  }, [data.plans, error]);
 
   return (
     <>
