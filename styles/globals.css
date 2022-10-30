@@ -28,7 +28,9 @@ body {
 section {
   background-color: #18042d;
 }
-
+h1 {
+  text-align: center;
+}
 span,
 p,
 h2,
