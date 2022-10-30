@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components';
 
-const animation = keyframes`
+const Animation = keyframes`
 from {
   opacity: 0;
 }
@@ -8,4 +8,4 @@ to{
   opacity: 1;
 }
 `;
-export default animation;
+export default Animation;

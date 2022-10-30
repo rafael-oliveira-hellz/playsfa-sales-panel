@@ -1,12 +1,10 @@
-import Image from 'next/image';
-import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
-import PurchaseCardWrapper from './PurchaseCardWrapper.style';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css } from 'styled-components';
-import animation from './Animation.style';
+import Animation from './Animation.style';
+import PurchaseCardWrapper from './PurchaseCardWrapper.style';
 
 const Section = styled.section`
-  ${({}) => css`
+  ${({ }) => css`
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -21,7 +19,7 @@ const Section = styled.section`
     height: calc(100vh + 9vh);
     z-index: 1;
     opacity: 0.9;
-    animation: ${animation} 250ms linear;
+    animation: ${Animation} 250ms linear;
     transition: all 250ms ease-in-out;
 
     &.modal-closed {
