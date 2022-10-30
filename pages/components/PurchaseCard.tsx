@@ -39,22 +39,18 @@ const Section = styled.section`
     }
     @media screen and (min-width: 300px) and (max-width: 750px) {
       & {
-        height: 255%;
+        height: 100vh;
       }
     }
-    @media screen and (min-width: 751px) and (max-width: 850px) {
+    @media screen and (min-width: 751px) and (max-width: 1250px) {
       & {
-        height: 175%;
+        height: 100vh;
       }
     }
-    @media screen and (min-width: 851px) and (max-width: 950px) {
-      & {
-        height: 160%;
-      }
-    }
-    @media screen and (min-width: 951px) and (max-width: 1250px) {
+
+    /* @media screen and (min-width: 951px) and (max-width: 1250px) {
       height: 155%;
-    }
+    } */
   `}
 `;
 

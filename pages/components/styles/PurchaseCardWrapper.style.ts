@@ -72,7 +72,7 @@ const PurchaseCardWrapper = styled.div`
     }
 
     & .close-box svg:hover {
-      color: #791BDD;
+      color: #791bdd;
     }
 
     & .purchase-card {
@@ -150,7 +150,7 @@ const PurchaseCardWrapper = styled.div`
 
       & h2 {
         font-size: 1rem;
-        transform: translateY(-3.5rem);
+        transform: translateY(-1.5rem);
       }
 
       & .purchase-card .purchase-card__body__info,
@@ -173,53 +173,98 @@ const PurchaseCardWrapper = styled.div`
         line-height: 1;
         text-align: center;
       }
+
+      & .close-box {
+        transform: translateY(0.8rem);
+      }
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (min-width: 401px) {
       & {
-        width: 85%;
-        height: 70%;
+        width: 90%;
+        height: 90%;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
       }
-      & h2 {
-        transform: translateY(-3.5rem);
-      }
-        & .payment-card {
-          min-height: 15%;
 
-          & payment-card__info__value {
-          }
-        }
-      }
-    }
-    @media screen and (min-width: 751px) {
-      & {
-        justify-content: space-between;
-        width: 85%;
-        height: 70%;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
       & h2 {
-        transform: translateY(-3.5rem);
+        transform: translateY(-1.5rem);
+        font-size: clamp(14px, 1.5rem, 1.5em);
       }
 
-      & .purchase-card,
       & .payment-card {
-        transform: translateY(-3.5rem);
+        min-height: 15%;
+      }
+
+      & .purchase-card .purchase-card__body__info {
+        font-size: 1.2rem;
+      }
+
+      & .purchase-card .purchase-card__body__info__value {
+        font-size: 1rem;
+      }
+      & .close-box {
+        transform: translateY(0.8rem);
       }
     }
 
-    @media screen and (min-width: 1300px) {
+    @media screen and (min-width: 500px) {
       & h2 {
         transform: translateY(-2.5rem);
       }
 
       & .purchase-card,
       & .payment-card {
+        transform: translateY(-2rem);
+      }
+
+      & .close-box {
+        transform: translateY(-0.1rem);
+      }
+    }
+
+    @media screen and (min-width: 751px) {
+      & {
+        justify-content: space-between;
+        width: 85%;
+        height: 80%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      & h2 {
+        transform: translateY(-2.5rem);
+      }
+
+      & .purchase-card,
+      & .payment-card {
+        transform: translateY(-2rem);
+      }
+      & .close-box {
+        transform: translateY(-0.1rem);
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      & h2 {
+        transform: translateY(-2.5rem);
+      }
+
+      & .purchase-card {
         transform: translateY(-2.3rem);
+      }
+
+      & .payment-card {
+        transform: translateY(-1.3rem);
+      }
+      & .purchase-card .purchase-card__body__info {
+        font-size: 1.8rem;
+      }
+      & .purchase-card .purchase-card__body__info__value {
+        font-size: 1.5rem;
+      }
+      & .close-box {
+        transform: translateY(0.5rem);
       }
     }
   `}
