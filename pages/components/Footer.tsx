@@ -6,11 +6,11 @@ const PageFooter = () => {
       <p>Play Séries, Filmes Animes</p>
       <p>
         <em>Desenvolvido por </em>{' '}
-        <a href='https://www.linkedin.com/in/XPTO-7b1b3b1b3/'>
+        <a href='https://www.linkedin.com/in/rafael-de-oliveira-s/'>
           Rafael de Oliveira
         </a>
         <span>e</span>
-        <a href='https://www.linkedin.com/in/'>Natan Boanafina</a>
+        <a href='https://www.linkedin.com/in/natanboanafina/'>Natan Boanafina</a>
       </p>
       <p>&#169; 2022 - Todos os direitos reservados</p>
     </Footer>
