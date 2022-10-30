@@ -72,7 +72,7 @@ const PurchaseCardWrapper = styled.div`
     }
 
     & .close-box svg:hover {
-      color: #791bdd;
+      color: #791BDD;
     }
 
     & .purchase-card {

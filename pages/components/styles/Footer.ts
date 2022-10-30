@@ -18,6 +18,10 @@ const Footer = styled.div`
     align-items: center;
     color: #fff;
     line-height: 1.8;
+
+    /* & a:hover {
+      color: #791BDD;
+    } */
   }
 
   & p:first-child {
@@ -35,11 +39,11 @@ const Footer = styled.div`
   }
   & p:nth-child(2) a {
     text-decoration: underline;
-    transition: all 250ms ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   & p:nth-child(2) a:hover {
-    color: #005fffff;
+    color: #005fff;
   }
 
   & p:nth-child(3) {

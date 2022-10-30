@@ -1,5 +1,6 @@
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
+import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 
 const animation = keyframes`
@@ -136,10 +137,9 @@ const PurchaseCard = ({
           </div>
 
           <div className='payment-card'>
-            <span className='payment-card__info'>Link de Pagamento: </span>
             <span className='payment-card__info__value'>
               <a href={paymentUrl} target='_blank' rel='noreferrer'>
-                {paymentUrl}
+                <MercadoPagoBtn />
               </a>
             </span>
           </div>
