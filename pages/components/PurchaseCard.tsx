@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
-import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
 
 const animation = keyframes`
 from {
