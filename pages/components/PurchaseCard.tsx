@@ -47,10 +47,6 @@ const Section = styled.section`
         height: 100vh;
       }
     }
-
-    /* @media screen and (min-width: 951px) and (max-width: 1250px) {
-      height: 155%;
-    } */
   `}
 `;
 

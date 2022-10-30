@@ -64,6 +64,7 @@ const PurchaseCardWrapper = styled.div`
       align-self: end;
       width: 25%;
       padding: 0.5rem;
+      z-index: 5;
     }
 
     & .close-box svg {
