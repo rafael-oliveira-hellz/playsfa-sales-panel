@@ -10,6 +10,9 @@
     "pm2": "pm2 start yarn --name \"psfa-painel-de-vendas\" --interpreter bash -- start"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.11",
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
     "fs": "^0.0.1-security",
