@@ -36,6 +36,7 @@ export default function Home(data: Props) {
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
 
   const getPaymentLink = async (
@@ -75,6 +76,7 @@ export default function Home(data: Props) {
   ) => {
     setPlanChosen(plan_name);
     setPlanPrice(plan_price);
+    setPaymentMethod(payment_type);
     getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
     setCloseModal(false);
@@ -213,12 +215,10 @@ export default function Home(data: Props) {
             onClick={() => setCloseModal(true)}
             userName={user.name}
             userEmail={user.email}
-            userWhatsapp={user.id_whatsapp}
             userPremium={user.premuim}
-            userTelegram={user.id_telegram}
-            userDiscord={user.id_discord}
             planName={planChosen}
             planPrice={planPrice}
+            paymentMethod={paymentMethod}
             paymentUrl={paymentLink}
           />
         )}
