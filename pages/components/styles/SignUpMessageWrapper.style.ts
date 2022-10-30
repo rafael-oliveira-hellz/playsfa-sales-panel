@@ -27,6 +27,18 @@ const SignUpMessageWrapper = styled.div`
     & p:hover {
       text-decoration: underline;
     }
+    & .toggle-hide-app {
+      display: none;
+    }
+    @media screen and (max-width: 750px) {
+      & .toggle-hide-qr {
+        display: none;
+      }
+
+      & .toggle-hide-app {
+        display: flex;
+      }
+    }
   `}
 `;
 
