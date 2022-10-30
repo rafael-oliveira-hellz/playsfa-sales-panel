@@ -18,7 +18,9 @@ const SignUpMessage = () => {
         />
         <a
           className='toggle-hide-app'
-          href='http://link-do-app-na-play-store.com'
+          href='https://play.google.com/store/apps/details?id=com.psaappsa'
+          target='_blank'
+          rel='noreferrer'
         >
           <Image src={AppStore} alt='Imagem com link para Google App Store' />
         </a>
