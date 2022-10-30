@@ -15,6 +15,7 @@ const SignUpMessageWrapper = styled.div`
     & p {
       color: #ff0000;
       font-size: 1.2rem;
+      margin-top: 0.5rem;
       margin-bottom: 6px;
       text-align: center;
     }
@@ -37,6 +38,9 @@ const SignUpMessageWrapper = styled.div`
 
       & .toggle-hide-app {
         display: flex;
+      }
+      & .toggle-hide-app > img {
+        margin-top: 0.5rem;
       }
     }
   `}

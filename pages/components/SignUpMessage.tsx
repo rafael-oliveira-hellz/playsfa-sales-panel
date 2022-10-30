@@ -7,9 +7,13 @@ const SignUpMessage = () => {
   return (
     <>
       <SignUpMessageWrapper>
-        <p>
+        <p className='toggle-hide-qr'>
           Email inválido! Não possui uma conta? Faça a leitura do nosso QR Code
           e cadastre-se!
+        </p>
+        <p className='toggle-hide-app'>
+          Email inválido! Não possui uma conta? Baixe nosso aplicativo na App
+          Store!
         </p>
         <Image
           className='toggle-hide-qr'
