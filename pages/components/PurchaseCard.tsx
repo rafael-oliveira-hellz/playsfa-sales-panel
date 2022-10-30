@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
-import PurchaseCardWrapper from './PurchaseCardWrapper.style';
+import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css } from 'styled-components';
-import animation from './Animation.style';
+import animation from './styles/Animation.style';
 
 const Section = styled.section`
   ${({}) => css`
