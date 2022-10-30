@@ -171,7 +171,7 @@ export default function Home(data: Props) {
                           plan.id,
                           email,
                           'boleto',
-                          plan.price
+                          plan.billet_price
                         )
                       }
                     >
@@ -197,7 +197,7 @@ export default function Home(data: Props) {
                           plan.id,
                           email,
                           'pix',
-                          plan.price
+                          plan.pix_price
                         )
                       }
                     >
