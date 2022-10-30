@@ -138,11 +138,15 @@ const PurchaseCardWrapper = styled.div`
       & {
         align-self: center;
         width: 100%;
-        height: 100%;
+        height: 100vh;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
 
       & h2 {
         font-size: 1rem;
+        transform: translateY(-3.5rem);
       }
 
       & .purchase-card .purchase-card__body__info,
@@ -164,14 +168,19 @@ const PurchaseCardWrapper = styled.div`
         font-size: 0.8rem;
         line-height: 1;
         text-align: center;
-        border: 1px solid red;
       }
     }
     @media screen and (min-width: 360px) {
       & {
-        width: 100%;
-        height: 100%;
-
+        width: 85%;
+        height: 70%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      & h2 {
+        transform: translateY(-3.5rem);
+      }
         & .payment-card {
           min-height: 15%;
 

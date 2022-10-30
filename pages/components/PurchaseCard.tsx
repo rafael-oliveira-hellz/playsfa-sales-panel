@@ -36,9 +36,9 @@ const Section = styled.section`
       z-index: -2;
       transition: all 250ms ease-in-out;
     }
-    @media screen and (min-width: 300px) {
+    @media screen and (min-width: 300px) and (max-width: 750px) {
       & {
-        height: 100%;
+        height: 255%;
       }
     }
     @media screen and (min-width: 751px) and (max-width: 850px) {
