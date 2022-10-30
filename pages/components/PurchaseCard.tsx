@@ -24,9 +24,9 @@ const Section = styled.section`
     top: 0;
     bottom: 0;
     width: 100%;
-    height: calc(100vh + 9vh);
+    min-height: calc(100vh + 9vh);
     z-index: 1;
-    opacity: 0.9;
+    opacity: 0.95;
     animation: ${animation} 250ms linear;
     transition: all 250ms ease-in-out;
 
@@ -35,6 +35,24 @@ const Section = styled.section`
       opacity: 0;
       z-index: -2;
       transition: all 250ms ease-in-out;
+    }
+    @media screen and (min-width: 300px) {
+      & {
+        height: 100%;
+      }
+    }
+    @media screen and (min-width: 751px) and (max-width: 850px) {
+      & {
+        height: 175%;
+      }
+    }
+    @media screen and (min-width: 851px) and (max-width: 950px) {
+      & {
+        height: 160%;
+      }
+    }
+    @media screen and (min-width: 951px) and (max-width: 1250px) {
+      height: 155%;
     }
   `}
 `;
@@ -70,50 +88,51 @@ const PurchaseCard = ({
 }: Props) => {
   return (
     <>
-      <Section className={customClass}></Section>
-      <PurchaseCardWrapper className={customClass}>
-        <div className='close-box'>
-          <IoMdCloseCircleOutline onClick={onClick} />
-        </div>
-        <h2>Resumo da Compra</h2>
-        <div className='purchase-card'>
-          <p className='purchase-card__body__info'>Nome: </p>
-          <p className='purchase-card__body__info__value'>{userName}</p>
-        </div>
-        <div className='purchase-card'>
-          <p className='purchase-card__body__info'>Email: </p>
-          <p className='purchase-card__body__info__value'>{userEmail}</p>
-        </div>
-        <div className='purchase-card'>
-          <p className='purchase-card__body__info'>
-            <strong className='purchase-card__body__info'>
-              Já Possui Premium?
-            </strong>
-          </p>
-          <p className='purchase-card__body__info__value'>
-            {userPremium === 0 ? 'Não' : 'Sim'}
-          </p>
-        </div>
-        <div className='purchase-card'>
-          <p className='purchase-card__body__info'>Plano Escolhido: </p>
-          <p className='purchase-card__body__info__value'>{planName}</p>
-        </div>
-        <div className='purchase-card'>
-          <p className='purchase-card__body__info'>
-            Valor do Plano Escolhido:{' '}
-          </p>
-          <p className='purchase-card__body__info__value'>R${planPrice},00</p>
-        </div>
+      <Section className={customClass}>
+        <PurchaseCardWrapper className={customClass}>
+          <div className='close-box'>
+            <IoMdCloseCircleOutline onClick={onClick} />
+          </div>
+          <h2>Resumo da Compra</h2>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>Nome: </p>
+            <p className='purchase-card__body__info__value'>{userName}</p>
+          </div>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>Email: </p>
+            <p className='purchase-card__body__info__value'>{userEmail}</p>
+          </div>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>
+              <strong className='purchase-card__body__info'>
+                Já Possui Premium?
+              </strong>
+            </p>
+            <p className='purchase-card__body__info__value'>
+              {userPremium === 0 ? 'Não' : 'Sim'}
+            </p>
+          </div>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>Plano Escolhido: </p>
+            <p className='purchase-card__body__info__value'>{planName}</p>
+          </div>
+          <div className='purchase-card'>
+            <p className='purchase-card__body__info'>
+              Valor do Plano Escolhido:{' '}
+            </p>
+            <p className='purchase-card__body__info__value'>R${planPrice},00</p>
+          </div>
 
-        <div className='payment-card'>
-          <p className='payment-card__info'>Link de Pagamento: </p>
-          <p className='payment-card__info__value'>
-            <a href={paymentUrl} target='_blank' rel='noreferrer'>
-              {paymentUrl}
-            </a>
-          </p>
-        </div>
-      </PurchaseCardWrapper>
+          <div className='payment-card'>
+            <span className='payment-card__info'>Link de Pagamento: </span>
+            <span className='payment-card__info__value'>
+              <a href={paymentUrl} target='_blank' rel='noreferrer'>
+                {paymentUrl}
+              </a>
+            </span>
+          </div>
+        </PurchaseCardWrapper>
+      </Section>
     </>
   );
 };
