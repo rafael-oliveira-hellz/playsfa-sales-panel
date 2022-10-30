@@ -1,5 +1,13 @@
 import styled, { css, keyframes } from 'styled-components';
-import animation from './Animation.style';
+
+const animation = keyframes`
+from {
+  opacity: 0;
+}
+to{
+  opacity: 1;
+}
+`;
 
 const PurchaseCardWrapper = styled.div`
   ${() => css`

@@ -2,11 +2,19 @@ import Image from 'next/image';
 import AbrirEmNovaGuia from '../assets/abrir-em-nova-janela.png';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
-import styled, { css } from 'styled-components';
-import animation from './styles/Animation.style';
+import styled, { css, keyframes } from 'styled-components';
+
+const animation = keyframes`
+from {
+  opacity: 0;
+}
+to{
+  opacity: 1;
+}
+`;
 
 const Section = styled.section`
-  ${({}) => css`
+  ${() => css`
     position: absolute;
     display: flex;
     flex-direction: column;
