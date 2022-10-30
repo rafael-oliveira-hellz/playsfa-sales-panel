@@ -118,7 +118,8 @@ const PurchaseCardWrapper = styled.div`
     & .payment-card .payment-card__info__value a {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
+      word-break: break-all;
+      padding: 0.5rem;
       width: 100%;
     }
     & .payment-card .payment-card__info__value a:hover {
@@ -164,6 +165,19 @@ const PurchaseCardWrapper = styled.div`
         line-height: 1;
         text-align: center;
         border: 1px solid red;
+      }
+    }
+    @media screen and (min-width: 360px) {
+      & {
+        width: 100%;
+        height: 100%;
+
+        & .payment-card {
+          min-height: 15%;
+
+          & payment-card__info__value {
+          }
+        }
       }
     }
     @media screen and (min-width: 751px) {
