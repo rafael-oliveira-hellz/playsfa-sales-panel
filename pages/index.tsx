@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
+import PageFooter from './components/Footer';
 import Input from './components/Input';
 import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
@@ -233,6 +234,7 @@ export default function Home(data: Props) {
           />
         )}
       </main>
+      <PageFooter />
     </>
   );
 }
