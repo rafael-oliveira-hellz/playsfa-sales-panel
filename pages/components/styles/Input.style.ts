@@ -28,6 +28,7 @@ const Input = styled.div`
       font-weight: 700;
       letter-spacing: 2px;
       padding: 1rem;
+      min-width: 50%;
       width: 60%;
       height: 2rem;
       outline: none;
@@ -40,8 +41,20 @@ const Input = styled.div`
     }
 
     @media screen and (max-width: 400px) {
-      input{
+      & input{
         font-size: 0.8rem;
+        width: 75%;
+      }
+      & input::placeholder{
+        font-size: 0.8rem;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      & input{
+        font-size: 0.8rem;
+        width: 75%;
       }
     }
   `}
