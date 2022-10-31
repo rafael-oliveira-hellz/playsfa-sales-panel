@@ -28,9 +28,11 @@ body {
 section {
   background-color: #18042d;
 }
+
 h1 {
   text-align: center;
 }
+
 span,
 p,
 h2,
@@ -63,6 +65,21 @@ strong,
 em {
   font-weight: normal;
   font-style: normal;
+}
+
+article {
+  margin: 100px 0 0;
+}
+
+article a {
+  color: #911308;
+  text-transform: uppercase;
+  transition: all 350ms ease-in-out;
+}
+
+article a:hover {
+  color: #fff;
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 750px) {
