@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
@@ -55,14 +54,14 @@ export default function Home(data: Props) {
           ...body
         })
         .then((res: any) => {
-          console.log(res.data);
+          // console.log(res.data);
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
         });
     } catch (error: any) {
       // debugger;
       if (error.response) {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         setError(true);
       }
     }
@@ -231,6 +230,8 @@ export default function Home(data: Props) {
             paymentUrl={paymentLink}
           />
         )}
+
+        <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte no <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
       </main>
       <PageFooter />
     </>
