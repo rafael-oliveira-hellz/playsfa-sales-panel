@@ -68,14 +68,15 @@ em {
 }
 
 article {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   width: 90%;
   margin: 100px 0 0;
+  text-align: center;
 }
 
 article a {
+  display: inline-flex;
+  align-self: center;
   color: #911308;
   text-transform: uppercase;
   transition: all 350ms ease-in-out;
