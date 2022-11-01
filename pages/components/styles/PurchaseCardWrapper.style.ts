@@ -139,6 +139,32 @@ const PurchaseCardWrapper = styled.div`
       transition: all 0.3s ease-in-out;
     }
 
+    & .payment-card__donation__info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    & .payment-card__donation__info p {     
+      text-align: justify;
+    }
+
+    & .payment-card__donation__info p strong.info {
+      color: #911308;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    & .payment-card__donation__info p strong {
+      font-weight: 400;
+      text-decoration: underline;
+    }
+
     @media screen and (min-width: 300px) and (max-width: 400px) {
       & {
         align-self: center;

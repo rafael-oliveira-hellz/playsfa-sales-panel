@@ -92,7 +92,7 @@ const PurchaseCard = ({
           <div className='close-box'>
             <IoMdCloseCircleOutline onClick={onClick} />
           </div>
-          <h2>Resumo da Compra</h2>
+          <h2>Resumo da Solicitação</h2>
           <div className='purchase-card'>
             <p className='purchase-card__body__info'>Nome: </p>
             <p className='purchase-card__body__info__value'>{userName}</p>
@@ -135,10 +135,22 @@ const PurchaseCard = ({
               </a>
             </span>
           </div>
+
+          <span className='payment-card__donation__info'>
+            <p>
+              <strong className="info">Importante:</strong> Ao clicar no botão acima, você será
+              redirecionado para o site do Mercado Pago, onde poderá realizar o
+              pagamento do seu plano escolhido.
+            </p>
+            <br />
+            <p>
+              <strong className="info">⚠</strong> Esteja ciente que você está fazendo uma <strong>doação</strong> e não pode ser devolvida, você não está comprando e sim doando, e como forma de gratificação iremos adicionar o Premium na sua conta.
+            </p>
+          </span>
         </PurchaseCardWrapper>
       </Section>
     </>
   );
-};
+}
 
 export default PurchaseCard;
