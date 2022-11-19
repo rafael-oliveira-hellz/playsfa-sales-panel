@@ -12,7 +12,7 @@ const SignUpMessage = ({email}: Props) => {
     <>
       <SignUpMessageWrapper>
         <p className='toggle-hide-qr'>
-          Email inválido! Não possui uma conta? Faça a leitura do nosso QR Code
+          Email [ {email} ] inválido! Não possui uma conta? Faça a leitura do nosso QR Code
           e cadastre-se!
         </p>
         <p className='toggle-hide-app'>
