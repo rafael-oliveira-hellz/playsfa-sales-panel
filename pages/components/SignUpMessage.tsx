@@ -3,7 +3,7 @@ import QRCode from '../assets/qr-code-styling.png';
 import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
 import AppStore from '../assets/google-play-logo.png';
 
-const SignUpMessage = () => {
+const SignUpMessage = ({email}: string) => {
   return (
     <>
       <SignUpMessageWrapper>
@@ -12,8 +12,7 @@ const SignUpMessage = () => {
           e cadastre-se!
         </p>
         <p className='toggle-hide-app'>
-          Email inválido! Não possui uma conta? Baixe nosso aplicativo na App
-          Store!
+          Email [ {email} ] inválido! Não possui uma conta? Baixe nosso aplicativo na App Store!
         </p>
         <Image
           className='toggle-hide-qr'
