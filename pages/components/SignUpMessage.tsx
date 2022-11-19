@@ -1,9 +1,13 @@
 import Image from 'next/image';
+import AppStore from '../assets/google-play-logo.png';
 import QRCode from '../assets/qr-code-styling.png';
 import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
-import AppStore from '../assets/google-play-logo.png';
 
-const SignUpMessage = ({email}: string) => {
+type Props = {
+  email: string;
+};
+
+const SignUpMessage = ({email}: Props) => {
   return (
     <>
       <SignUpMessageWrapper>
