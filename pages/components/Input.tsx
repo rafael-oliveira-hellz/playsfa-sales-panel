@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Input from './styles/Input.style';
 
 type InputProps = {
@@ -16,6 +16,7 @@ const InputComponent = ({
   onKeyDown
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [focused, setFocused] = useState(false);
 
   const onEnter = (e: any) => {
     e.target.focus();
@@ -30,12 +31,17 @@ const InputComponent = ({
 
   return (
     <>
-      <Input className={className}>
-        <label htmlFor='email'>E-mail</label>
+      <Input className={className} style={{
+        borderColor: focused ? '#371f8b' : '#a0aec0',
+        backgroundColor: focused ? '#edf2f7' : '#fff'
+      }}>
+        <label htmlFor='email'>E-mail:</label>
         <input
           type='email'
           id='email'
           autoFocus={autoFocus}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           onChange={onChange}
           value={value}
           ref={inputRef}
