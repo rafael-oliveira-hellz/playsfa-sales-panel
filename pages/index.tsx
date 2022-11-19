@@ -143,7 +143,7 @@ export default function Home(data: Props) {
             }}
             />
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
-          {error ? <SignUpMessage email={email} /> : null}
+          {error ? <SignUpMessage /> : null}
 
           <div
             id='map-wrapper'
