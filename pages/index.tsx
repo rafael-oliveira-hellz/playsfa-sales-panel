@@ -108,6 +108,7 @@ export default function Home(data: Props) {
 
   useEffect(() => {
     setPlans(data.plans);
+    console.log("Planos disponíveis: ", plans);
   }, [data.plans, error, user]);
 
   return (
