@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { LinearProgress } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
@@ -49,21 +49,17 @@ export default function Home(data: Props) {
     try {
         setLoading(true);
         const body = { email, planId, type };
-      // debugger;
       await apiUser
         .post('/getUserByEmail', {
           // send the email to the backend by the body of the request
           ...body
         })
         .then((res: any) => {
-          // console.log(res.data);
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
         });
     } catch (error: any) {
-      // debugger;
       if (error.response) {
-        // console.log(error.response.data);
         setError(true);
       }
     }
@@ -96,7 +92,6 @@ export default function Home(data: Props) {
     setError(false);
   };
 
-  // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
     const arr = str.split('!');
     return arr.map((item, index) => {
@@ -110,10 +105,9 @@ export default function Home(data: Props) {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setPlans(data.plans);
-    console.log("Planos disponíveis: ", plans);
-  }, [data.plans, error, plans, user]);
+  }, [data.plans, error, user]);
 
   return (
     <>
