@@ -49,17 +49,21 @@ export default function Home(data: Props) {
     try {
         setLoading(true);
         const body = { email, planId, type };
+      // debugger;
       await apiUser
         .post('/getUserByEmail', {
           // send the email to the backend by the body of the request
           ...body
         })
         .then((res: any) => {
+          // console.log(res.data);
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
         });
     } catch (error: any) {
+      // debugger;
       if (error.response) {
+        // console.log(error.response.data);
         setError(true);
       }
     }
@@ -92,6 +96,7 @@ export default function Home(data: Props) {
     setError(false);
   };
 
+  // iterate throught the string and break a line every exclamation mark without excluding the exclamation mark
   const breakLine = (str: string) => {
     const arr = str.split('!');
     return arr.map((item, index) => {
