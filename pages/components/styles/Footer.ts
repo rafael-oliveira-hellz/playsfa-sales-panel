@@ -53,14 +53,19 @@ const Footer = styled.div`
     padding-bottom: 0.2rem;
   }
 
-  @media screen and (max-width: 350px) {
+  @media screen and (max-width: 365px) {
+    & {
+      height: 9rem;
+    }
+
     & .site-name,
     & .site-developers,
     & .site-copyrights {
       padding: 0;
     }
+
     & .site-name .site-name__text {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       letter-spacing: 1.5px;
     }
     & .site-developers .site-developers__names {
@@ -69,7 +74,9 @@ const Footer = styled.div`
     & .site-copyrights .site-copyrights__text {
       font-size: 1rem;
     }
-  } ;
+  };
+
+
 `;
 
 export default Footer;

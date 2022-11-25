@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import AppStore from '../assets/google-play-logo.png';
 import QRCode from '../assets/qr-code-styling.png';
 import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
-import AppStore from '../assets/google-play-logo.png';
 
 const SignUpMessage = () => {
   return (
@@ -12,8 +12,7 @@ const SignUpMessage = () => {
           e cadastre-se!
         </p>
         <p className='toggle-hide-app'>
-          Email inválido! Não possui uma conta? Baixe nosso aplicativo na App
-          Store!
+          Email inválido! Não possui uma conta? Baixe nosso aplicativo na App Store!
         </p>
         <Image
           className='toggle-hide-qr'

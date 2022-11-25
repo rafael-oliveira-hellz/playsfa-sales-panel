@@ -3,7 +3,7 @@ import Footer from './styles/Footer';
 const PageFooter = () => {
   return (
     <Footer>
-      <div className='site-name'>
+      <div className='site-name' >
         <p className='site-name__text'>Play Séries, Filmes e Animes</p>
       </div>
       <div className='site-developers'>

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { LinearProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { apiUser } from '../hooks/api';
 import { Plan } from '../types/Plan';
@@ -38,6 +39,7 @@ export default function Home(data: Props) {
   const [planPrice, setPlanPrice] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const getPaymentLink = async (
     email: string,
@@ -45,8 +47,8 @@ export default function Home(data: Props) {
     type: string
   ) => {
     try {
-      const body = { email, planId, type };
-
+        setLoading(true);
+        const body = { email, planId, type };
       // debugger;
       await apiUser
         .post('/getUserByEmail', {
@@ -65,6 +67,8 @@ export default function Home(data: Props) {
         setError(true);
       }
     }
+    setLoading(false);
+
   };
 
   const handlePlanChosen = (
@@ -138,7 +142,8 @@ export default function Home(data: Props) {
             onKeyDown={() => {
               setError(false);
             }}
-          />
+            />
+            {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
           {error ? <SignUpMessage /> : null}
 
           <div
