@@ -28,7 +28,7 @@ const PageFooter = () => {
       </div>
       <div className='site-copyrights'>
         <p className='site-copyrights__text'>     
-          &#169; {new Date().getFullYear().toLocaleString()} - Todos os direitos reservados
+          &#169; {new Date().getFullYear()} - Todos os direitos reservados
         </p>
       </div>
     </Footer>
