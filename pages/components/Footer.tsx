@@ -28,7 +28,7 @@ const PageFooter = () => {
       </div>
       <div className='site-copyrights'>
         <p className='site-copyrights__text'>
-          &#169; 2022 - Todos os direitos reservados
+          &#169; 2023 - Todos os direitos reservados
         </p>
       </div>
     </Footer>
