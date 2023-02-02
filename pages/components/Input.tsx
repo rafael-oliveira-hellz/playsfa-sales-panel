@@ -7,13 +7,15 @@ type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autoFocus: boolean;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 };
 const InputComponent = ({
   className,
   value,
   onChange,
   autoFocus,
-  onKeyDown
+  onKeyDown,
+  placeholder,
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -47,7 +49,7 @@ const InputComponent = ({
           ref={inputRef}
           onMouseEnter={onEnter}
           onKeyDown={onKeyDown}
-          placeholder='Digite seu e-mail cadastrado'
+          placeholder={placeholder}
         />
       </Input>
     </>

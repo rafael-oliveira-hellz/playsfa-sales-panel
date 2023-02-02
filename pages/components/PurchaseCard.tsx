@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
@@ -59,6 +60,7 @@ type Props = {
   planPrice: string;
   customClass?: any;
   paymentMethod: string;
+  pixQR: string;
   onClick?: () => void;
 };
 
@@ -71,7 +73,8 @@ const PurchaseCard = ({
   planPrice,
   customClass,
   onClick,
-  paymentMethod
+  paymentMethod,
+  pixQR,
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'boleto') {
@@ -84,6 +87,20 @@ const PurchaseCard = ({
 
     return paymentMethod;
   };
+
+  const [status, setStatus] = useState('');
+  
+  useEffect(() => {
+    const socket = new WebSocket("wss://paypixapp.store/topic/payment-confirmation");
+    socket.onmessage = (event) => {
+      console.log("Status: ", event.data)
+      setStatus(event.data);
+    };
+    return () => {
+      socket.close();
+    };
+  }, []);
+  
 
   return (
     <>
@@ -135,7 +152,8 @@ const PurchaseCard = ({
               </a>
             </span>
           </div>
-
+          {pixQR ? pixQR : null}
+          {status ? <p className='status'>{status}</p> : null}
           <span className='payment-card__donation__info'>
             <p>
               <strong className="info">Importante:</strong> Ao clicar no botão acima, você será

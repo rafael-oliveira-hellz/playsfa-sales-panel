@@ -8,10 +8,14 @@ const apiUser = axios.create({
   baseURL: 'https://rafael1963.c37.integrator.host'
 });
 
+const apiUserPix = axios.create({
+  baseURL: 'paypixapp.store'
+});
+
 const apiLocal = axios.create({
   baseURL: 'http://localhost:3333'
 });
 
 
-export { api, apiLocal, apiUser };
+export { api, apiLocal, apiUser, apiUserPix };
 
