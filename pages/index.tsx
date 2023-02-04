@@ -1,7 +1,7 @@
 import { LinearProgress } from '@mui/material';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { apiUser, apiUserPix, localhost } from '../hooks/api';
+import { apiUser, apiUserPix } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
 import PageFooter from './components/Footer';
@@ -45,7 +45,6 @@ export default function Home(data: Props) {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isPix, setIsPix] = useState(false);
 
 
   const getPaymentLink = async (
@@ -81,7 +80,7 @@ export default function Home(data: Props) {
     try {
         setLoading(true);
         const body = { email, plan, cpf };
-      await localhost
+      await apiUserPix
         .post('/plans/pix/requestData', {
           ...body
         })
@@ -114,19 +113,21 @@ export default function Home(data: Props) {
     getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
     setCloseModal(false);
-    setIsPix(false);
   };
   
   const handlePixPlanChosen = (
     plan: Plan,
     plan_name: string,
     user_email: string,
+    payment_type: string,
+    plan_price: string
   ) => {
     setPlanChosen(plan_name);
+    setPlanPrice(plan_price);
+    setPaymentMethod(payment_type);
     getPixQR(user_email, plan, cpf);
     setEmail('');
     setCloseModal(false);
-    setIsPix(true);
   };
 
   const handleClick = () => {
@@ -266,7 +267,9 @@ export default function Home(data: Props) {
                         handlePixPlanChosen(
                           plan,
                           plan.name,
-                          email
+                          email,
+                          'pix',
+                          plan.pix_price
                         )
                       }
                     >
@@ -290,7 +293,6 @@ export default function Home(data: Props) {
             paymentMethod={paymentMethod}
             paymentUrl={paymentLink}
             pixQR={pixQR}
-            pix={isPix}
           />
         )}
 
