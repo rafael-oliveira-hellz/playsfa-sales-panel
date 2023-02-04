@@ -8,6 +8,8 @@ type InputProps = {
   autoFocus: boolean;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  label?: string;
+  type?: string;
 };
 const InputComponent = ({
   className,
@@ -16,6 +18,8 @@ const InputComponent = ({
   autoFocus,
   onKeyDown,
   placeholder,
+  label,
+  type
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -37,10 +41,10 @@ const InputComponent = ({
         borderColor: focused ? '#371f8b' : '#a0aec0',
         backgroundColor: focused ? '#edf2f7' : '#fff'
       }}>
-        <label htmlFor='email'>E-mail:</label>
+        <label htmlFor={type}>{label}</label>
         <input
-          type='email'
-          id='email'
+          type={type}
+          id={type}
           autoFocus={autoFocus}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

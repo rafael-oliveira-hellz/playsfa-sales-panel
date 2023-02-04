@@ -74,7 +74,7 @@ export default function Home(data: Props) {
 
   const getPixQR = async (
     email: string,
-    plan: object,
+    plan: Plan,
     cpf: string
   ) => {
     try {
@@ -115,7 +115,7 @@ export default function Home(data: Props) {
   };
   
   const handlePixPlanChosen = (
-    plan: object,
+    plan: Plan,
     plan_name: string,
     user_email: string,
   ) => {
@@ -173,6 +173,8 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
           <Input
+            label='E-mail:'
+            type='email'
             value={email}
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
@@ -183,6 +185,8 @@ export default function Home(data: Props) {
             />
 
           <Input
+            label='CPF:'
+            type='text'
             value={cpf}
             autoFocus
             onChange={(e) => setCpf(e.target.value)}

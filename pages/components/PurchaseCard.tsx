@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import Stomp from 'stompjs';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
@@ -91,12 +92,22 @@ const PurchaseCard = ({
   const [status, setStatus] = useState('');
   
   useEffect(() => {
-    const socket = new WebSocket("wss://paypixapp.store/topic/payment-confirmation");
-    socket.onmessage = (event) => {
-      console.log("Status: ", event.data)
-      setStatus(event.data);
-    };
+    const socket = new WebSocket("wss://paypixapp.store/ws");
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame: any) {
+    console.log("Connected: " + frame);
+    stompClient.subscribe('/topic/payment-confirmation', function (response: { body: SetStateAction<string>; }) {
+      console.log("Status: ", response.body);
+      setStatus(response.body);
+    });
+  });
+
     return () => {
+      stompClient.disconnect(
+        () => console.log("Disconnected"),  
+        () => console.log("Error while disconnecting")
+      );
       socket.close();
     };
   }, []);
