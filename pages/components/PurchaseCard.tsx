@@ -1,6 +1,7 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
@@ -62,6 +63,7 @@ type Props = {
   customClass?: any;
   paymentMethod: string;
   pixQR: string;
+  pix: boolean;
   onClick?: () => void;
 };
 
@@ -76,6 +78,7 @@ const PurchaseCard = ({
   onClick,
   paymentMethod,
   pixQR,
+  pix
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'boleto') {
@@ -90,27 +93,24 @@ const PurchaseCard = ({
   };
 
   const [status, setStatus] = useState('');
-  
-  useEffect(() => {
-    const socket = new WebSocket("wss://paypixapp.store/ws");
+  const connect = async () => {
+    const socket = new SockJS('http://localhost:8081/ws');
     const stompClient = Stomp.over(socket);
-
-    stompClient.connect({}, function (frame: any) {
-    console.log("Connected: " + frame);
-    stompClient.subscribe('/topic/payment-confirmation', function (response: { body: SetStateAction<string>; }) {
-      console.log("Status: ", response.body);
-      setStatus(response.body);
+    stompClient.connect({}, (frame: any) => {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/topic/response', (message: any) => {
+        console.log('Message: ' + message.body);
+      });
     });
-  });
-
-    return () => {
-      stompClient.disconnect(
-        () => console.log("Disconnected"),  
-        () => console.log("Error while disconnecting")
-      );
-      socket.close();
-    };
-  }, []);
+  }
+   useEffect(() => {
+    if(pix) {
+      connect();
+    
+    } else {
+     console.log("No websocket needed");
+   }
+   }, [pix]);
   
 
   return (
@@ -163,7 +163,7 @@ const PurchaseCard = ({
               </a>
             </span>
           </div>
-          {pixQR ? pixQR : null}
+         {pixQR ? pixQR : "Não tem qr"}
           {status ? <p className='status'>{status}</p> : null}
           <span className='payment-card__donation__info'>
             <p>
