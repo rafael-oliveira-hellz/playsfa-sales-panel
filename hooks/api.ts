@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'https://psadns.xyz'
-});
-
 const apiUser = axios.create({
   baseURL: 'https://rafael1963.c37.integrator.host'
 });
 
-const apiLocal = axios.create({
-  baseURL: 'http://localhost:3333'
+const apiUserPix = axios.create({
+  baseURL: 'https://paypixapp.store'
+});
+
+const localhost = axios.create({
+  baseURL: 'http://localhost:8081'
 });
 
 
-export { api, apiLocal, apiUser };
+export { apiUser, apiUserPix, localhost };
 

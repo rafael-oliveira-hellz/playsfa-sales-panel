@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { LinearProgress } from '@mui/material';
-import { useLayoutEffect, useState } from 'react';
-import { apiUser } from '../hooks/api';
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { apiUser, apiUserPix, localhost } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
 import PageFooter from './components/Footer';
@@ -10,11 +10,15 @@ import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
 
 export async function getStaticProps() {
-  const plansUrl = 'https://psadns.xyz/plans.php';
+  const plansUrl = 'https://psadns.xyz/plans.php';  
 
   const plansResponse = await fetch(plansUrl);
 
+  console.log(plansResponse);
+
   const plans: Plan[] = await plansResponse.json();
+
+  console.log(plans);
 
   return {
     props: {
@@ -33,12 +37,16 @@ export default function Home(data: Props) {
   const [plans, setPlans] = useState<Plan[]>();
   const [user, setUser] = useState<User>();
   const [paymentLink, setPaymentLink] = useState('');
+  const [pixQR, setPixQR] = useState('');
+  const [cpf, setCpf] = useState('');
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [isPix, setIsPix] = useState(false);
+
 
   const getPaymentLink = async (
     email: string,
@@ -65,6 +73,34 @@ export default function Home(data: Props) {
 
   };
 
+  const getPixQR = async (
+    email: string,
+    plan: Plan,
+    cpf: string
+  ) => {
+    try {
+        setLoading(true);
+        const body = { email, plan, cpf };
+      await localhost
+        .post('/plans/pix/requestData', {
+          ...body
+        })
+        .then((res: any) => {
+          console.log(res.data);
+          setUser(res.data.user);
+          setPixQR(res.data.qrcode.qrcode);
+          console.log(res.data.qrcode.qrcode);
+        });
+    } catch (error: any) {  
+      if (error.response) {
+        console.log(error.response);
+        setError(true);
+      }
+    }
+    setLoading(false);
+
+  };
+
   const handlePlanChosen = (
     plan_name: string,
     plan_id: number,
@@ -78,6 +114,19 @@ export default function Home(data: Props) {
     getPaymentLink(user_email, plan_id, payment_type);
     setEmail('');
     setCloseModal(false);
+    setIsPix(false);
+  };
+  
+  const handlePixPlanChosen = (
+    plan: Plan,
+    plan_name: string,
+    user_email: string,
+  ) => {
+    setPlanChosen(plan_name);
+    getPixQR(user_email, plan, cpf);
+    setEmail('');
+    setCloseModal(false);
+    setIsPix(true);
   };
 
   const handleClick = () => {
@@ -103,7 +152,7 @@ export default function Home(data: Props) {
     });
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setPlans(data.plans);
   }, [data.plans, error, user]);
 
@@ -128,13 +177,29 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
           <Input
+            label='E-mail:'
+            type='email'
             value={email}
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={() => {
               setError(false);
             }}
+            placeholder='Digite seu e-mail'
             />
+
+          <Input
+            label='CPF:'
+            type='text'
+            value={cpf}
+            autoFocus
+            onChange={(e) => setCpf(e.target.value)}
+            onKeyDown={() => {
+              setError(false);
+            }}
+            placeholder='Digite seu CPF'
+            />
+            
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
           {error ? <SignUpMessage /> : null}
 
@@ -198,12 +263,10 @@ export default function Home(data: Props) {
                     </button>
                     <button
                       onClick={() =>
-                        handlePlanChosen(
+                        handlePixPlanChosen(
+                          plan,
                           plan.name,
-                          plan.id,
-                          email,
-                          'pix',
-                          plan.pix_price
+                          email
                         )
                       }
                     >
@@ -226,6 +289,8 @@ export default function Home(data: Props) {
             planPrice={planPrice}
             paymentMethod={paymentMethod}
             paymentUrl={paymentLink}
+            pixQR={pixQR}
+            pix={isPix}
           />
         )}
 

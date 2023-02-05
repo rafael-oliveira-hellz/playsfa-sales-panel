@@ -1,4 +1,7 @@
+import { SetStateAction, useEffect, useState } from 'react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
@@ -59,6 +62,8 @@ type Props = {
   planPrice: string;
   customClass?: any;
   paymentMethod: string;
+  pixQR: string;
+  pix: boolean;
   onClick?: () => void;
 };
 
@@ -71,7 +76,9 @@ const PurchaseCard = ({
   planPrice,
   customClass,
   onClick,
-  paymentMethod
+  paymentMethod,
+  pixQR,
+  pix
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'boleto') {
@@ -84,6 +91,27 @@ const PurchaseCard = ({
 
     return paymentMethod;
   };
+
+  const [status, setStatus] = useState('');
+  const connect = async () => {
+    const socket = new SockJS('http://localhost:8081/ws');
+    const stompClient = Stomp.over(socket);
+    stompClient.connect({}, (frame: any) => {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/topic/response', (message: any) => {
+        console.log('Message: ' + message.body);
+      });
+    });
+  }
+   useEffect(() => {
+    if(pix) {
+      connect();
+    
+    } else {
+     console.log("No websocket needed");
+   }
+   }, [pix]);
+  
 
   return (
     <>
@@ -135,7 +163,8 @@ const PurchaseCard = ({
               </a>
             </span>
           </div>
-
+         {pixQR ? pixQR : "Não tem qr"}
+          {status ? <p className='status'>{status}</p> : null}
           <span className='payment-card__donation__info'>
             <p>
               <strong className="info">Importante:</strong> Ao clicar no botão acima, você será

@@ -50,7 +50,7 @@ export type User = {
   card_brand: string | null;
   card_last_four: string | null;
   trial_ends_at: string | null;
-  id_discord: string | null;
+  id_discord: number | null;
   id_whatsapp: string | null;
   id_telegram: string | null;
   manual_premuim: number;
@@ -58,4 +58,7 @@ export type User = {
   provider_id: string;
   type: string | null;
   avatar: string;
+  last_access: string;
+  last_login_ip: string;
+  
 };
