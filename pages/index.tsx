@@ -55,10 +55,6 @@ export default function Home(data: Props) {
   ) => {
     try {
         setLoading(true);
-        if (!email) {
-          setError(true);
-          return;
-        }
         const body = { email, planId, type };
       await apiUser
         .post('/getUserByEmail', {
