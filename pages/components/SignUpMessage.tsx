@@ -3,17 +3,30 @@ import AppStore from '../assets/google-play-logo.png';
 import QRCode from '../assets/qr-code-styling.png';
 import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
 
-const SignUpMessage = () => {
+type Props = {
+  error?: string | null;
+}
+
+const SignUpMessage = ({error}: Props) => {
   return (
     <>
       <SignUpMessageWrapper>
-        <p className='toggle-hide-qr'>
+        {error ? (
+          <>
+          <p className='toggle-hide-qr'>{error}</p>
+          <p className='toggle-hide-app'>{error}</p>
+          </>
+        ) : (
+          <>
+          <p className='toggle-hide-qr'>
           Email inválido! Não possui uma conta? Faça a leitura do nosso QR Code
           e cadastre-se!
         </p>
         <p className='toggle-hide-app'>
           Email inválido! Não possui uma conta? Baixe nosso aplicativo na App Store!
         </p>
+        </>
+        )}
         <Image
           className='toggle-hide-qr'
           src={QRCode}

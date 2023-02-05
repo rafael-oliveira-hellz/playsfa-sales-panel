@@ -46,6 +46,7 @@ export default function Home(data: Props) {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
 
   const getPaymentLink = async (
@@ -98,8 +99,9 @@ export default function Home(data: Props) {
         });
     } catch (error: any) {  
       if (error.response) {
-        console.log(error.response);
+        console.log("Mensagem de Erro: ", error.response.data.message);
         setError(true);
+        setErrorMessage(error.response.data.message);
       }
     }
     setLoading(false);
@@ -205,7 +207,7 @@ export default function Home(data: Props) {
             />
             
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
-          {error ? <SignUpMessage /> : null}
+          {error ? <SignUpMessage error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
 
           <div
             id='map-wrapper'
