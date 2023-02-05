@@ -21,6 +21,7 @@
     "net": "^1.0.2",
     "next": "13.0.0",
     "next-connect": "^0.13.0",
+    "qrcode.react": "^3.1.0",
     "qs": "^6.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "18.11.5",
+    "@types/qrcode.react": "^1.0.2",
     "@types/qs": "^6.9.7",
     "@types/react": "18.0.23",
     "@types/react-dom": "18.0.7",

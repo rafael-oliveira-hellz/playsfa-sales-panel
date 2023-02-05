@@ -1,7 +1,5 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import QRCode from "qrcode.react";
 import { IoMdCloseCircleOutline } from 'react-icons/io';
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
@@ -63,7 +61,6 @@ type Props = {
   customClass?: any;
   paymentMethod: string;
   pixQR: string;
-  pix: boolean;
   onClick?: () => void;
 };
 
@@ -77,8 +74,7 @@ const PurchaseCard = ({
   customClass,
   onClick,
   paymentMethod,
-  pixQR,
-  pix
+  pixQR
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'boleto') {
@@ -92,26 +88,9 @@ const PurchaseCard = ({
     return paymentMethod;
   };
 
-  const [status, setStatus] = useState('');
-  const connect = async () => {
-    const socket = new SockJS('http://localhost:8081/ws');
-    const stompClient = Stomp.over(socket);
-    stompClient.connect({}, (frame: any) => {
-      console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/response', (message: any) => {
-        console.log('Message: ' + message.body);
-      });
-    });
-  }
-   useEffect(() => {
-    if(pix) {
-      connect();
-    
-    } else {
-     console.log("No websocket needed");
-   }
-   }, [pix]);
-  
+  const handleCopy = () => {
+    navigator.clipboard.writeText(pixQR);
+  };
 
   return (
     <>
@@ -158,20 +137,37 @@ const PurchaseCard = ({
 
           <div className='payment-card'>
             <span className='payment-card__info__value'>
-              <a href={paymentUrl} target='_blank' rel='noreferrer'>
-                <MercadoPagoBtn />
-              </a>
+              {pixQR === '' ? (
+                <a href={paymentUrl} target='_blank' rel='noreferrer'>
+                  <MercadoPagoBtn />
+                </a>
+              ) : (
+                <>
+                  <QRCode value={pixQR} size={200} style={{paddingTop: '1rem'}} />
+                  <p style={{padding: '1rem 0', textAlign: 'center', color: 'black'}}>{pixQR}</p>
+                  <button onClick={handleCopy}>Copiar Código PIX para Área de Transferência</button>
+                </>
+              )}
             </span>
           </div>
-         {pixQR ? pixQR : "Não tem qr"}
-          {status ? <p className='status'>{status}</p> : null}
+          {pixQR ? (
+            <span className='payment-card__donation__info'>
+              <p>
+                <strong className="info">Importante:</strong> Seu premium será automaticamente ativado em, no máximo, 30 minutos após a realização do pagamento
+              </p>
+            </span>            
+          ): null}
           <span className='payment-card__donation__info'>
-            <p>
+            {pixQR === '' ? (
+              <>
+              <p>
               <strong className="info">Importante:</strong> Ao clicar no botão acima, você será
               redirecionado para o site do Mercado Pago, onde poderá realizar o
               pagamento do seu plano escolhido.
             </p>
             <br />
+            </>
+            ) : null}
             <p>
               <strong className="info">⚠</strong> Esteja ciente que você está fazendo uma <strong>doação</strong> e não pode ser devolvida, você não está comprando e sim doando, e como forma de gratificação iremos adicionar o Premium na sua conta.
             </p>

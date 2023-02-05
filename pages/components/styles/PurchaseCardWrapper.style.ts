@@ -88,7 +88,7 @@ const PurchaseCardWrapper = styled.div`
       align-items: center;
       background-color: #fff;
       border-radius: 1rem;
-      height: 30%;
+      height: 40%;
       flex-wrap: wrap;
     }
 
@@ -123,8 +123,7 @@ const PurchaseCardWrapper = styled.div`
     & .payment-card .payment-card__info__value a {
       display: flex;
       justify-content: center;
-      word-break: break-all;
-      padding: 0.5rem;
+      padding: 1rem 0.5rem;
       width: 100%;
     }
     & .payment-card .payment-card__info__value a:hover {
@@ -254,7 +253,7 @@ const PurchaseCardWrapper = styled.div`
       & {
         justify-content: space-between;
         width: 85%;
-        height: 80%;
+        height: 88%;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
