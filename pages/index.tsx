@@ -216,7 +216,6 @@ export default function Home(data: Props) {
           >
             {plans &&
               plans.map((plan) => (
-                // w-90
                 <div
                   className='map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
                   key={plan.id}
@@ -269,9 +268,9 @@ export default function Home(data: Props) {
                     </button>
                     <button
                       onClick={() =>
-                        handlePlanChosen(
+                        handlePixPlanChosen(
+                          plan,
                           plan.name,
-                          plan.id,
                           email,
                           'pix',
                           plan.pix_price
@@ -300,6 +299,10 @@ export default function Home(data: Props) {
             pixQR={pixQR}
           />
         )}
+
+        <article className='text-center mt-5'>
+        Não armazenamos nem compartilhamos nenhum dado e são usados exclusivamente para gerar o link de pagamento
+        </article>
 
         <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte pelo <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
       </main>
