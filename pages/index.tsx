@@ -1,11 +1,12 @@
 import { LinearProgress } from '@mui/material';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { apiUser, apiUserPix } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
+import CpfInput from './components/CpfInput';
+import EmailInput from './components/EmailInput';
 import PageFooter from './components/Footer';
-import Input from './components/Input';
 import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
 
@@ -177,28 +178,25 @@ export default function Home(data: Props) {
           id='section'
           className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
-          <Input
-            label='E-mail:'
-            type='email'
+          <EmailInput
             value={email}
             autoFocus
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: { target: { value: SetStateAction<string>; }; }) => setEmail(e.target.value)}
             onKeyDown={() => {
               setError(false);
             }}
             placeholder='Digite seu e-mail'
             />
 
-          <Input
-            label='CPF:'
-            type='text'
+          <CpfInput
             value={cpf}
             autoFocus
-            onChange={(e) => setCpf(e.target.value)}
+            onChange={(e: { target: { value: SetStateAction<string>; }; }) => setCpf(e.target.value)}
             onKeyDown={() => {
               setError(false);
             }}
             placeholder='Digite seu CPF'
+            paymentMethod={paymentMethod}
             />
             
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
