@@ -268,9 +268,9 @@ export default function Home(data: Props) {
                     </button>
                     <button
                       onClick={() =>
-                        handlePixPlanChosen(
-                          plan,
+                        handlePlanChosen(
                           plan.name,
+                          plan.id,
                           email,
                           'pix',
                           plan.pix_price
