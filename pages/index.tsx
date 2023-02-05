@@ -10,7 +10,7 @@ import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
 
 export async function getStaticProps() {
-  const plansUrl = 'https://psadns.xyz/plans.php';  
+  const plansUrl = 'https://psadns.xyz/plans.php';
 
   const plansResponse = await fetch(plansUrl);
 
@@ -46,15 +46,14 @@ export default function Home(data: Props) {
   const [closeModal, setCloseModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const getPaymentLink = async (
     email: string,
     planId: number,
     type: string
   ) => {
     try {
-        setLoading(true);
-        const body = { email, planId, type };
+      setLoading(true);
+      const body = { email, planId, type };
       await apiUser
         .post('/getUserByEmail', {
           ...body
@@ -63,23 +62,18 @@ export default function Home(data: Props) {
           setUser(res.data.data);
           setPaymentLink(res.data.paymentUrl);
         });
-    } catch (error: any) {  
+    } catch (error: any) {
       if (error.response) {
         setError(true);
       }
     }
     setLoading(false);
-
   };
 
-  const getPixQR = async (
-    email: string,
-    plan: Plan,
-    cpf: string
-  ) => {
+  const getPixQR = async (email: string, plan: Plan, cpf: string) => {
     try {
-        setLoading(true);
-        const body = { email, plan, cpf };
+      setLoading(true);
+      const body = { email, plan, cpf };
       await apiUserPix
         .post('/plans/pix/requestData', {
           ...body
@@ -90,14 +84,13 @@ export default function Home(data: Props) {
           setPixQR(res.data.qrcode.qrcode);
           console.log(res.data.qrcode.qrcode);
         });
-    } catch (error: any) {  
+    } catch (error: any) {
       if (error.response) {
         console.log(error.response);
         setError(true);
       }
     }
     setLoading(false);
-
   };
 
   const handlePlanChosen = (
@@ -114,7 +107,7 @@ export default function Home(data: Props) {
     setEmail('');
     setCloseModal(false);
   };
-  
+
   const handlePixPlanChosen = (
     plan: Plan,
     plan_name: string,
@@ -177,31 +170,42 @@ export default function Home(data: Props) {
           id='section'
           className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
-          <Input
-            label='E-mail:'
-            type='email'
-            value={email}
-            autoFocus
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={() => {
-              setError(false);
-            }}
-            placeholder='Digite seu e-mail'
+          <div className='flex flex-col justify-center justify-items-center items-center w-full'>
+            <Input
+              label='E-mail:'
+              type='email'
+              value={email}
+              autoFocus
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={() => {
+                setError(false);
+              }}
+              placeholder='Digite seu e-mail'
             />
 
-          <Input
-            label='CPF:'
-            type='text'
-            value={cpf}
-            autoFocus
-            onChange={(e) => setCpf(e.target.value)}
-            onKeyDown={() => {
-              setError(false);
-            }}
-            placeholder='Digite seu CPF'
+            <Input
+              label='CPF:'
+              type='text'
+              value={cpf}
+              autoFocus
+              onChange={(e) => setCpf(e.target.value)}
+              onKeyDown={() => {
+                setError(false);
+              }}
+              placeholder='Digite seu CPF'
             />
-            
-            {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
+          </div>
+          {loading ? (
+            <LinearProgress
+              color='secondary'
+              id='progress-bar'
+              style={{
+                marginTop: '-0.5rem',
+                marginBottom: '1rem',
+                width: '55%'
+              }}
+            />
+          ) : null}
           {error ? <SignUpMessage /> : null}
 
           <div
@@ -296,7 +300,13 @@ export default function Home(data: Props) {
           />
         )}
 
-        <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte pelo <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
+        <article>
+          Está com algum problema com pagamento, premium ou outro assunto? Entre
+          em contato com o suporte pelo{' '}
+          <a href='https://discord.gg/app' target='_blank' rel='noreferrer'>
+            Discord
+          </a>
+        </article>
       </main>
       <PageFooter />
     </>
