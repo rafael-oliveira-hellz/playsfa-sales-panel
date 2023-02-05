@@ -37,10 +37,13 @@ const InputComponent = ({
 
   return (
     <>
-      <Input className={className} style={{
-        borderColor: focused ? '#371f8b' : '#a0aec0',
-        backgroundColor: focused ? '#edf2f7' : '#fff'
-      }}>
+      <Input
+        className={className}
+        style={{
+          borderColor: focused ? '#371f8b' : '#a0aec0',
+          backgroundColor: focused ? '#edf2f7' : '#fff'
+        }}
+      >
         <label htmlFor={type}>{label}</label>
         <input
           type={type}
