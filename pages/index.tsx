@@ -81,7 +81,7 @@ export default function Home(data: Props) {
     try {
         setLoading(true);
         const body = { email, plan, cpf };
-      await localhost
+      await apiUserPix
         .post('/plans/pix/requestData', {
           ...body
         })
