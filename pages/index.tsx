@@ -101,6 +101,10 @@ export default function Home(data: Props) {
       if (error.response) {
         console.log("Mensagem de Erro: ", error.response);
         setError(true);
+        if (Array.isArray(error.response.data)) {
+          setErrorMessage(error.response.data[0].defaultMessage);
+        }
+
         setErrorMessage(error.response.data.message);
       }
     }
