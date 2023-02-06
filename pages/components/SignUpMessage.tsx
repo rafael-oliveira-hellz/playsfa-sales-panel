@@ -6,13 +6,14 @@ import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
 type Props = {
   error?: string | null;
   cpf?: string | null;
+  invalidCpf?: boolean;
 }
 
-const SignUpMessage = ({error, cpf}: Props) => {
+const SignUpMessage = ({error, cpf, invalidCpf}: Props) => {
   return (
     <>
       <SignUpMessageWrapper>
-        {error && cpf ? (
+        {error && cpf && !invalidCpf ? (
           <>
           <p className='toggle-hide-qr'>{error}</p>
           <p className='toggle-hide-app'>{error}</p>
@@ -31,7 +32,7 @@ const SignUpMessage = ({error, cpf}: Props) => {
           <Image src={AppStore} alt='Imagem com link para Google App Store' />
         </a>
           </>
-        ) : error && !cpf ? (
+        ) : error && !cpf && invalidCpf || error && cpf && invalidCpf ? (
           <>
             <p className='toggle-hide-qr'>{error}</p>
             <p className='toggle-hide-app'>{error}</p>

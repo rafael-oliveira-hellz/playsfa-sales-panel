@@ -40,6 +40,7 @@ export default function Home(data: Props) {
   const [paymentLink, setPaymentLink] = useState('');
   const [pixQR, setPixQR] = useState('');
   const [cpf, setCpf] = useState('');
+  const [invalidCpf, setInvalidCpf] = useState(false);
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
@@ -105,6 +106,7 @@ export default function Home(data: Props) {
         
         if (Array.isArray(error.response.data)) {
           setErrorMessage(error.response.data[0].defaultMessage);
+          setInvalidCpf(true);
           console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
         } else {
           setErrorMessage(error.response.data.message);
@@ -214,7 +216,7 @@ export default function Home(data: Props) {
             />
             
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
-          {error ? <SignUpMessage cpf={paymentMethod === 'pix' ? cpf : null} error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
+          {error ? <SignUpMessage invalidCpf={invalidCpf} cpf={paymentMethod === 'pix' ? cpf : null} error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
 
           <div
             id='map-wrapper'
