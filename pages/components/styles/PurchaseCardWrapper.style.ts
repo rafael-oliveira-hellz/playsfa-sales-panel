@@ -181,11 +181,14 @@ const PurchaseCardWrapper = styled.div`
       & {
         align-self: center;
         width: 100%;
-        height: 188vh;
+        min-height: fit-content;
+        height: 210vh !important;
+        /* max-height: 188vh; */
         left: 50%;
-        top: 25%;
+        top: 30%;
         transform: translate(-50%, -50%);
         line-height: 1.2;
+        border: 1px solid red;
       }
 
       & h2 {
@@ -237,9 +240,10 @@ const PurchaseCardWrapper = styled.div`
     @media screen and (min-width: 401px) and (max-width: 740px) {
       & {
         width: 90%;
-        height: 60%;
+        /* min-height: 50% !important; */
+        height: 55% !important;
         left: 50%;
-        top: 32%;
+        top: 28%;
         transform: translate(-50%, -50%);
       }
 
@@ -267,7 +271,7 @@ const PurchaseCardWrapper = styled.div`
     @media screen and (min-width: 741px) {
       & {
         top: 10vh;
-        height: 45%;
+        height: 40% !important;
         width: 90%;
       }
       & h2 {
@@ -288,9 +292,9 @@ const PurchaseCardWrapper = styled.div`
       & {
         justify-content: space-between;
         width: 85%;
-        height: 180vh;
+        height: 160vh !important;
         left: 50%;
-        top: 50%;
+        top: 45%;
         transform: translate(-50%, -50%);
       }
       & h2 {
