@@ -122,7 +122,7 @@ const PurchaseCardWrapper = styled.div`
       font-size: 1.3rem;
     }
     & .payment-card .payment-card__info__value div {
-      display: inline-flex;
+      display: inline-block;
       /* justify-content: center; */
       margin-top: 1rem;
       width: 100%;
@@ -132,6 +132,7 @@ const PurchaseCardWrapper = styled.div`
       color: #000;
       width: fit-content;
       text-align: center;
+      word-wrap: break-word;
     }
     & .payment-card .payment-card__info__value a {
       display: flex;
@@ -234,12 +235,12 @@ const PurchaseCardWrapper = styled.div`
         height: 8vh;
       }
     }
-    @media screen and (min-width: 401px) {
+    @media screen and (min-width: 401px) and (max-width: 740px) {
       & {
         width: 90%;
-        height: 90%;
+        height: 60%;
         left: 50%;
-        top: 50%;
+        top: 32%;
         transform: translate(-50%, -50%);
       }
 
@@ -264,7 +265,12 @@ const PurchaseCardWrapper = styled.div`
       }
     }
 
-    @media screen and (min-width: 500px) {
+    @media screen and (min-width: 741px) {
+      & {
+        top: 10vh;
+        height: 45%;
+        width: 90%;
+      }
       & h2 {
         transform: translateY(-2.5rem);
       }
@@ -283,9 +289,9 @@ const PurchaseCardWrapper = styled.div`
       & {
         justify-content: space-between;
         width: 85%;
-        height: 88%;
+        height: 100vh;
         left: 50%;
-        top: 50%;
+        top: 50vh;
         transform: translate(-50%, -50%);
       }
       & h2 {
