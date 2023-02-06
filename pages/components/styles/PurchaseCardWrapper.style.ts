@@ -90,7 +90,6 @@ const PurchaseCardWrapper = styled.div`
       border-radius: 1rem;
       height: 40%;
       flex-wrap: wrap;
-      /* border: 1px solid red; */
     }
 
     & .purchase-card .purchase-card__body__info,
@@ -289,9 +288,9 @@ const PurchaseCardWrapper = styled.div`
       & {
         justify-content: space-between;
         width: 85%;
-        height: 100vh;
+        height: 180vh;
         left: 50%;
-        top: 50vh;
+        top: 50%;
         transform: translate(-50%, -50%);
       }
       & h2 {
@@ -304,6 +303,10 @@ const PurchaseCardWrapper = styled.div`
       }
       & .close-box {
         transform: translateY(-0.1rem);
+      }
+
+      & button {
+        margin-top: 2rem;
       }
     }
 
