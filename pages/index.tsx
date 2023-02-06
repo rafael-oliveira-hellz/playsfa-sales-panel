@@ -308,7 +308,7 @@ export default function Home(data: Props) {
         )}
 
         <article className='text-center mt-5'>
-        <strong className="info" style={{color: '#911308'}}>Importante:</strong> Não armazenamos nem compartilhamos nenhum dado e são usados exclusivamente para gerar o link de pagamento.
+        <strong className="info" style={{color: '#911308', fontWeight: 900}}>Importante:</strong> Não armazenamos nem compartilhamos nenhum dado e são usados exclusivamente para gerar o link de pagamento.
         </article>
 
         <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte pelo <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
