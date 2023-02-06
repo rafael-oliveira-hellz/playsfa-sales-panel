@@ -48,7 +48,6 @@ const Section = styled.section`
     @media screen and (min-width: 751px) and (max-width: 1250px) {
       & {
         height: 203.6vh;
-        border: 1px solid red;
       }
     }
   `}
