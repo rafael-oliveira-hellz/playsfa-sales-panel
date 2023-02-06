@@ -47,7 +47,8 @@ const Section = styled.section`
     }
     @media screen and (min-width: 751px) and (max-width: 1250px) {
       & {
-        height: 100vh;
+        height: 203.6vh;
+        border: 1px solid red;
       }
     }
   `}
@@ -152,7 +153,7 @@ const PurchaseCard = ({
                   />
                   <div>
                     <span>
-                      {pixQR.split('').map((splitted) => {
+                      {pixQR!.split('').map((splitted) => {
                         return splitted + '\n';
                       })}
                     </span>
