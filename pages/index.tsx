@@ -106,9 +106,9 @@ export default function Home(data: Props) {
         if (Array.isArray(error.response.data)) {
           setErrorMessage(error.response.data[0].defaultMessage);
           console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
+        } else {
+          setErrorMessage(error.response.data.message);
         }
-
-        setErrorMessage(error.response.data.message);
       }
     }
     setLoading(false);
