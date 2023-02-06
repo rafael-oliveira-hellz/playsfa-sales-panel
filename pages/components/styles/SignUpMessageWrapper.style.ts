@@ -31,6 +31,7 @@ const SignUpMessageWrapper = styled.div`
     & .toggle-hide-app {
       display: none;
     }
+
     @media screen and (max-width: 991px) {
       & .toggle-hide-qr {
         display: none;
