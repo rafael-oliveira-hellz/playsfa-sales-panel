@@ -214,7 +214,7 @@ export default function Home(data: Props) {
             />
             
             {loading ? <LinearProgress color="secondary" id="progress-bar" style={{marginTop:"-0.5rem", marginBottom:"1rem", width:"55%"}}/> : null}
-          {error ? <SignUpMessage error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
+          {error ? <SignUpMessage cpf={paymentMethod === 'pix' ? cpf : null} error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
 
           <div
             id='map-wrapper'
