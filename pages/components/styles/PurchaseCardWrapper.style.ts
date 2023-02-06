@@ -90,6 +90,7 @@ const PurchaseCardWrapper = styled.div`
       border-radius: 1rem;
       height: 40%;
       flex-wrap: wrap;
+      border: 1px solid red;
     }
 
     & .purchase-card .purchase-card__body__info,
@@ -98,10 +99,10 @@ const PurchaseCardWrapper = styled.div`
       font-weight: 600;
     }
 
-    & .purchase-card .purchase-card__body__info__value {
+    /* & .purchase-card .purchase-card__body__info__value {
       font-size: 1.3rem;
       font-weight: 400;
-    }
+    } */
 
     & .payment-card .payment-card__info,
     & .payment-card .payment-card__info__value {
@@ -119,6 +120,18 @@ const PurchaseCardWrapper = styled.div`
     }
     & .payment-card .payment-card__info__value {
       font-size: 1.3rem;
+    }
+    & .payment-card .payment-card__info__value div {
+      display: inline-flex;
+      /* justify-content: center; */
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.5rem 1rem;
+    }
+    & .payment-card .payment-card__info__value div span {
+      color: #000;
+      width: fit-content;
+      text-align: center;
     }
     & .payment-card .payment-card__info__value a {
       display: flex;
@@ -148,7 +161,7 @@ const PurchaseCardWrapper = styled.div`
       margin-bottom: 1.75rem;
     }
 
-    & .payment-card__donation__info p {     
+    & .payment-card__donation__info p {
       text-align: justify;
     }
 
@@ -188,10 +201,22 @@ const PurchaseCardWrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 15%;
+        height: 50%;
       }
       & .payment-card .payment-card__info__value {
         width: 100%;
+      }
+      & .payment-card .payment-card__info__value div {
+        margin-bottom: 0.4rem;
+      }
+      & .payment-card .payment-card__info__value div span {
+        width: 100% !important;
+        font-size: 0.8rem;
+        text-align: center !important;
+        line-height: 1.2;
+
+        /* letter-spacing: 10rem; */
+        /* margin-left: 1.9rem; */
       }
       & .payment-card .payment-card__info,
       & .payment-card .payment-card__info__value a {
