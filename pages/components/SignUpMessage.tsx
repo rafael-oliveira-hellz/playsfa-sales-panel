@@ -12,7 +12,7 @@ const SignUpMessage = ({error, cpf}: Props) => {
   return (
     <>
       <SignUpMessageWrapper>
-        {error && !cpf ? (
+        {error && cpf ? (
           <>
           <p className='toggle-hide-qr'>{error}</p>
           <p className='toggle-hide-app'>{error}</p>
@@ -31,7 +31,7 @@ const SignUpMessage = ({error, cpf}: Props) => {
           <Image src={AppStore} alt='Imagem com link para Google App Store' />
         </a>
           </>
-        ) : error && cpf ? (
+        ) : error && !cpf ? (
           <>
             <p className='toggle-hide-qr'>{error}</p>
             <p className='toggle-hide-app'>{error}</p>
