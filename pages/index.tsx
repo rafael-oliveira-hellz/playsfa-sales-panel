@@ -100,9 +100,12 @@ export default function Home(data: Props) {
     } catch (error: any) {  
       if (error.response) {
         console.log("Mensagem de Erro: ", error.response);
+
         setError(true);
+        
         if (Array.isArray(error.response.data)) {
           setErrorMessage(error.response.data[0].defaultMessage);
+          console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
         }
 
         setErrorMessage(error.response.data.message);
