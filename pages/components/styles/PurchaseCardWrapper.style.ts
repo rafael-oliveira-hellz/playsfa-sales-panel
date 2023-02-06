@@ -20,7 +20,7 @@ const PurchaseCardWrapper = styled.div`
     border: 1px solid rgb(51 65 85);
     border-radius: 1rem;
     width: 70%;
-    height: 70%;
+    height: 90% !important;
     padding: 0.3rem 1rem;
     top: 0;
     bottom: 0;
@@ -310,7 +310,7 @@ const PurchaseCardWrapper = styled.div`
       }
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1200px) and (max-width: 1250px) {
       & h2 {
         transform: translateY(-2.5rem);
       }
