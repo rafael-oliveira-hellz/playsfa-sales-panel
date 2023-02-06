@@ -99,7 +99,7 @@ export default function Home(data: Props) {
         });
     } catch (error: any) {  
       if (error.response) {
-        console.log("Mensagem de Erro: ", error.response.data.message);
+        console.log("Mensagem de Erro: ", error.response);
         setError(true);
         setErrorMessage(error.response.data.message);
       }
