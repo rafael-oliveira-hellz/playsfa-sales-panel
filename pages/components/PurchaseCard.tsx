@@ -152,11 +152,7 @@ const PurchaseCard = ({
                     style={{ paddingTop: '1rem' }}
                   />
                   <div>
-                    <span>
-                      {pixQR?.split('').map((splitted) => {
-                        return splitted + '\n';
-                      })}
-                    </span>
+                    <span>{pixQR}</span>
                   </div>
                   <button onClick={handleCopy}>
                     Copiar Código PIX para Área de Transferência
