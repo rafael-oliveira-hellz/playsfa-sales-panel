@@ -42,7 +42,7 @@ const Section = styled.section`
 
     @media screen and (min-width: 300px) and (max-width: 750px) {
       & {
-        height: 196vh;
+        height: 405.5vh;
       }
     }
     @media screen and (min-width: 751px) and (max-width: 1250px) {
@@ -89,7 +89,7 @@ const PurchaseCard = ({
 
     return paymentMethod;
   };
-  const windowWidth = window.innerWidth;
+
   const handleCopy = () => {
     navigator.clipboard.writeText(pixQR);
   };
@@ -152,11 +152,9 @@ const PurchaseCard = ({
                   />
                   <div>
                     <span>
-                      {windowWidth <= 400
-                        ? pixQR.split('').map((splitted) => {
-                            return splitted + '\n';
-                          })
-                        : pixQR}
+                      {pixQR.split('').map((splitted) => {
+                        return splitted + '\n';
+                      })}
                     </span>
                   </div>
                   <button onClick={handleCopy}>
