@@ -153,7 +153,7 @@ const PurchaseCard = ({
                   />
                   <div>
                     <span>
-                      {pixQR!.split('').map((splitted) => {
+                      {pixQR?.split('').map((splitted) => {
                         return splitted + '\n';
                       })}
                     </span>
