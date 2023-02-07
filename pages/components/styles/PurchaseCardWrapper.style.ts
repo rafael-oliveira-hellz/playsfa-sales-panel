@@ -188,7 +188,6 @@ const PurchaseCardWrapper = styled.div`
         top: 30%;
         transform: translate(-50%, -50%);
         line-height: 1.2;
-        border: 1px solid red;
       }
 
       & h2 {
