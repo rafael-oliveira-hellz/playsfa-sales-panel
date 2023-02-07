@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { apiUser, apiUserPix } from '../hooks/api';
 import { Plan } from '../types/Plan';
 import { User } from '../types/User';
+import InputCpf from './components/CpfInput';
+import InputEmail from './components/EmailInput';
 import PageFooter from './components/Footer';
-import Input from './components/Input';
 import PurchaseCard from './components/PurchaseCard';
 import SignUpMessage from './components/SignUpMessage';
 
@@ -39,12 +40,14 @@ export default function Home(data: Props) {
   const [paymentLink, setPaymentLink] = useState('');
   const [pixQR, setPixQR] = useState('');
   const [cpf, setCpf] = useState('');
+  const [invalidCpf, setInvalidCpf] = useState(false);
   const [error, setError] = useState(false);
   const [planChosen, setPlanChosen] = useState('');
   const [planPrice, setPlanPrice] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [closeModal, setCloseModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const getPaymentLink = async (
     email: string,
@@ -72,8 +75,13 @@ export default function Home(data: Props) {
 
   const getPixQR = async (email: string, plan: Plan, cpf: string) => {
     try {
-      setLoading(true);
-      const body = { email, plan, cpf };
+        setLoading(true);
+        
+        if (!cpf || !email) {
+          setError(true);
+        }
+        
+        const body = { email, plan, cpf };
       await apiUserPix
         .post('/plans/pix/requestData', {
           ...body
@@ -86,8 +94,18 @@ export default function Home(data: Props) {
         });
     } catch (error: any) {
       if (error.response) {
-        console.log(error.response);
+        console.log("Mensagem de Erro: ", error.response);
+
         setError(true);
+        
+        if (Array.isArray(error.response.data)) {
+          setErrorMessage(error.response.data[0].defaultMessage);
+          setInvalidCpf(true);
+          console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
+        } else {
+          setErrorMessage(error.response.data.message);
+          setInvalidCpf(false);
+        }
       }
     }
     setLoading(false);
@@ -171,9 +189,7 @@ export default function Home(data: Props) {
           className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
         >
           <div className='flex flex-col justify-center justify-items-center items-center w-full'>
-            <Input
-              label='E-mail:'
-              type='email'
+            <InputEmail
               value={email}
               autoFocus
               onChange={(e) => setEmail(e.target.value)}
@@ -183,16 +199,15 @@ export default function Home(data: Props) {
               placeholder='Digite seu e-mail'
             />
 
-            <Input
-              label='CPF:'
-              type='text'
+            <InputCpf
               value={cpf}
               autoFocus
               onChange={(e) => setCpf(e.target.value)}
               onKeyDown={() => {
                 setError(false);
               }}
-              placeholder='Digite seu CPF'
+              placeholder='Digite seu CPF (Ex.: 99988877722)'
+              paymentMethod={paymentMethod}
             />
           </div>
           {loading ? (
@@ -206,7 +221,7 @@ export default function Home(data: Props) {
               }}
             />
           ) : null}
-          {error ? <SignUpMessage /> : null}
+          {error ? <SignUpMessage invalidCpf={invalidCpf} cpf={paymentMethod === 'pix' ? cpf : null} error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
 
           <div
             id='map-wrapper'
@@ -215,7 +230,6 @@ export default function Home(data: Props) {
           >
             {plans &&
               plans.map((plan) => (
-                // w-90
                 <div
                   className='map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
                   key={plan.id}
@@ -300,13 +314,11 @@ export default function Home(data: Props) {
           />
         )}
 
-        <article>
-          Está com algum problema com pagamento, premium ou outro assunto? Entre
-          em contato com o suporte pelo{' '}
-          <a href='https://discord.gg/app' target='_blank' rel='noreferrer'>
-            Discord
-          </a>
+        <article className='text-center mt-5'>
+        <strong className="info" style={{color: '#911308', fontWeight: 900}}>Importante:</strong> Não armazenamos nem compartilhamos nenhum dado e são usados exclusivamente para gerar o link de pagamento.
         </article>
+
+        <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte pelo <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
       </main>
       <PageFooter />
     </>
