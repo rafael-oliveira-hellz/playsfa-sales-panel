@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const Input = styled.div`
   ${() => css`
@@ -40,25 +40,92 @@ const Input = styled.div`
     }
 
     @media screen and (max-width: 400px) {
+      & {
+        width: 90%;
+      }
       & label {
-        font-size: 1.2rem;
-        width: 5rem;
+        font-size: 0.9rem !important;
+        width: 4rem !important;
+        margin-right: 0rem !important;
+        transform: translateX(-0.7rem) !important;
       }
 
       & input {
         font-size: 0.8rem;
         width: 75%;
+        transform: translateX(-0.8rem) !important;
       }
+
       & input::placeholder {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         letter-spacing: 0;
         font-weight: 500;
       }
     }
+
     @media screen and (max-width: 600px) {
+      & label {
+        font-size: 0.7rem !important;
+        width: 2.6rem;
+        transform: translateX(-0.7rem) !important;
+        margin-right: 1rem;
+      }
       & input {
         font-size: 0.8rem;
-        width: 75%;
+        width: 85%;
+        transform: translateX(-1.6rem) !important;
+      }
+
+      & input::placeholder {
+        font-size: 0.5rem;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      & label {
+        font-size: 1rem;
+        transform: translateX(-1.8rem) !important;
+      }
+
+      & input {
+        font-size: 0.8rem;
+        transform: translateX(-2.6rem) !important;
+      }
+
+      & input::placeholder {
+        font-size: 0.8rem !important;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      & label {
+        font-size: 1.2rem !important;
+        transform: translateX(-2.4rem) !important;
+      }
+
+      & input {
+        font-size: 1rem;
+        transform: translateX(-2.5rem);
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      & label {
+        transform: translateX(-1.5rem);
+      }
+
+      & input::placeholder {
+        font-size: 1rem !important;
+      }
+    }
+
+    @media screen and (max-width: 1000px) {
+      & label {
+        transform: translateX(-1rem);
+      }
+
+      & input::placeholder {
+        font-size: 1.2rem !important;
       }
     }
   `}
