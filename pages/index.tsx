@@ -15,11 +15,11 @@ export async function getStaticProps() {
 
   const plansResponse = await fetch(plansUrl);
 
-  console.log(plansResponse);
+  // console.log(plansResponse);
 
   const plans: Plan[] = await plansResponse.json();
 
-  console.log(plans);
+  // console.log(plans);
 
   return {
     props: {
@@ -87,21 +87,21 @@ export default function Home(data: Props) {
           ...body
         })
         .then((res: any) => {
-          console.log(res.data);
+          // console.log(res.data);
           setUser(res.data.user);
           setPixQR(res.data.qrcode.qrcode);
-          console.log(res.data.qrcode.qrcode);
+          // console.log(res.data.qrcode.qrcode);
         });
     } catch (error: any) {
       if (error.response) {
-        console.log("Mensagem de Erro: ", error.response);
+        // console.log("Mensagem de Erro: ", error.response);
 
         setError(true);
         
         if (Array.isArray(error.response.data)) {
           setErrorMessage(error.response.data[0].defaultMessage);
           setInvalidCpf(true);
-          console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
+          // console.log("Mensagem de Erro de Array? ", Array.isArray(error.response.data));
         } else {
           setErrorMessage(error.response.data.message);
           setInvalidCpf(false);
