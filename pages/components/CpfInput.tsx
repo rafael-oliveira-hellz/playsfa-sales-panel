@@ -8,18 +8,16 @@ type InputProps = {
   autoFocus: boolean;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  label?: string;
-  type?: string;
+  paymentMethod: string;
 };
-const InputComponent = ({
+const InputCpf= ({
   className,
   value,
   onChange,
   autoFocus,
   onKeyDown,
   placeholder,
-  label,
-  type
+  paymentMethod
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -37,17 +35,14 @@ const InputComponent = ({
 
   return (
     <>
-      <Input
-        className={className}
-        style={{
-          borderColor: focused ? '#371f8b' : '#a0aec0',
-          backgroundColor: focused ? '#edf2f7' : '#fff'
-        }}
-      >
-        <label htmlFor={type}>{label}</label>
+      <Input className={className} style={{
+        borderColor: focused ? '#371f8b' : '#a0aec0',
+        backgroundColor: focused ? '#edf2f7' : '#fff'
+      }}>
+        <label htmlFor='text'>CPF:</label>
         <input
-          type={type}
-          id={type}
+          type='text'
+          id='text'
           autoFocus={autoFocus}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -57,10 +52,11 @@ const InputComponent = ({
           onMouseEnter={onEnter}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
+          {...paymentMethod === 'pix' ? { required: true } : { required: false }}
         />
       </Input>
     </>
   );
 };
 
-export default InputComponent;
+export default InputCpf;

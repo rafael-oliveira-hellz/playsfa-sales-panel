@@ -3,16 +3,48 @@ import AppStore from '../assets/google-play-logo.png';
 import QRCode from '../assets/qr-code-styling.png';
 import SignUpMessageWrapper from './styles/SignUpMessageWrapper.style';
 
-const SignUpMessage = () => {
+type Props = {
+  error?: string | null;
+  cpf?: string | null;
+  invalidCpf?: boolean;
+}
+
+const SignUpMessage = ({error, cpf, invalidCpf}: Props) => {
   return (
     <>
       <SignUpMessageWrapper>
-        <p className='toggle-hide-qr'>
-          Email inválido! Não possui uma conta? Faça a leitura do nosso QR Code
+        {error && cpf && !invalidCpf ? (
+          <>
+          <p className='toggle-hide-qr'>{error}</p>
+          <p className='toggle-hide-app'>{error}</p>
+
+          <Image
+          className='toggle-hide-qr'
+          src={QRCode}
+          alt='QR Code para cadastro de novos usuários'
+        />
+        <a
+          className='toggle-hide-app'
+          href='https://play.google.com/store/apps/details?id=com.psaappsa'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <Image src={AppStore} alt='Imagem com link para Google App Store' />
+        </a>
+          </>
+        ) : error && !cpf && invalidCpf || error && cpf && invalidCpf ? (
+          <>
+            <p className='toggle-hide-qr'>{error}</p>
+            <p className='toggle-hide-app'>{error}</p>
+          </>
+        ) : (
+          <>
+          <p className='toggle-hide-qr'>
+          E-mail inválido! Não possui uma conta? Faça a leitura do nosso QR Code
           e cadastre-se!
         </p>
         <p className='toggle-hide-app'>
-          Email inválido! Não possui uma conta? Baixe nosso aplicativo na App Store!
+          E-mail inválido! Não possui uma conta? Baixe nosso aplicativo na App Store!
         </p>
         <Image
           className='toggle-hide-qr'
@@ -27,6 +59,8 @@ const SignUpMessage = () => {
         >
           <Image src={AppStore} alt='Imagem com link para Google App Store' />
         </a>
+        </>
+        )}
       </SignUpMessageWrapper>
     </>
   );
