@@ -212,7 +212,7 @@ export default function Home(data: Props) {
             onKeyDown={() => {
               setError(false);
             }}
-            placeholder='Digite seu CPF'
+            placeholder='Digite seu CPF (Ex.: 99988877722')
             paymentMethod={paymentMethod}
             />
             
