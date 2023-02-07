@@ -1,4 +1,4 @@
-import QRCode from "qrcode.react";
+import QRCode from 'qrcode.react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
 import MercadoPagoBtn from './MercadoPagoBtn';
@@ -26,7 +26,8 @@ const Section = styled.section`
     top: 0;
     bottom: 0;
     width: 100%;
-    min-height: calc(100vh + 9vh);
+    /* min-height: calc(100vh + 9vh); */
+    height: 72rem;
     z-index: 1;
     opacity: 0.95;
     animation: ${animation} 0.3s linear;
@@ -38,14 +39,15 @@ const Section = styled.section`
       z-index: -2;
       transition: all 0.3s ease-in-out;
     }
+
     @media screen and (min-width: 300px) and (max-width: 750px) {
       & {
-        height: 196vh;
+        height: 405.5vh;
       }
     }
     @media screen and (min-width: 751px) and (max-width: 1250px) {
       & {
-        height: 100vh;
+        height: 203.6vh;
       }
     }
   `}
@@ -143,9 +145,17 @@ const PurchaseCard = ({
                 </a>
               ) : (
                 <>
-                  <QRCode value={pixQR} size={200} style={{paddingTop: '1rem'}} />
-                  <p style={{padding: '1rem 0', textAlign: 'center', color: 'black'}}>{pixQR}</p>
-                  <button onClick={handleCopy}>Copiar Código PIX para Área de Transferência</button>
+                  <QRCode
+                    value={pixQR}
+                    size={200}
+                    style={{ paddingTop: '1rem' }}
+                  />
+                  <div>
+                    <span>{pixQR}</span>
+                  </div>
+                  <button onClick={handleCopy}>
+                    Copiar Código PIX para Área de Transferência
+                  </button>
                 </>
               )}
             </span>
@@ -153,29 +163,34 @@ const PurchaseCard = ({
           {pixQR ? (
             <span className='payment-card__donation__info'>
               <p>
-                <strong className="info">Importante:</strong> Seu premium será automaticamente ativado em, no máximo, 30 minutos após a realização do pagamento
+                <strong className='info'>Importante:</strong> Seu premium será
+                automaticamente ativado em, no máximo, 30 minutos após a
+                realização do pagamento
               </p>
-            </span>            
-          ): null}
+            </span>
+          ) : null}
           <span className='payment-card__donation__info'>
             {pixQR === '' ? (
               <>
-              <p>
-              <strong className="info">Importante:</strong> Ao clicar no botão acima, você será
-              redirecionado para o site do Mercado Pago, onde poderá realizar o
-              pagamento do seu plano escolhido.
-            </p>
-            <br />
-            </>
+                <p>
+                  <strong className='info'>Importante:</strong> Ao clicar no
+                  botão acima, você será redirecionado para o site do Mercado
+                  Pago, onde poderá realizar o pagamento do seu plano escolhido.
+                </p>
+                <br />
+              </>
             ) : null}
             <p>
-              <strong className="info">⚠</strong> Esteja ciente que você está fazendo uma <strong>doação</strong> e não pode ser devolvida, você não está comprando e sim doando, e como forma de gratificação iremos adicionar o Premium na sua conta.
+              <strong className='info'>⚠</strong> Esteja ciente que você está
+              fazendo uma <strong>doação</strong> e não pode ser devolvida, você
+              não está comprando e sim doando, e como forma de gratificação
+              iremos adicionar o Premium na sua conta.
             </p>
           </span>
         </PurchaseCardWrapper>
       </Section>
     </>
   );
-}
+};
 
 export default PurchaseCard;

@@ -9,7 +9,7 @@ type InputProps = {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
 };
-const InputComponent = ({
+const InputEmail= ({
   className,
   value,
   onChange,
@@ -57,4 +57,4 @@ const InputComponent = ({
   );
 };
 
-export default InputComponent;
+export default InputEmail;

@@ -10,7 +10,7 @@ type InputProps = {
   placeholder?: string;
   paymentMethod: string;
 };
-const InputComponent = ({
+const InputCpf= ({
   className,
   value,
   onChange,
@@ -59,4 +59,4 @@ const InputComponent = ({
   );
 };
 
-export default InputComponent;
+export default InputCpf;
