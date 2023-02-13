@@ -256,32 +256,6 @@ export default function Home(data: Props) {
                   <div className='flex flex-col w-full h-auto'>
                     <button
                       onClick={() =>
-                        handlePlanChosen(
-                          plan.name,
-                          plan.id,
-                          email,
-                          'boleto',
-                          plan.billet_price
-                        )
-                      }
-                    >
-                      PAGAR COM <em>Boleto</em>
-                    </button>
-                    <button
-                      onClick={() =>
-                        handlePlanChosen(
-                          plan.name,
-                          plan.id,
-                          email,
-                          'normal',
-                          plan.price
-                        )
-                      }
-                    >
-                      PAGAR COM <em>Cartão de Crédito</em>
-                    </button>
-                    <button
-                      onClick={() =>
                         handlePixPlanChosen(
                           plan,
                           plan.name,
