@@ -1,17 +1,17 @@
-import { LinearProgress } from '@mui/material';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { apiUser, apiUserPix } from '../hooks/api';
-import { Plan } from '../types/Plan';
-import { User } from '../types/User';
-import InputCpf from './components/CpfInput';
-import InputEmail from './components/EmailInput';
-import PageFooter from './components/Footer';
-import PurchaseCard from './components/PurchaseCard';
-import SignUpMessage from './components/SignUpMessage';
+import { LinearProgress } from "@mui/material";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import { apiUser, apiUserPix } from "../hooks/api";
+import { Plan } from "../types/Plan";
+import { User } from "../types/User";
+import InputCpf from "./components/CpfInput";
+import InputEmail from "./components/EmailInput";
+import PageFooter from "./components/Footer";
+import PurchaseCard from "./components/PurchaseCard";
+import SignUpMessage from "./components/SignUpMessage";
 
 export async function getStaticProps() {
-  const plansUrl = 'https://psadns.xyz/plans.php';
+  const plansUrl = "https://psadns.xyz/plans.php";
 
   const plansResponse = await fetch(plansUrl);
 
@@ -23,8 +23,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      plans
-    }
+      plans,
+    },
   };
 }
 
@@ -34,20 +34,20 @@ type Props = {
 };
 
 export default function Home(data: Props) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [plans, setPlans] = useState<Plan[]>();
   const [user, setUser] = useState<User>();
-  const [paymentLink, setPaymentLink] = useState('');
-  const [pixQR, setPixQR] = useState('');
-  const [cpf, setCpf] = useState('');
+  const [paymentLink, setPaymentLink] = useState("");
+  const [pixQR, setPixQR] = useState("");
+  const [cpf, setCpf] = useState("");
   const [invalidCpf, setInvalidCpf] = useState(false);
   const [error, setError] = useState(false);
-  const [planChosen, setPlanChosen] = useState('');
-  const [planPrice, setPlanPrice] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [planChosen, setPlanChosen] = useState("");
+  const [planPrice, setPlanPrice] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [closeModal, setCloseModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getPaymentLink = async (
     email: string,
@@ -58,8 +58,8 @@ export default function Home(data: Props) {
       setLoading(true);
       const body = { email, planId, type };
       await apiUser
-        .post('/getUserByEmail', {
-          ...body
+        .post("/getUserByEmail", {
+          ...body,
         })
         .then((res: any) => {
           setUser(res.data.data);
@@ -75,16 +75,16 @@ export default function Home(data: Props) {
 
   const getPixQR = async (email: string, plan: Plan, cpf: string) => {
     try {
-        setLoading(true);
-        
-        if (!cpf || !email) {
-          setError(true);
-        }
-        
-        const body = { email, plan, cpf };
+      setLoading(true);
+
+      if (!cpf || !email) {
+        setError(true);
+      }
+
+      const body = { email, plan, cpf };
       await apiUserPix
-        .post('/plans/pix/requestData', {
-          ...body
+        .post("/plans/pix/requestData", {
+          ...body,
         })
         .then((res: any) => {
           // console.log(res.data);
@@ -97,7 +97,7 @@ export default function Home(data: Props) {
         // console.log("Mensagem de Erro: ", error.response);
 
         setError(true);
-        
+
         if (Array.isArray(error.response.data)) {
           setErrorMessage(error.response.data[0].defaultMessage);
           setInvalidCpf(true);
@@ -122,7 +122,7 @@ export default function Home(data: Props) {
     setPlanPrice(plan_price);
     setPaymentMethod(payment_type);
     getPaymentLink(user_email, plan_id, payment_type);
-    setEmail('');
+    setEmail("");
     setCloseModal(false);
   };
 
@@ -137,27 +137,27 @@ export default function Home(data: Props) {
     setPlanPrice(plan_price);
     setPaymentMethod(payment_type);
     getPixQR(user_email, plan, cpf);
-    setEmail('');
+    setEmail("");
     setCloseModal(false);
   };
 
   const handleClick = () => {
     setCloseModal(true);
     setUser(undefined);
-    setPaymentLink('');
-    setPlanChosen('');
-    setPlanPrice('');
-    setPaymentMethod('');
+    setPaymentLink("");
+    setPlanChosen("");
+    setPlanPrice("");
+    setPaymentMethod("");
     setError(false);
   };
 
   const breakLine = (str: string) => {
-    const arr = str.split('!');
+    const arr = str.split("!");
     return arr.map((item, index) => {
       return (
         <span key={index}>
           {item}
-          {index !== arr.length - 1 && ' !'}
+          {index !== arr.length - 1 && " !"}
           {index !== arr.length - 1 && <br />}
         </span>
       );
@@ -171,24 +171,24 @@ export default function Home(data: Props) {
   return (
     <>
       <Head>
-        <meta charSet='utf-8' />
+        <meta charSet="utf-8" />
         <title>Play SFA | Renovar Plano de Streaming</title>
         <meta
-          name='description'
-          content='Página para renovação de planos de streaming dos usuários da Play Séries, Filmes e Animes'
+          name="description"
+          content="Página para renovação de planos de streaming dos usuários da Play Séries, Filmes e Animes"
         />
-        <link rel='icon' href='/p-icon.svg' />
+        <link rel="icon" href="/p-icon.svg" />
       </Head>
 
-      <main className='flex flex-col justify-center items-center h-full mb-11'>
-        <h1 className='font-bold text-5xl mt-5 mb-5'>
+      <main className="flex flex-col justify-center items-center h-full mb-11">
+        <h1 className="font-bold text-5xl mt-5 mb-5">
           Play Séries, Filmes e Animes
         </h1>
         <section
-          id='section'
-          className='flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full'
+          id="section"
+          className="flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full"
         >
-          <div className='flex flex-col justify-center justify-items-center items-center w-full'>
+          <div className="flex flex-col justify-center justify-items-center items-center w-full">
             <InputEmail
               value={email}
               autoFocus
@@ -196,7 +196,7 @@ export default function Home(data: Props) {
               onKeyDown={() => {
                 setError(false);
               }}
-              placeholder='Digite seu e-mail'
+              placeholder="Digite seu e-mail"
             />
 
             <InputCpf
@@ -206,39 +206,45 @@ export default function Home(data: Props) {
               onKeyDown={() => {
                 setError(false);
               }}
-              placeholder='Digite seu CPF (Ex.: 99988877722)'
+              placeholder="Digite seu CPF (Ex.: 99988877722)"
               paymentMethod={paymentMethod}
             />
           </div>
           {loading ? (
             <LinearProgress
-              color='secondary'
-              id='progress-bar'
+              color="secondary"
+              id="progress-bar"
               style={{
-                marginTop: '-0.5rem',
-                marginBottom: '1rem',
-                width: '55%'
+                marginTop: "-0.5rem",
+                marginBottom: "1rem",
+                width: "55%",
               }}
             />
           ) : null}
-          {error ? <SignUpMessage invalidCpf={invalidCpf} cpf={paymentMethod === 'pix' ? cpf : null} error={paymentMethod === 'pix' ? errorMessage : null} /> : null}
+          {error ? (
+            <SignUpMessage
+              invalidCpf={invalidCpf}
+              cpf={paymentMethod === "pix" ? cpf : null}
+              error={paymentMethod === "pix" ? errorMessage : null}
+            />
+          ) : null}
 
           <div
-            id='map-wrapper'
-            style={{ justifyContent: 'space-evenly' }}
-            className='flex flex-row pb-3'
+            id="map-wrapper"
+            style={{ justifyContent: "space-evenly" }}
+            className="flex flex-row pb-3"
           >
             {plans &&
               plans.map((plan) => (
                 <div
-                  className='map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2'
+                  className="map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2"
                   key={plan.id}
-                  style={{ backgroundColor: '#ffffff' }}
+                  style={{ backgroundColor: "#ffffff" }}
                 >
-                  <h2 className='div-card_title text-center font-semibold text-2xl underline mb-2'>
+                  <h2 className="div-card_title text-center font-semibold text-2xl underline mb-2">
                     {plan.name}
                   </h2>
-                  <p className='text-left px-2 py-5'>
+                  <p className="text-left px-2 py-5">
                     <strong>{breakLine(plan.description)}</strong>
                   </p>
                   <div className='flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1'>
@@ -247,14 +253,14 @@ export default function Home(data: Props) {
                     </p>
                   </div>
 
-                  <div className='flex flex-col w-full h-auto'>
+                  <div className="flex flex-col w-full h-auto">
                     <button
                       onClick={() =>
                         handlePixPlanChosen(
                           plan,
                           plan.name,
                           email,
-                          'pix',
+                          "pix",
                           plan.pix_price
                         )
                       }
@@ -269,7 +275,7 @@ export default function Home(data: Props) {
 
         {!error && user && (
           <PurchaseCard
-            customClass={closeModal ? 'modal-closed' : ''}
+            customClass={closeModal ? "modal-closed" : ""}
             onClick={handleClick}
             userName={user.name}
             userEmail={user.email}
@@ -282,11 +288,24 @@ export default function Home(data: Props) {
           />
         )}
 
-        <article className='text-center mt-5'>
-        <strong className="info" style={{color: '#911308', fontWeight: 900}}>Importante:</strong> Não armazenamos nem compartilhamos nenhum dado e são usados exclusivamente para gerar o link de pagamento.
+        <article className="text-center mt-5">
+          <strong
+            className="info"
+            style={{ color: "#911308", fontWeight: 900 }}
+          >
+            Importante:
+          </strong>{" "}
+          Não armazenamos nem compartilhamos nenhum dado e são usados
+          exclusivamente para gerar o link de pagamento.
         </article>
 
-        <article>Está com algum problema com pagamento, premium ou outro assunto? Entre em contato com o suporte pelo <a href="https://discord.gg/app" target="_blank" rel="noreferrer">Discord</a></article>
+        <article>
+          Está com algum problema com pagamento, premium ou outro assunto? Entre
+          em contato com o suporte pelo{" "}
+          <a href="https://discord.gg/app" target="_blank" rel="noreferrer">
+            Discord
+          </a>
+        </article>
       </main>
       <PageFooter />
     </>

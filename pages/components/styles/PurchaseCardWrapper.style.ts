@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from "styled-components";
 
 const animation = keyframes`
 from {
@@ -19,14 +19,14 @@ const PurchaseCardWrapper = styled.div`
     background-color: #18042d;
     border: 1px solid rgb(51 65 85);
     border-radius: 1rem;
-    width: 70%;
+    width: clamp(65%, 70%, calc(100vh - 100px));
     height: 90% !important;
     padding: 0.3rem 1rem;
     top: 0;
     bottom: 0;
     animation: ${animation} 0.3s linear;
     transition: all 0.3s ease-in-out;
-
+    border: 1px solid red;
     & h2 {
       display: flex;
       justify-content: center;
@@ -188,7 +188,6 @@ const PurchaseCardWrapper = styled.div`
         top: 30%;
         transform: translate(-50%, -50%);
         line-height: 1.2;
-        border: 1px solid red;
       }
 
       & h2 {

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import Input from './styles/Input.style';
+import { useEffect, useRef, useState } from "react";
+import Input from "./styles/Input.style";
 
 type InputProps = {
   className?: string;
@@ -10,14 +10,14 @@ type InputProps = {
   placeholder?: string;
   paymentMethod: string;
 };
-const InputCpf= ({
+const InputCpf = ({
   className,
   value,
   onChange,
   autoFocus,
   onKeyDown,
   placeholder,
-  paymentMethod
+  paymentMethod,
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -26,7 +26,7 @@ const InputCpf= ({
     e.target.focus();
   };
   useEffect(() => {
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
       if (inputRef.current) {
         inputRef.current.focus();
       }
@@ -35,14 +35,19 @@ const InputCpf= ({
 
   return (
     <>
-      <Input className={className} style={{
-        borderColor: focused ? '#371f8b' : '#a0aec0',
-        backgroundColor: focused ? '#edf2f7' : '#fff'
-      }}>
-        <label htmlFor='text'>CPF:</label>
+      <Input
+        className={className}
+        style={{
+          borderColor: focused ? "#371f8b" : "#a0aec0",
+          backgroundColor: focused ? "#edf2f7" : "#fff",
+        }}
+      >
+        <label htmlFor="text" data->
+          CPF:
+        </label>
         <input
-          type='text'
-          id='text'
+          type="text"
+          id="text"
           autoFocus={autoFocus}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -52,7 +57,9 @@ const InputCpf= ({
           onMouseEnter={onEnter}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
-          {...paymentMethod === 'pix' ? { required: true } : { required: false }}
+          {...(paymentMethod === "pix"
+            ? { required: true }
+            : { required: false })}
         />
       </Input>
     </>
