@@ -247,45 +247,13 @@ export default function Home(data: Props) {
                   <p className="text-left px-2 py-5">
                     <strong>{breakLine(plan.description)}</strong>
                   </p>
-                  <div className="flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1">
-                    {/* <p className='text-left font-bold '>
-                      Boleto: R${plan.billet_price},00
-                    </p>
+                  <div className='flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1'>
                     <p className='text-left font-bold '>
-                      Cartão de Crédito: R${plan.price},00
-                    </p> */}
-                    <p className="text-left font-bold ">
-                      PIX: R${plan.pix_price},00
+                      Valor: R${plan.pix_price},00
                     </p>
                   </div>
 
                   <div className="flex flex-col w-full h-auto">
-                    {/* <button
-                      onClick={() =>
-                        handlePlanChosen(
-                          plan.name,
-                          plan.id,
-                          email,
-                          "boleto",
-                          plan.billet_price
-                        )
-                      }
-                    >
-                      PAGAR COM <em>Boleto</em>
-                    </button>
-                    <button
-                      onClick={() =>
-                        handlePlanChosen(
-                          plan.name,
-                          plan.id,
-                          email,
-                          "normal",
-                          plan.price
-                        )
-                      }
-                    >
-                      PAGAR COM <em>Cartão de Crédito</em>
-                    </button> */}
                     <button
                       onClick={() =>
                         handlePixPlanChosen(
