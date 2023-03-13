@@ -26,7 +26,6 @@ const PurchaseCardWrapper = styled.div`
     bottom: 0;
     animation: ${animation} 0.3s linear;
     transition: all 0.3s ease-in-out;
-    border: 1px solid red;
     & h2 {
       display: flex;
       justify-content: center;
@@ -163,11 +162,11 @@ const PurchaseCardWrapper = styled.div`
 
     & .payment-card__donation__info p {
       text-align: justify;
+      font-size: 0.925rem;
     }
 
     & .payment-card__donation__info p strong.info {
       color: #911308;
-      font-size: 1.5rem;
       font-weight: 600;
       text-decoration: none;
     }

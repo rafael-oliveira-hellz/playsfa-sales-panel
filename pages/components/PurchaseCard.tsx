@@ -1,7 +1,6 @@
 import QRCode from 'qrcode.react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
-import MercadoPagoBtn from './MercadoPagoBtn';
 import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
 
 const animation = keyframes`
@@ -91,7 +90,15 @@ const PurchaseCard = ({
   };
 
   const handleCopy = () => {
+    const btnCopy = document.querySelector('.btn-copy');
+
     navigator.clipboard.writeText(pixQR);
+
+    btnCopy?.classList.add('copied');
+
+    setTimeout(() => {
+      btnCopy?.classList.remove('copied');
+    }, 2000);
   };
 
   return (
@@ -134,30 +141,25 @@ const PurchaseCard = ({
             <p className='purchase-card__body__info'>
               Valor do Plano Escolhido:{' '}
             </p>
-            <p className='purchase-card__body__info__value'>R${planPrice},00</p>
+            <p className='purchase-card__body__info__value'>R$ {Number(planPrice).toFixed(2).replace(".", ",")}</p>
           </div>
 
           <div className='payment-card'>
             <span className='payment-card__info__value'>
-              {pixQR === '' ? (
-                <a href={paymentUrl} target='_blank' rel='noreferrer'>
-                  <MercadoPagoBtn />
-                </a>
-              ) : (
+
                 <>
                   <QRCode
                     value={pixQR}
-                    size={200}
-                    style={{ paddingTop: '1rem' }}
+                    size={150}
+                    style={{ paddingTop: '2rem' }}
                   />
                   <div>
                     <span>{pixQR}</span>
                   </div>
-                  <button onClick={handleCopy}>
+                  <button className='btn-copy' onClick={handleCopy}>
                     Copiar Código PIX para Área de Transferência
                   </button>
-                </>
-              )}
+                </>              
             </span>
           </div>
           {pixQR ? (
@@ -169,24 +171,12 @@ const PurchaseCard = ({
               </p>
             </span>
           ) : null}
-          <span className='payment-card__donation__info'>
-            {pixQR === '' ? (
-              <>
-                <p>
-                  <strong className='info'>Importante:</strong> Ao clicar no
-                  botão acima, você será redirecionado para o site do Mercado
-                  Pago, onde poderá realizar o pagamento do seu plano escolhido.
-                </p>
-                <br />
-              </>
-            ) : null}
-            <p>
+            <p style={{fontSize: '0.925rem', textAlign: 'justify'}}>
               <strong className='info'>⚠</strong> Esteja ciente que você está
               fazendo uma <strong>doação</strong> e não pode ser devolvida, você
               não está comprando e sim doando, e como forma de gratificação
               iremos adicionar o Premium na sua conta.
             </p>
-          </span>
         </PurchaseCardWrapper>
       </Section>
     </>

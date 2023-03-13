@@ -1,0 +1,27 @@
+button.btn-copy {
+  background-color: #4CAF50;
+  color: #FFF;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+button.btn-copy::before {
+  content: "\2714";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+button.btn-copy.copied {
+  background-color: #8BC34A;
+}
+
+button.btn-copy.copied::before {
+  opacity: 1;
+}
