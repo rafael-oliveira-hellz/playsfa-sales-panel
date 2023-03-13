@@ -9,6 +9,7 @@ import InputEmail from "./components/EmailInput";
 import PageFooter from "./components/Footer";
 import PurchaseCard from "./components/PurchaseCard";
 import SignUpMessage from "./components/SignUpMessage";
+import styles from "../styles/Styles.module.css";
 
 export async function getStaticProps() {
   const plansUrl = "https://psadns.xyz/plans.php";
@@ -180,15 +181,17 @@ export default function Home(data: Props) {
         <link rel="icon" href="/p-icon.svg" />
       </Head>
 
-      <main className="flex flex-col justify-center items-center h-full mb-11">
+      <main id="main" className={styles.main}>
         <h1 className="font-bold text-5xl mt-5 mb-5">
           Play Séries, Filmes e Animes
         </h1>
         <section
           id="section"
-          className="flex flex-col justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full"
+          className={`flex flex-col flex-wrap justify-items-center items-center border rounded-2xl border-slate-700 w-11/12 min-h-full ${styles.main_section}`}
         >
-          <div className="flex flex-col justify-center justify-items-center items-center w-full">
+          <div
+            className={`main_section_cards-wrapper flex flex-col justify-center justify-items-center items-center w-full`}
+          >
             <InputEmail
               value={email}
               autoFocus
@@ -234,7 +237,7 @@ export default function Home(data: Props) {
           <div
             id="map-wrapper"
             style={{ justifyContent: "space-evenly" }}
-            className="flex flex-row pb-3"
+            className={`flex flex-row pb-3 ${styles.main_section_cards_wrapper}`}
           >
             {plans &&
               plans.map((plan) => (

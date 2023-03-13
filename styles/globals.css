@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Roboto:wght@300;400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,7 +18,7 @@ body {
 body {
   background-color: #1e1537;
   color: #ffffff;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 28px;
   width: 100%;
@@ -98,16 +98,16 @@ article a:hover {
     padding-right: 0.2rem;
   }
 
-  #progress-bar{
+  #progress-bar {
     display: flex;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     align-content: center;
-    transform: translateX(50%)
+    transform: translateX(50%);
   }
 }
 
-@media screen and (max-width: 750px) {
+/* @media screen and (max-width: 750px) {
   h1 {
     display: flex;
     justify-content: center;
@@ -139,4 +139,4 @@ article a:hover {
     width: 80%;
     transform: translateX(45%)
   }
-}
+} */

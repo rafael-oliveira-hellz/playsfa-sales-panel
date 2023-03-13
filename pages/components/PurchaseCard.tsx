@@ -1,7 +1,7 @@
-import QRCode from 'qrcode.react';
-import { IoMdCloseCircleOutline } from 'react-icons/io';
-import styled, { css, keyframes } from 'styled-components';
-import PurchaseCardWrapper from './styles/PurchaseCardWrapper.style';
+import QRCode from "qrcode.react";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import styled, { css, keyframes } from "styled-components";
+import PurchaseCardWrapper from "./styles/PurchaseCardWrapper.style";
 
 const animation = keyframes`
 from {
@@ -75,29 +75,29 @@ const PurchaseCard = ({
   customClass,
   onClick,
   paymentMethod,
-  pixQR
+  pixQR,
 }: Props) => {
   const handlePay = (paymentMethod: string) => {
-    if (paymentMethod === 'boleto') {
-      paymentMethod = 'BOLETO';
-    } else if (paymentMethod === 'pix') {
-      paymentMethod = 'PIX';
+    if (paymentMethod === "boleto") {
+      paymentMethod = "BOLETO";
+    } else if (paymentMethod === "pix") {
+      paymentMethod = "PIX";
     } else {
-      paymentMethod = 'CARTÃO DE CRÉDITO';
+      paymentMethod = "CARTÃO DE CRÉDITO";
     }
 
     return paymentMethod;
   };
 
   const handleCopy = () => {
-    const btnCopy = document.querySelector('.btn-copy');
+    const btnCopy = document.querySelector(".btn-copy");
 
     navigator.clipboard.writeText(pixQR);
 
-    btnCopy?.classList.add('copied');
+    btnCopy?.classList.add("copied");
 
     setTimeout(() => {
-      btnCopy?.classList.remove('copied');
+      btnCopy?.classList.remove("copied");
     }, 2000);
   };
 
@@ -105,78 +105,79 @@ const PurchaseCard = ({
     <>
       <Section className={customClass}>
         <PurchaseCardWrapper className={customClass}>
-          <div className='close-box'>
+          <div className="close-box">
             <IoMdCloseCircleOutline onClick={onClick} />
           </div>
           <h2>Resumo da Solicitação</h2>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>Nome: </p>
-            <p className='purchase-card__body__info__value'>{userName}</p>
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">Nome: </p>
+            <p className="purchase-card__body__info__value">{userName}</p>
           </div>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>Email: </p>
-            <p className='purchase-card__body__info__value'>{userEmail}</p>
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">Email: </p>
+            <p className="purchase-card__body__info__value">{userEmail}</p>
           </div>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>
-              <strong className='purchase-card__body__info'>
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">
+              <strong className="purchase-card__body__info">
                 Já Possui Premium?
               </strong>
             </p>
-            <p className='purchase-card__body__info__value'>
-              {userPremium === 0 ? 'Não' : 'Sim'}
+            <p className="purchase-card__body__info__value">
+              {userPremium === 0 ? "Não" : "Sim"}
             </p>
           </div>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>Plano Escolhido: </p>
-            <p className='purchase-card__body__info__value'>{planName}</p>
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">Plano Escolhido: </p>
+            <p className="purchase-card__body__info__value">{planName}</p>
           </div>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>Forma de Pagamento: </p>
-            <p className='purchase-card__body__info__value'>
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">Forma de Pagamento: </p>
+            <p className="purchase-card__body__info__value">
               {handlePay(paymentMethod)}
             </p>
           </div>
-          <div className='purchase-card'>
-            <p className='purchase-card__body__info'>
-              Valor do Plano Escolhido:{' '}
+          <div className="purchase-card">
+            <p className="purchase-card__body__info">
+              Valor do Plano Escolhido:{" "}
             </p>
-            <p className='purchase-card__body__info__value'>R$ {Number(planPrice).toFixed(2).replace(".", ",")}</p>
+            <p className="purchase-card__body__info__value">
+              R$ {Number(planPrice).toFixed(2).replace(".", ",")}
+            </p>
           </div>
 
-          <div className='payment-card'>
-            <span className='payment-card__info__value'>
-
-                <>
-                  <QRCode
-                    value={pixQR}
-                    size={150}
-                    style={{ paddingTop: '2rem' }}
-                  />
-                  <div>
-                    <span>{pixQR}</span>
-                  </div>
-                  <button className='btn-copy' onClick={handleCopy}>
-                    Copiar Código PIX para Área de Transferência
-                  </button>
-                </>              
+          <div className="payment-card">
+            <span className="payment-card__info__value">
+              <>
+                <QRCode
+                  value={pixQR}
+                  size={150}
+                  style={{ paddingTop: "2rem" }}
+                />
+                <div>
+                  <span>{pixQR}</span>
+                </div>
+                <button className="btn-copy" onClick={handleCopy}>
+                  Copiar Código PIX para Área de Transferência
+                </button>
+              </>
             </span>
           </div>
           {pixQR ? (
-            <span className='payment-card__donation__info'>
+            <span className="payment-card__donation__info">
               <p>
-                <strong className='info'>Importante:</strong> Seu premium será
+                <strong className="info">Importante:</strong> Seu premium será
                 automaticamente ativado em, no máximo, 30 minutos após a
                 realização do pagamento
               </p>
             </span>
           ) : null}
-            <p style={{fontSize: '0.925rem', textAlign: 'justify'}}>
-              <strong className='info'>⚠</strong> Esteja ciente que você está
-              fazendo uma <strong>doação</strong> e não pode ser devolvida, você
-              não está comprando e sim doando, e como forma de gratificação
-              iremos adicionar o Premium na sua conta.
-            </p>
+          <p style={{ fontSize: "0.925rem", textAlign: "justify" }}>
+            <strong className="info">⚠</strong> Esteja ciente que você está
+            fazendo uma <strong>doação</strong> e não pode ser devolvida, você
+            não está comprando e sim doando, e como forma de gratificação iremos
+            adicionar o Premium na sua conta.
+          </p>
         </PurchaseCardWrapper>
       </Section>
     </>
