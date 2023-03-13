@@ -186,7 +186,10 @@ const PurchaseCardWrapper = styled.div`
       text-decoration: underline;
     }
 
-    @media all and (min-width: 350px) {
+    @media all and (max-width: 300px) {
+      & p {
+        text-align: left;
+      }
     }
 
     @media all and (min-width: 860px) {
