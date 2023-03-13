@@ -51,8 +51,9 @@ const PurchaseCardWrapper = styled.div`
       font-size: 1.2rem;
       margin-bottom: 6px;
       text-align: center;
-      margin-right: 2rem;
+      margin-right: 0.5rem;
       letter-spacing: 2px;
+      word-break: break-word;
     }
 
     & .purchase-card,
@@ -184,6 +185,10 @@ const PurchaseCardWrapper = styled.div`
       font-weight: 400;
       text-decoration: underline;
     }
+
+    @media all and (min-width: 350px) {
+    }
+
     @media all and (min-width: 860px) {
       & {
         padding: 1rem 2rem;
