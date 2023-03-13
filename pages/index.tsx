@@ -306,7 +306,7 @@ export default function Home(data: Props) {
           exclusivamente para gerar o link de pagamento.
         </article>
 
-        <article>
+        <article className={styles.article}>
           Está com algum problema com pagamento, premium ou outro assunto? Entre
           em contato com o suporte pelo{" "}
           <a href="https://discord.gg/app" target="_blank" rel="noreferrer">
