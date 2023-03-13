@@ -185,6 +185,9 @@ const PurchaseCardWrapper = styled.div`
       text-decoration: underline;
     }
     @media all and (min-width: 860px) {
+      & {
+        padding: 1rem 2rem;
+      }
       & .payment-card {
         max-width: 75%;
       }
