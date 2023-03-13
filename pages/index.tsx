@@ -244,7 +244,9 @@ export default function Home(data: Props) {
                 <div
                   className="map-wrapper_div-card border  border-double rounded border-zinc-800 w-2/3 h-auto mx-3 p-2"
                   key={plan.id}
-                  style={{ backgroundColor: "#ffffff" }}
+                  style={{
+                    backgroundColor: "#ffffff",
+                  }}
                 >
                   <h2 className="div-card_title text-center font-semibold text-2xl underline mb-2">
                     {plan.name}
