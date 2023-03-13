@@ -196,7 +196,8 @@ export default function Home(data: Props) {
               onKeyDown={() => {
                 setError(false);
               }}
-              placeholder="Digite seu e-mail"
+              placeholder="E-mail"
+              className="email-input"
             />
 
             <InputCpf
@@ -206,8 +207,9 @@ export default function Home(data: Props) {
               onKeyDown={() => {
                 setError(false);
               }}
-              placeholder="Digite seu CPF (Ex.: 99988877722)"
+              placeholder="(Ex.: 99988877722)"
               paymentMethod={paymentMethod}
+              className="cpf-input"
             />
           </div>
           {loading ? (
@@ -247,8 +249,8 @@ export default function Home(data: Props) {
                   <p className="text-left px-2 py-5">
                     <strong>{breakLine(plan.description)}</strong>
                   </p>
-                  <div className='flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1'>
-                    <p className='text-left font-bold '>
+                  <div className="flex flex-col justify-start w-full h-fit pr-3 pb-4 my-2 ml-1">
+                    <p className="text-left font-bold ">
                       Valor: R${plan.pix_price},00
                     </p>
                   </div>
