@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const Footer = styled.div`
   ${() => css`
@@ -53,7 +53,7 @@ const Footer = styled.div`
     padding-bottom: 0.2rem;
   }
 
-  @media screen and (max-width: 365px) {
+  @media screen and (max-width: 390px) {
     & {
       height: 9rem;
     }
@@ -68,15 +68,28 @@ const Footer = styled.div`
       font-size: 1.3rem;
       letter-spacing: 1.5px;
     }
+
     & .site-developers .site-developers__names {
       font-size: 1rem;
     }
     & .site-copyrights .site-copyrights__text {
       font-size: 1rem;
     }
-  };
+  }
 
-
+  @media all and (max-width: 490px) {
+    & .site-name .site-name__text {
+      font-size: 1.3rem;
+      margin-top: 0.8rem;
+    }
+    & .site-developers .site-developers__names {
+      font-size: 1.1rem;
+    }
+    & .site-copyrights .site-copyrights__text {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+  } ;
 `;
 
 export default Footer;
