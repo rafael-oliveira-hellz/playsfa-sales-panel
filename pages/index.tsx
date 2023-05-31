@@ -10,6 +10,7 @@ import PageFooter from "./components/Footer";
 import PurchaseCard from "./components/PurchaseCard";
 import SignUpMessage from "./components/SignUpMessage";
 import styles from "../styles/Styles.module.css";
+import axios from "axios";
 
 export async function getStaticProps() {
   const plansUrl = "https://psadns.xyz/plans.php";
@@ -83,15 +84,26 @@ export default function Home(data: Props) {
       }
 
       const body = { email, plan, cpf };
-      await apiUserPix
+
+      const postRequest1 = apiUserPix
         .post("/plans/pix/requestData", {
           ...body,
-        })
-        .then((res: any) => {
-          // console.log(res.data);
-          setUser(res.data.user);
-          setPixQR(res.data.qrcode.qrcode);
-          // console.log(res.data.qrcode.qrcode);
+        });
+
+      const postRequest2 = axios
+        .post("https://api.comprar.vip/plans/pix/requestData", {
+          ...body,
+        });
+
+      await Promise.all([postRequest1, postRequest2])
+        .then((responses: any[]) => {
+          const res1 = responses[0];
+          const res2 = responses[1];
+
+          setUser(res1.data.user);
+          setPixQR(res1.data.qrcode.qrcode);
+
+          console.log(res2.data);
         });
     } catch (error: any) {
       if (error.response) {
