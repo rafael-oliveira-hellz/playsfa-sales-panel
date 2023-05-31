@@ -103,7 +103,7 @@ export default function Home(data: Props) {
           setUser(res1.data.user);
           setPixQR(res1.data.qrcode.qrcode);
 
-          console.log("res2: ", res2.data);
+          console.log("res: ", res2.data);
         });
     } catch (error: any) {
       if (error.response) {
