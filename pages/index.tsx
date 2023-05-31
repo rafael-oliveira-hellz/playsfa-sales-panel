@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+`;
+
 const Card = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 300px;
@@ -15,12 +22,21 @@ const Card = styled.div`
 const Heading = styled.h1`
   font-size: 24px;
   color: #333;
+  margin-bottom: 10px;
+`;
+
+const Subheading = styled.p`
+  font-size: 16px;
+  color: #666;
 `;
 
 export default function Home() {
   return (
-    <Card>
-      <Heading>EM MANUTENÇÃO!!!</Heading>
-    </Card>
+    <Container>
+      <Card>
+        <Heading>EM MANUTENÇÃO!!!</Heading>
+        <Subheading>Desculpe pelo transtorno.</Subheading>
+      </Card>
+    </Container>
   );
 }
