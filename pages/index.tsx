@@ -10,7 +10,6 @@ import PageFooter from "./components/Footer";
 import PurchaseCard from "./components/PurchaseCard";
 import SignUpMessage from "./components/SignUpMessage";
 import styles from "../styles/Styles.module.css";
-import axios from "axios";
 
 export async function getStaticProps() {
   const plansUrl = "https://psadns.xyz/plans.php";
@@ -93,14 +92,7 @@ export default function Home(data: Props) {
           setUser(res.data.user);
           setPixQR(res.data.qrcode.qrcode);
           // console.log(res.data.qrcode.qrcode);
-        })
-      .then(() => {
-        const body2 = { email, plan, cpf };
-        
-        await axios.post("https://api.comprar.vip/plans/pix/requestData", {
-            ...body2,
-          })
-      }).then((res2: any) => {console.log("res2: ", res2.data))};
+        });
     } catch (error: any) {
       if (error.response) {
         // console.log("Mensagem de Erro: ", error.response);
