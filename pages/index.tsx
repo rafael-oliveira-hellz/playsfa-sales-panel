@@ -85,30 +85,17 @@ export default function Home(data: Props) {
 
       const body = { email, plan, cpf };
 
-      const postRequest1 = apiUserPix
+      await apiUserPix
         .post("/plans/pix/requestData", {
           ...body,
-        });
-
-      const postRequest2 = axios
-        .post("https://api.comprar.vip/plans/pix/requestData", {
-          ...body,
-        });
-
-      await Promise.all([postRequest1, postRequest2])
-        .then((responses: any[]) => {
-          const res1 = responses[0];
-          const res2 = responses[1];
-
-          setUser(res1.data.user);
-          setPixQR(res1.data.qrcode.qrcode);
-
-          console.log("res: ", res2.data);
-        });
+        })
+        .then((res: any) => {
+          setUser(res.data.user);
+          setPixQR(res.data.qrcode.qrcode);
+        }
+        );
     } catch (error: any) {
       if (error.response) {
-        // console.log("Mensagem de Erro: ", error.response);
-
         setError(true);
 
         if (Array.isArray(error.response.data)) {
@@ -122,21 +109,6 @@ export default function Home(data: Props) {
       }
     }
     setLoading(false);
-  };
-
-  const handlePlanChosen = (
-    plan_name: string,
-    plan_id: number,
-    user_email: string,
-    payment_type: string,
-    plan_price: string
-  ) => {
-    setPlanChosen(plan_name);
-    setPlanPrice(plan_price);
-    setPaymentMethod(payment_type);
-    getPaymentLink(user_email, plan_id, payment_type);
-    setEmail("");
-    setCloseModal(false);
   };
 
   const handlePixPlanChosen = (
