@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 // export const PixFormWrapper = styled.div`
 //   ${({ theme }) => css`
@@ -206,5 +206,22 @@ export const PixPaymentWrapper = styled.form`
         flex-wrap: wrap;
       }
     }
+  `}
+`;
+
+export const QRCodeWrapper = styled.div`
+  ${({ theme }) => css`
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(30, 21, 55, 0.6);
+    width: ${theme.sizes.fullPercentWidth};
+    height: ${theme.sizes.fullPercentHeight};
+    max-height: ${theme.sizes.fullVH};
+    z-index: 9999;
+    top: 0;
+    bottom: 0;
   `}
 `;

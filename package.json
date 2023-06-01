@@ -10,7 +10,6 @@
     "pm2": "pm2 start yarn --name \"psfa-painel-de-vendas\" --interpreter bash -- start"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.15",
     "@stomp/stompjs": "^7.0.0",
@@ -39,6 +38,7 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
+    "@types/card-validator": "^7.0.1",
     "@types/node": "18.11.5",
     "@types/qrcode.react": "^1.0.2",
     "@types/qs": "^6.9.7",

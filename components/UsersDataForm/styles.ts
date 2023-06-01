@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const UsersDataForm = styled.form`
   ${({ theme }) => css`
@@ -29,7 +29,7 @@ export const UsersDataForm = styled.form`
 
     & .button-submit {
       color: ${theme.colors.fonts};
-      font-weight: bold;
+      font-weight: 500;
       font-size: 1.8rem;
       min-width: 12rem;
       width: 25%;
@@ -63,6 +63,13 @@ export const UsersDataForm = styled.form`
       outline-style: inset;
       outline-color: rgba(73, 36, 168, 0.5);
     }
+
+    @media all and (max-width: 270px) {
+      & .input-mail {
+        min-width: 12rem;
+        width: ${theme.sizes.fullPercentWidth};
+      }
+    }
   `}
 `;
 
@@ -71,17 +78,30 @@ export const ResultWrapper = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background-color: ${theme.colors.home};
     width: ${theme.sizes.fullPercentWidth};
     height: ${theme.sizes.fullPercentHeight};
     padding: 2rem;
+    gap: 0.5rem;
 
     & p {
       color: ${theme.colors.fonts};
-      font-weight: bold;
+      font-weight: 500;
       font-size: 2.2rem;
     }
     & p span {
+      color: ${theme.colors.inputDisabled};
       font-weight: normal;
+      padding-left: 0.5rem;
+    }
+
+    @media all and (max-width: 340px) {
+      & p,
+      & p span {
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 1.8rem !important;
+      }
     }
   `}
 `;

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const MainPageWrapper = styled.main`
   ${({ theme }) => css`
@@ -23,7 +23,6 @@ export const MainPageWrapper = styled.main`
       width: 80%;
       min-height: 80vh;
       height: ${theme.sizes.fullPercentHeight};
-
       background: rgba(128, 255, 192, 0.1);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(2.5px);
@@ -53,13 +52,18 @@ export const MainPageWrapper = styled.main`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      background-color: transparent;
       gap: 1rem;
       width: ${theme.sizes.fullPercentWidth};
       min-height: fit-content;
       height: ${theme.sizes.fullPercentHeight};
       padding: 1rem;
     }
+    @media all and (max-width:280px) {
+      & .content-wrapper .content-wrapper__title-wrapper h2 {
+    font-size: 2.5rem;
 
+      }
     @media all and (min-width: 750px) {
       & .content-wrapper {
         width: 95%;

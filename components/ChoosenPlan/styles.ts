@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const ChoosenPlanWrapper = styled.section`
   ${({ theme }) => css`
@@ -19,6 +19,7 @@ export const ChoosenPlanWrapper = styled.section`
       width: ${theme.sizes.fullPercentWidth};
       height: ${theme.sizes.fullPercentHeight};
       padding: 2rem;
+      background-color: ${theme.colors.home};
     }
 
     & .plan-cards-wrapper .title-wrapper,
@@ -56,6 +57,7 @@ export const ChoosenPlanWrapper = styled.section`
       width: ${theme.sizes.fullPercentWidth};
       height: ${theme.sizes.fullPercentHeight};
       padding: 2rem;
+      background-color: ${theme.colors.home};
     }
 
     @media all and (max-width: 1085px) {
