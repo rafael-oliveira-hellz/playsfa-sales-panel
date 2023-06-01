@@ -24,5 +24,5 @@ export default function Home({ plans }: Props) {
     <>
       <MainPage plans={plans} />;
     </>
-  )
+  );
 }

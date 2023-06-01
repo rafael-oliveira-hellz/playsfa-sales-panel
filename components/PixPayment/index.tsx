@@ -5,6 +5,7 @@ import { UserContextData } from "../../types/User";
 import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
 import { connect } from "../../hooks/websocket-client";
+import { WaitingPayment } from "../WaitingPayment";
 
 interface IProps {
   selectedPlan: Plan;
@@ -37,7 +38,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         .then((res: any) => {
           console.log(res.data);
           setQr(res.data.qrcode.linkVisualizacao);
-          window.open(res.data.qrcode.linkVisualizacao, '_blank');
+          window.open(res.data.qrcode.linkVisualizacao, "_blank");
           setLoader(false);
         });
     } catch (error: any) {
@@ -59,13 +60,10 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   };
 
   useEffect(() => {
-    connect(
-      (paymentResponse: string) => {
-        console.log('Resposta do pagamento recebida: ' + paymentResponse);
-        setPaymentConfirmation(paymentResponse);
-      },
-      "pix"
-    );
+    connect((paymentResponse: string) => {
+      console.log("Resposta do pagamento recebida: " + paymentResponse);
+      setPaymentConfirmation(paymentResponse);
+    }, "pix");
   }, [paymentConfirmation]);
 
   return (
@@ -102,16 +100,23 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         <PixPaymentLoading className="closing" />
       )}
 
-      {/* TODO: Colocar um modal que vai receber a confirmação de pagamento assim que a pessoa pagar na outra tela a qual será redirecionada, Coloca no modal o texto padrão "Aguardando pagamento...", e coloca a condição de que se a variavel paymentResponse for atualizada com algum valor, ele deverá mostrar no modal, vide exemplo abaixo: */}
-
-        {paymentConfirmation !== "" ? (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close">&times;</span>
-              <p>{paymentConfirmation}</p>
-            </div>
+      {paymentConfirmation !== "" && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            <p>
+              {paymentConfirmation === "paid" ? (
+                <WaitingPayment
+                  confirmed
+                  paymentConfirmationStatus={paymentConfirmation}
+                />
+              ) : (
+                <WaitingPayment />
+              )}
+            </p>
           </div>
-        ) : "Aguardando pagamento..."}
+        </div>
+      )}
     </>
   );
 };

@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import * as Styled from './styles';
-import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
-import { ClientData } from '../CreditCardPayment/ClientData';
-import { CreditCardData } from '../CreditCardPayment';
-import { Thanks } from './Thanks';
-import { AddressData } from '../CreditCardPayment/AddressData';
-import { RecurrencyData } from '../CreditCardPayment/RecurrencyData';
-import { FiSend } from 'react-icons/fi';
-import { useForm } from '../Hooks/useForm';
+import React, { useState, useEffect } from "react";
+import * as Styled from "./styles";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { ClientData } from "../CreditCardPayment/ClientData";
+import { CreditCardData } from "../CreditCardPayment";
+import { Thanks } from "./Thanks";
+import { AddressData } from "../CreditCardPayment/AddressData";
+import { RecurrencyData } from "../CreditCardPayment/RecurrencyData";
+import { FiSend } from "react-icons/fi";
+import { useForm } from "../Hooks/useForm";
 import {
   CardData,
   Plan,
   UserContextData,
   CustomUser,
-  CustomAddress
-} from '../../types/';
-import { PaymentLoading } from '../PaymentLoading';
-import cardValidator from 'card-validator';
-import axios, { AxiosResponse } from 'axios';
-import { connect,  disconnect, } from '../../hooks/websocket-client';
-
+  CustomAddress,
+} from "../../types/";
+import { PaymentLoading } from "../PaymentLoading";
+import cardValidator from "card-validator";
+import axios, { AxiosResponse } from "axios";
+import { connect, disconnect } from "../../hooks/websocket-client";
+import { WaitingPayment } from "../WaitingPayment";
 
 interface IProps {
   selectedPlan: Plan;
@@ -28,6 +28,7 @@ interface IProps {
 export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState<boolean>(false);
+  const [paymentConfirmation, setPaymentConfirmation] = useState("");
   const [selectRadio, setSelectRadio] = useState<"Sim" | "Não">("Não");
   const [isRecurrency, setIsRecurrency] = useState(false);
   const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
@@ -204,14 +205,12 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useForm(formComponents);
 
-    useEffect(() => {
-      connect(
-        (paymentResponse: string) => {
-          console.log('Resposta do pagamento recebida: ' + paymentResponse);
-        },
-        "card"
-      );
-    }, []);
+  useEffect(() => {
+    connect((paymentResponse: string) => {
+      console.log("Resposta do pagamento recebida: " + paymentResponse);
+      setPaymentConfirmation(paymentResponse);
+    }, "card");
+  }, [paymentConfirmation]);
   return (
     <>
       <Styled.FormContainer>
@@ -257,6 +256,23 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         </form>
       </Styled.FormContainer>
       {loading && <PaymentLoading />}
+      {paymentConfirmation !== "" && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            <p>
+              {paymentConfirmation === "paid" ? (
+                <WaitingPayment
+                  confirmed
+                  paymentConfirmationStatus={paymentConfirmation}
+                />
+              ) : (
+                <WaitingPayment />
+              )}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 };
