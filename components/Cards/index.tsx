@@ -30,7 +30,7 @@ export const Cards = ({
           </h3>
         </div>
         <div className='paragraph-wrapper'>
-          <p>{plans && plans.length > 0 && plans[0].description}</p>
+        <p style={{whiteSpace: "pre-line", hyphens: "none", wordBreak: "keep-all"}}>{plans && plans.length > 0 && plans[0].description}</p>
         </div>
         <div className='payment-methods-wrapper'>
           <p>Pix: R$ {plans && plans.length > 0 && plans[0].pix_price} </p>

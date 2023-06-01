@@ -3,6 +3,9 @@ import {AppProps} from 'next/app';
 import {useEffect, useState} from 'react';
 import "../styles/globals.css";
 import { UserProvider, PlanProvider } from "../contexts/Provider";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles/Theme";
+import { GlobalStyles } from "./styles/GlobalStyles";
 
 function App({Component, pageProps}: AppProps) {
   const [render, setRender] = useState(false);
@@ -10,14 +13,15 @@ function App({Component, pageProps}: AppProps) {
   useEffect(() => setRender(true), []);
 
   return render ? (
-    <>
-    <UserProvider>
-      <PlanProvider>
-        <Component {...pageProps} />
-        <Analytics />
-      </PlanProvider>
-    </UserProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <UserProvider>
+        <PlanProvider>
+          <Component {...pageProps} />
+          <Analytics />
+        </PlanProvider>
+      </UserProvider>
+    </ThemeProvider>
   ) : null;
 }
 
