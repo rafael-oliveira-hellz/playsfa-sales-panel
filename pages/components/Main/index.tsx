@@ -19,6 +19,8 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
     setPlans(plans);
   }, [plans, error, loading]);
 
+  // TODO: se tiver dúvidas aqui me chame
+
   const planContext = useContext(PlanContext);
 
   if (!planContext) {
@@ -27,6 +29,8 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
   }
 
   const { setSelectedPlan } = planContext;
+
+  // TODO: se tiver dúvidas aqui me chame
 
   const handleClick = (plan: Plan) => {
     setSelectedPlan(plan);
