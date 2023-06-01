@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Styled from './styles';
 import { Cards } from '../Cards';
 import { UsersDataForm } from '../UsersDataForm';
 import { Plan } from '../../types/Plan';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContextData } from '../../types/User';
+import { PlanContext, UserContext } from '../../contexts/Provider';
+import { useRouter } from 'next/router';
 
 export const ChoosenPlan = () => {
   const [click, setClick] = useState(true);
-  const [userData, setUserData] = useState<UserContextData>();
+
+  const router = useRouter();
+
+  const planContext = useContext(PlanContext);
+  const userContext = useContext(UserContext);
+
+  if (!planContext || !userContext) {
+    console.error('A context was not found');
+    return null;
+  }
+
+  const selectedPlan  = sessionStorage.getItem('selectedPlan');
+
+  const JSONSelectedPlan = JSON.parse(selectedPlan as string);
+
+  const { user, setUser } = userContext;
+
+  if (!selectedPlan) {
+    console.error('A plan was not found');
+    router.push('/');
+  }
 
   const handleSearchSuccess = (data: UserContextData) => {
-    setUserData(data);
+    setUser(data);
   };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const selectedPlan = location.state?.selectedPlan;
+  console.log(selectedPlan);
 
   const handleClick = () => {
     console.log(selectedPlan);
-    console.log(userData);
+    console.log(user);
     setClick(!click);
-    if (selectedPlan && userData) {
-      navigate('/payment', { state: { selectedPlan, userData } });
-    }
+
+    router.push('/payment');
   };
 
   return (
@@ -39,7 +57,7 @@ export const ChoosenPlan = () => {
             <Cards
               showModal={click}
               setShowModal={setClick}
-              plans={[selectedPlan]}
+              plans={[JSONSelectedPlan]}
               onButtonClick={handleClick}
             />
           </div>

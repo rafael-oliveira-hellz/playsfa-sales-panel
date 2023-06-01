@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Styled from './styles';
-import Loading from '../../assets/loading/deathnote1.gif';
+import Loading from '../../pages/assets/loading/deathnote1.gif';
 import Image from 'next/image';
 interface IProps {
   className?: string;

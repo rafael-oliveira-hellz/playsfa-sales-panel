@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiUser = axios.create({
-  baseURL: 'https://rafael1963.c37.integrator.host'
+  baseURL: 'https://api.comprar.vip'
 });
 
 const apiUserPix = axios.create({

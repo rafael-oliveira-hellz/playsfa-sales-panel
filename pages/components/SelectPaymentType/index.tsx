@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Styled from './styles';
 import { PixPayment } from '../../../components/PixPayment';
 import { MultiStepForm } from '../../../components/MultiStepForm';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import { PlanContext, UserContext } from '../../../contexts/Provider';
+import { Plan, UserContextData } from '../../../types';
 
 export default function ChoosePayment() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     'PIX' | 'CARTÃO DE CRÉDITO'
   >('PIX');
 
-  const location = useLocation();
-  const selectedPlan = location.state?.selectedPlan;
-  const user = location.state?.userData;
+  const router = useRouter();
+
+  const planContext = useContext(PlanContext);
+  const userContext = useContext(UserContext);
+
+  if (!planContext || !userContext) {
+    console.error('A context was not found');
+    return null;
+  }
+
+  const { selectedPlan } = planContext;
+  const { user } = userContext;
+
+  if (!selectedPlan) {
+    console.error('A plan was not found');
+    router.push('/');
+  } else if (!user) {
+    console.error('A user was not found');
+    router.push('/checkout');
+  }
 
   const handlePay = (paymentMethod: string) => {
     if (paymentMethod === 'PIX') {
@@ -23,9 +42,9 @@ export default function ChoosePayment() {
 
   const renderPaymentForm = () => {
     if (selectedPaymentMethod === 'PIX') {
-      return <PixPayment selectedPlan={selectedPlan} user={user} />;
+      return <PixPayment selectedPlan={selectedPlan as Plan} user={user as UserContextData} />;
     } else {
-      return <MultiStepForm selectedPlan={selectedPlan} user={user} />;
+      return <MultiStepForm selectedPlan={selectedPlan as Plan} user={user as UserContextData} />;
     }
   };
 

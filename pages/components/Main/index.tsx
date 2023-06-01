@@ -28,12 +28,14 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
     return null;
   }
 
-  const { setSelectedPlan } = planContext;
+  const { selectedPlan, setSelectedPlan } = planContext;
 
   // TODO: se tiver dúvidas aqui me chame
 
   const handleClick = (plan: Plan) => {
     setSelectedPlan(plan);
+
+    sessionStorage.setItem('selectedPlan', JSON.stringify(plan));
 
     router.push('/checkout');
   };

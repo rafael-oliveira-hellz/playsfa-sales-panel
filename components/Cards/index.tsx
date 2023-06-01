@@ -26,16 +26,16 @@ export const Cards = ({
       <Styled.CardsWrapper>
         <div className='title-wrapper'>
           <h3>
-            <strong>{plans && plans.length > 0 && plans[0].name}</strong>
+            <strong>{plans && plans.length > 0 && plans[0]?.name}</strong>
           </h3>
         </div>
         <div className='paragraph-wrapper'>
-        <p style={{whiteSpace: "pre-line", hyphens: "none", wordBreak: "keep-all"}}>{plans && plans.length > 0 && plans[0].description}</p>
+        <p style={{whiteSpace: "pre-line", hyphens: "none", wordBreak: "keep-all"}}>{plans && plans.length > 0 && plans[0]?.description}</p>
         </div>
         <div className='payment-methods-wrapper'>
-          <p>Pix: R$ {plans && plans.length > 0 && plans[0].pix_price} </p>
+          <p>Pix: R$ {plans && plans.length > 0 && plans[0]?.pix_price} </p>
           <p>
-            Cartão de Crédito: R$ {plans && plans.length > 0 && plans[0].price}
+            Cartão de Crédito: R$ {plans && plans.length > 0 && plans[0]?.price}
           </p>
         </div>
         <button type='submit' onClick={handleButtonClick}>

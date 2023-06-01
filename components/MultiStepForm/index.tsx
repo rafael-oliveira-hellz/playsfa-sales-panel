@@ -18,7 +18,7 @@ import {
 import { PaymentLoading } from '../PaymentLoading';
 import cardValidator from 'card-validator';
 import axios, { AxiosResponse } from 'axios';
-import { randomUUID } from 'crypto';
+
 interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
@@ -185,28 +185,28 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       onChange={handleCreditCardDataChange}
       onBrandChange={handleCreditCardBrand}
       handleName={handleName}
-      key={randomUUID()}
+      key={1}
     />,
     <ClientData
       email={user.user.email}
       birth_date={customUser.birth_date}
       phone={customUser.phone}
       onChange={handleUserChange}
-      key={randomUUID()}
+      key={1}
     />,
     <AddressData
       onAddressChange={handleCustomAddressChange}
       customAddress={customAddress}
-      key={randomUUID()}
+      key={1}
     />,
     <RecurrencyData
       onRadioSelect={onRadioSelect}
       isRecurrency={isRecurrency}
       handleSelection={handleSelection}
       opcaoSelecionada={opcaoSelecionada}
-      key={randomUUID()}
+      key={1}
     />,
-    <Thanks loading={loading} key={randomUUID()} />
+    <Thanks loading={loading} key={1} />
   ];
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useForm(formComponents);
