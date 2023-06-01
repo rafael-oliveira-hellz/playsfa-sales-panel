@@ -3,9 +3,6 @@ import * as Styled from "./styles";
 import { Plan } from "../../types/Plan";
 import { UserContextData } from "../../types/User";
 import axios from "axios";
-import QRCode from "qrcode.react";
-import saitama from "../../pages/assets/loading/saitama.gif";
-import Image from "next/image";
 import { PixPaymentLoading } from "../PixLoader";
 import { connect } from "../../hooks/websocket-client";
 
@@ -21,6 +18,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [errorMessage, setErrorMessage] = useState(false);
   const [invalidCpf, setInvalidCpf] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [paymentConfirmation, setPaymentConfirmation] = useState("");
 
   const generatePix = async (email: string, plan: Plan, cpf: string) => {
     try {
@@ -38,7 +36,8 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         })
         .then((res: any) => {
           console.log(res.data);
-          setQr(res.data.qrcode.qrcode);
+          setQr(res.data.qrcode.linkVisualizacao);
+          window.open(res.data.qrcode.linkVisualizacao, '_blank');
           setLoader(false);
         });
     } catch (error: any) {
@@ -63,10 +62,11 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
     connect(
       (paymentResponse: string) => {
         console.log('Resposta do pagamento recebida: ' + paymentResponse);
+        setPaymentConfirmation(paymentResponse);
       },
       "pix"
     );
-  }, []);
+  }, [paymentConfirmation]);
 
   return (
     <>
@@ -101,13 +101,17 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       ) : (
         <PixPaymentLoading className="closing" />
       )}
-      {qr !== "" ? (
-        <Styled.QRCodeWrapper>
-          <QRCode value={qr} size={150} />
-        </Styled.QRCodeWrapper>
-      ) : (
-        ""
-      )}
+
+      {/* TODO: Colocar um modal que vai receber a confirmação de pagamento assim que a pessoa pagar na outra tela a qual será redirecionada, Coloca no modal o texto padrão "Aguardando pagamento...", e coloca a condição de que se a variavel paymentResponse for atualizada com algum valor, ele deverá mostrar no modal, vide exemplo abaixo: */}
+
+        {paymentConfirmation !== "" ? (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close">&times;</span>
+              <p>{paymentConfirmation}</p>
+            </div>
+          </div>
+        ) : "Aguardando pagamento..."}
     </>
   );
 };

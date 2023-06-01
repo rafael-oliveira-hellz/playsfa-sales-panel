@@ -23,6 +23,7 @@ export type Plan = {
   id: number;
   name: string;
   description: string;
+  description_web: string;
   price: string;
   billet_price: string;
   pix_price: string;
