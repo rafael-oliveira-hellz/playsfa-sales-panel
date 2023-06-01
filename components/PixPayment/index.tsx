@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Styled from './styles';
 import { Plan } from '../../types/Plan';
 import { UserContextData } from '../../types/User';
 import axios from 'axios';
 import QRCode from 'qrcode.react';
+import { connect, disconnect, } from '../../hooks/websocket-client';
+
+export async function getServerSideProps() {
+  const initialData = await fetch("http://localhost:8000/handler-initial-data").then(x => x.json());
+  return {props: {data: initialData}}
+}
+
 interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
@@ -50,6 +57,15 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    connect(
+      (paymentResponse: string) => {
+        console.log('Resposta do pagamento recebida: ' + paymentResponse);
+      },
+      "pix"
+    );
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Styled from './styles';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { ClientData } from '../CreditCardPayment/ClientData';
@@ -18,6 +18,8 @@ import {
 import { PaymentLoading } from '../PaymentLoading';
 import cardValidator from 'card-validator';
 import axios, { AxiosResponse } from 'axios';
+import { connect,  disconnect, } from '../../hooks/websocket-client';
+
 
 interface IProps {
   selectedPlan: Plan;
@@ -161,23 +163,14 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         .post('https://api.comprar.vip/card/transaction', {
           ...body
         })
-        .then((res: AxiosResponse) => {
-          console.log('AxiosResponse: ', res.data);
-          setData(res.data);
+        .then(() => {
           setLoading(false);
-
-          if (res.status === 0) {
-            setLoading(false);
-          } else if (res.status > 199 || res.status < 400) {
-            setLoading(false);
-          } else if (res.status > 400) {
-            setLoading(false);
-          }
         });
     } catch (error: any) {
       console.log(error);
     }
   };
+
   const formComponents = [
     <CreditCardData
       customUser={customUser}
@@ -208,8 +201,18 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     />,
     <Thanks loading={loading} key={1} />
   ];
+
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useForm(formComponents);
+
+    useEffect(() => {
+      connect(
+        (paymentResponse: string) => {
+          console.log('Resposta do pagamento recebida: ' + paymentResponse);
+        },
+        "card"
+      );
+    }, []);
   return (
     <>
       <Styled.FormContainer>
