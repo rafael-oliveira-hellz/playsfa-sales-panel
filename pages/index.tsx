@@ -85,25 +85,13 @@ export default function Home(data: Props) {
 
       const body = { email, plan, cpf };
 
-      const postRequest1 = apiUserPix
+      await apiUserPix
         .post("/plans/pix/requestData", {
           ...body,
-        });
-
-      const postRequest2 = axios
-        .post("https://api.comprar.vip/plans/pix/requestData", {
-          ...body,
-        });
-
-      await Promise.all([postRequest1, postRequest2])
-        .then((responses: any[]) => {
-          const res1 = responses[0];
-          const res2 = responses[1];
-
-          setUser(res1.data.user);
-          setPixQR(res1.data.qrcode.qrcode);
-
-          console.log("res2: ", res2.data);
+        })
+        .then((res: any) => {
+          setUser(res.data.user);
+          setPixQR(res.data.qrcode.qrcode);
         });
     } catch (error: any) {
       if (error.response) {
