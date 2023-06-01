@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
-import * as Styled from './styles';
-import { PixPayment } from '../../../components/PixPayment';
-import { MultiStepForm } from '../../../components/MultiStepForm';
-import { useRouter } from 'next/router';
-import { PlanContext, UserContext } from '../../../contexts/Provider';
-import { Plan, UserContextData } from '../../../types';
+import React, { useContext, useState } from "react";
+import * as Styled from "./styles";
+import { PixPayment } from "../../../components/PixPayment";
+import { MultiStepForm } from "../../../components/MultiStepForm";
+import { useRouter } from "next/router";
+import { PlanContext, UserContext } from "../../../contexts/Provider";
+import { Plan, UserContextData } from "../../../types";
 
 export default function ChoosePayment() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
-    'PIX' | 'CARTÃO DE CRÉDITO'
-  >('PIX');
+    "PIX" | "CARTÃO DE CRÉDITO"
+  >("PIX");
 
   const router = useRouter();
 
@@ -17,7 +17,7 @@ export default function ChoosePayment() {
   const userContext = useContext(UserContext);
 
   if (!planContext || !userContext) {
-    console.error('A context was not found');
+    console.error("A context was not found");
     return null;
   }
 
@@ -25,26 +25,36 @@ export default function ChoosePayment() {
   const { user } = userContext;
 
   if (!selectedPlan) {
-    console.error('A plan was not found');
-    router.push('/');
+    console.error("A plan was not found");
+    router.push("/");
   } else if (!user) {
-    console.error('A user was not found');
-    router.push('/checkout');
+    console.error("A user was not found");
+    router.push("/checkout");
   }
 
   const handlePay = (paymentMethod: string) => {
-    if (paymentMethod === 'PIX') {
-      setSelectedPaymentMethod('PIX');
+    if (paymentMethod === "PIX") {
+      setSelectedPaymentMethod("PIX");
     } else {
-      setSelectedPaymentMethod('CARTÃO DE CRÉDITO');
+      setSelectedPaymentMethod("CARTÃO DE CRÉDITO");
     }
   };
 
   const renderPaymentForm = () => {
-    if (selectedPaymentMethod === 'PIX') {
-      return <PixPayment selectedPlan={selectedPlan as Plan} user={user as UserContextData} />;
+    if (selectedPaymentMethod === "PIX") {
+      return (
+        <PixPayment
+          selectedPlan={selectedPlan as Plan}
+          user={user as UserContextData}
+        />
+      );
     } else {
-      return <MultiStepForm selectedPlan={selectedPlan as Plan} user={user as UserContextData} />;
+      return (
+        <MultiStepForm
+          selectedPlan={selectedPlan as Plan}
+          user={user as UserContextData}
+        />
+      );
     }
   };
 
@@ -53,28 +63,28 @@ export default function ChoosePayment() {
       <Styled.ChoosePaymentWrapper>
         <h2>Escolha a forma de Pagamento</h2>
         <form>
-          <div className='wrapper'>
-            <div className='wrapper__pix'>
-              <label htmlFor='pix'>PIX</label>
+          <div className="wrapper">
+            <div className="wrapper__pix">
+              <label htmlFor="pix">PIX</label>
               <input
-                type='radio'
-                name='payment'
-                id='pix'
-                value='PIX'
-                defaultChecked={selectedPaymentMethod === 'PIX'}
-                onChange={() => handlePay('PIX')}
+                type="radio"
+                name="payment"
+                id="pix"
+                value="PIX"
+                defaultChecked={selectedPaymentMethod === "PIX"}
+                onChange={() => handlePay("PIX")}
               />
             </div>
-            <div className='wrapper__card'>
+            <div className="wrapper__card">
               <input
-                type='radio'
-                name='payment'
-                id='card'
-                value='CARTÃO DE CRÉDITO'
-                defaultChecked={selectedPaymentMethod === 'CARTÃO DE CRÉDITO'}
-                onChange={() => handlePay('CARTÃO DE CRÉDITO')}
+                type="radio"
+                name="payment"
+                id="card"
+                value="CARTÃO DE CRÉDITO"
+                defaultChecked={selectedPaymentMethod === "CARTÃO DE CRÉDITO"}
+                onChange={() => handlePay("CARTÃO DE CRÉDITO")}
               />
-              <label htmlFor='card'>Cartão de Crédito</label>
+              <label htmlFor="card">Cartão de Crédito</label>
             </div>
           </div>
         </form>

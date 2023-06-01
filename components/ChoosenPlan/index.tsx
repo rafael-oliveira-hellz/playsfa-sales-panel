@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
-import * as Styled from './styles';
-import { Cards } from '../Cards';
-import { UsersDataForm } from '../UsersDataForm';
-import { Plan } from '../../types/Plan';
-import { UserContextData } from '../../types/User';
-import { PlanContext, UserContext } from '../../contexts/Provider';
-import { useRouter } from 'next/router';
+import React, { useContext, useState } from "react";
+import * as Styled from "./styles";
+import { Cards } from "../Cards";
+import { UsersDataForm } from "../UsersDataForm";
+import { Plan } from "../../types/Plan";
+import { UserContextData } from "../../types/User";
+import { PlanContext, UserContext } from "../../contexts/Provider";
+import { useRouter } from "next/router";
 
 export const ChoosenPlan = () => {
   const [click, setClick] = useState(true);
@@ -16,19 +16,19 @@ export const ChoosenPlan = () => {
   const userContext = useContext(UserContext);
 
   if (!planContext || !userContext) {
-    console.error('A context was not found');
+    console.error("A context was not found");
     return null;
   }
 
-  const selectedPlan  = sessionStorage.getItem('selectedPlan');
+  const selectedPlan = sessionStorage.getItem("selectedPlan");
 
   const JSONSelectedPlan = JSON.parse(selectedPlan as string);
 
   const { user, setUser } = userContext;
 
   if (!selectedPlan) {
-    console.error('A plan was not found');
-    router.push('/');
+    console.error("A plan was not found");
+    router.push("/");
   }
 
   const handleSearchSuccess = (data: UserContextData) => {
@@ -42,28 +42,35 @@ export const ChoosenPlan = () => {
     console.log(user);
     setClick(!click);
 
-    router.push('/payment');
+    router.push("/payment");
   };
 
   return (
     <>
       <Styled.ChoosenPlanWrapper>
-        <section className='plan-cards-wrapper'>
-          <div className='title-wrapper'>
+        <section className="plan-cards-wrapper">
+          <div className="title-wrapper">
             <h2>Plano Escolhido</h2>
           </div>
-          {/* FAZER A TELA DE SELEÇÃO ENTRE PIX E CARTÃO */}
-          <div className='plan-cards'>
+          <div className="plan-cards">
             <Cards
               showModal={click}
               setShowModal={setClick}
               plans={[JSONSelectedPlan]}
               onButtonClick={handleClick}
+              buttonStyle={{
+                fontSize: "1.7rem",
+                wordBreak: "break-all",
+                minHeight: "100%",
+                height: "100%",
+                width: "100%",
+                maxWidth: "31.4rem",
+              }}
             />
           </div>
         </section>
-        <section className='user-search'>
-          <div className='title-wrapper'>
+        <section className="user-search">
+          <div className="title-wrapper">
             <h2>Usuário</h2>
           </div>
           <UsersDataForm onSearchSuccess={handleSearchSuccess} />

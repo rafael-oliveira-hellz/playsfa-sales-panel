@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const CardsWrapper = styled.section`
   ${({ theme }) => css`
@@ -70,7 +70,7 @@ export const CardsWrapper = styled.section`
       min-width: 12rem;
       width: 45%;
       height: 4rem;
-      font-size: 1rem;
+      font-size: 1.5rem;
       word-wrap: break-word;
       cursor: pointer;
       backdrop-filter: blur(0px);
@@ -93,10 +93,30 @@ export const CardsWrapper = styled.section`
     }
 
     @media all and (max-width: 260px) {
+      & .title-wrapper h3 {
+        font-size: 1.8rem;
+        word-break: break-all;
+      }
+      & .payment-methods-wrapper {
+        flex-wrap: wrap;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      & .paragraph-wrapper p {
+        font-size: 1.1rem;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      & .payment-methods-wrapper p {
+        font-size: 1.5rem;
+        word-wrap: break-word;
+        word-break: break-all !important;
+      }
       & button {
         word-wrap: break-word;
-        width: fit-content !important;
-        font-size: 1rem !important;
+        word-break: break-all;
+        min-width: ${theme.sizes.fullPercentWidth} !important;
+        font-size: 0.8rem !important;
       }
     }
   `}

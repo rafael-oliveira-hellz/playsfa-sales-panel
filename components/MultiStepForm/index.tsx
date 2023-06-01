@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import * as Styled from './styles';
-import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
-import { ClientData } from '../CreditCardPayment/ClientData';
-import { CreditCardData } from '../CreditCardPayment';
-import { Thanks } from './Thanks';
-import { AddressData } from '../CreditCardPayment/AddressData';
-import { RecurrencyData } from '../CreditCardPayment/RecurrencyData';
-import { FiSend } from 'react-icons/fi';
-import { useForm } from '../Hooks/useForm';
+import React, { useState } from "react";
+import * as Styled from "./styles";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { ClientData } from "../CreditCardPayment/ClientData";
+import { CreditCardData } from "../CreditCardPayment";
+import { Thanks } from "./Thanks";
+import { AddressData } from "../CreditCardPayment/AddressData";
+import { RecurrencyData } from "../CreditCardPayment/RecurrencyData";
+import { FiSend } from "react-icons/fi";
+import { useForm } from "../Hooks/useForm";
 import {
   CardData,
   Plan,
   UserContextData,
   CustomUser,
-  CustomAddress
-} from '../../types/';
-import { PaymentLoading } from '../PaymentLoading';
-import cardValidator from 'card-validator';
-import axios, { AxiosResponse } from 'axios';
+  CustomAddress,
+} from "../../types/";
+import { PaymentLoading } from "../PaymentLoading";
+import cardValidator from "card-validator";
+import axios, { AxiosResponse } from "axios";
 
 interface IProps {
   selectedPlan: Plan;
@@ -26,45 +26,44 @@ interface IProps {
 export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectRadio, setSelectRadio] = useState<'Sim' | 'Não'>('Não');
+  const [selectRadio, setSelectRadio] = useState<"Sim" | "Não">("Não");
   const [isRecurrency, setIsRecurrency] = useState(false);
-  const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>('');
-  const [cardPaymentTokenDTO, setCardPaymentTokenDTO] =
-    useState<CardData>({
-      brand: '',
-      number: '',
-      cvv: '',
-      expiration_month: '',
-      expiration_year: ''
-    });
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
+  const [cardPaymentTokenDTO, setCardPaymentTokenDTO] = useState<CardData>({
+    brand: "",
+    number: "",
+    cvv: "",
+    expiration_month: "",
+    expiration_year: "",
+  });
 
   const [customUser, setCustomUser] = useState<CustomUser>({
-    name: '',
-    cpf: '',
-    phone: '',
+    name: "",
+    cpf: "",
+    phone: "",
     email: user.user.email,
-    birth_date: ''
+    birth_date: "",
   });
 
   const [customAddress, setCustomAddress] = useState<CustomAddress>({
-    street: '',
-    number: '',
-    neighborhood: '',
-    cep: '',
-    city: '',
-    state: ''
+    street: "",
+    number: "",
+    neighborhood: "",
+    cep: "",
+    city: "",
+    state: "",
   });
 
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     let updatedValue = value;
 
-    if (name === 'phone' || name === 'cpf') {
-      updatedValue = value.replaceAll(/[^\w\s]|_/g, '').replaceAll(/\s+/g, '');
+    if (name === "phone" || name === "cpf") {
+      updatedValue = value.replaceAll(/[^\w\s]|_/g, "").replaceAll(/\s+/g, "");
     }
 
     setCustomUser({ ...customUser, [name]: updatedValue });
-    console.log('handleUserChange: ', customUser.birth_date);
+    console.log("handleUserChange: ", customUser.birth_date);
   };
 
   const handleCreditCardDataChange = (
@@ -73,13 +72,13 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     const { name, value } = event.target;
     let updatedValue = value;
 
-    if (name === 'number') {
-      updatedValue = value.replace(/[^0-9]/g, '');
+    if (name === "number") {
+      updatedValue = value.replace(/[^0-9]/g, "");
     }
 
     setCardPaymentTokenDTO((prevState) => ({
       ...prevState,
-      [name]: updatedValue
+      [name]: updatedValue,
     }));
   };
 
@@ -93,14 +92,14 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     const { name, value } = event.target;
     let updatedValue = value;
 
-    if (name === 'number' || name === 'cep') {
-      updatedValue = value.replace(/[^0-9]/g, '');
+    if (name === "number" || name === "cep") {
+      updatedValue = value.replace(/[^0-9]/g, "");
 
-      console.log('updatedValue: ', updatedValue);
+      console.log("updatedValue: ", updatedValue);
     }
     setCustomAddress((prevState) => ({
       ...prevState,
-      [name]: updatedValue
+      [name]: updatedValue,
     }));
   };
 
@@ -114,27 +113,27 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     const { name, value } = event.target;
 
     const cardValidation = cardValidator.number(value);
-    const brand = cardValidation.card?.type || '';
+    const brand = cardValidation.card?.type || "";
 
     setCardPaymentTokenDTO((prevState) => ({
       ...prevState,
       [name]: value,
-      brand
+      brand,
     }));
   };
 
   // ================================================
   const onRadioSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    if (event === 'Sim') {
+    if (event === "Sim") {
       setIsRecurrency(true);
-      setSelectRadio('Sim');
-      setOpcaoSelecionada('30');
+      setSelectRadio("Sim");
+      setOpcaoSelecionada("30");
     }
-    if (event === 'Não') {
+    if (event === "Não") {
       setIsRecurrency(false);
-      setSelectRadio('Não');
-      setOpcaoSelecionada('0');
+      setSelectRadio("Não");
+      setOpcaoSelecionada("0");
     }
   };
 
@@ -151,18 +150,18 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         customUser,
         customAddress: customAddress,
         plan: selectedPlan,
-        cardPaymentTokenDTO: cardPaymentTokenDTO
+        cardPaymentTokenDTO: cardPaymentTokenDTO,
       };
 
-      console.log('body: ', { ...body });
+      console.log("body: ", { ...body });
 
       setLoading(true);
       await axios
-        .post('https://api.comprar.vip/card/transaction', {
-          ...body
+        .post("https://api.comprar.vip/card/transaction", {
+          ...body,
         })
         .then((res: AxiosResponse) => {
-          console.log('AxiosResponse: ', res.data);
+          console.log("AxiosResponse: ", res.data);
           setData(res.data);
           setLoading(false);
 
@@ -206,34 +205,36 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       opcaoSelecionada={opcaoSelecionada}
       key={1}
     />,
-    <Thanks loading={loading} key={1} />
+    <Thanks loading={loading} key={1} />,
   ];
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useForm(formComponents);
   return (
     <>
       <Styled.FormContainer>
-        <form onSubmit={(e) => changeStep(currentStep + 1, e)} noValidate>
-          <div className='actions'>
-            <div className='inputs-container'>{currentComponent}</div>
-            <div className='button-wrapper'>
+        <form onSubmit={(e) => changeStep(currentStep + 1, e)}>
+          <div className="actions">
+            <div className="inputs-container">{currentComponent}</div>
+            <div className="button-wrapper">
               {!isFirstStep && (
                 <button
-                  type='button'
+                  type="button"
                   onClick={() => changeStep(currentStep - 1)}
                 >
-                  <GrFormPrevious />
+                  <GrFormPrevious style={{ alignSelf: "center" }} />
                   <span>Voltar</span>
                 </button>
               )}
               {!isLastStep ? (
-                <button type='submit'>
+                <button type="submit">
                   <span>Avançar</span>
-                  <GrFormNext style={{ color: 'white !important' }} />
+                  <GrFormNext
+                    style={{ color: "white !important", alignSelf: "center" }}
+                  />
                 </button>
               ) : (
                 <button
-                  type='submit'
+                  type="submit"
                   onClick={() =>
                     generatePayment(
                       customUser,

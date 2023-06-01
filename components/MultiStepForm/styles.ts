@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const FormContainer = styled.div`
   ${({ theme }) => css`
@@ -87,6 +87,12 @@ export const FormContainer = styled.div`
         inset -12px -12px 16px 0px rgba(27, 3, 89, 0.6),
         inset 0px 11px 28px 0px rgb(255, 255, 255);
     }
+
+    & form .actions .button-wrapper button span {
+      font-size: 2rem;
+      color: ${theme.colors.btn};
+      color: ${theme.colors.fonts};
+    }
     @media all and (min-width: 150px) and (max-width: 220px) {
       & form {
         width: 95%;
@@ -135,6 +141,7 @@ export const AppreciationWrapper = styled.section`
     justify-content: center;
     align-items: center;
     min-width: fit-content;
+    background-color: transparent;
     width: ${theme.sizes.fullPercentWidth};
     max-width: ${theme.sizes.fullPercentWidth};
     height: 44rem;

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -44,8 +44,14 @@ li{
 a{
   text-decoration: none;
 }
+input{
+  color: #000;
+}
 input:disabled {
-      background-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+input::placeholder{
+  color:rgba(47, 47, 47, 0.322)
 }
 button span{
   margin-right: 0.5rem;

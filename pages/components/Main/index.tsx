@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import * as Styled from './styles';
-import { useNavigate } from 'react-router-dom';
-import { Plan } from '../../../types/Plan';
-import { Cards } from '../../../components/Cards';
-import { MainLoading } from '../../../components/MainLoading';
-import { PlanContext } from '../../../contexts/Provider';
-import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from "react";
+import * as Styled from "./styles";
+// import { useNavigate } from 'react-router-dom';
+import { Plan } from "../../../types/Plan";
+import { Cards } from "../../../components/Cards";
+import { MainLoading } from "../../../components/MainLoading";
+import { PlanContext } from "../../../contexts/Provider";
+import { useRouter } from "next/router";
 
 export default function MainPage({ plans }: { plans: Plan[] }) {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
   const planContext = useContext(PlanContext);
 
   if (!planContext) {
-    console.error('PlanContext not found');
+    console.error("PlanContext not found");
     return null;
   }
 
@@ -35,19 +35,19 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
   const handleClick = (plan: Plan) => {
     setSelectedPlan(plan);
 
-    sessionStorage.setItem('selectedPlan', JSON.stringify(plan));
+    sessionStorage.setItem("selectedPlan", JSON.stringify(plan));
 
-    router.push('/checkout');
+    router.push("/checkout");
   };
 
   return (
     <>
       <Styled.MainPageWrapper>
-        <section className='content-wrapper'>
-          <div className='content-wrapper__title-wrapper'>
+        <section className="content-wrapper">
+          <div className="content-wrapper__title-wrapper">
             <h2>Escolha o seu plano</h2>
           </div>
-          <section className='content-wrapper__boxes-wrapper'>
+          <section className="content-wrapper__boxes-wrapper">
             {newPlans?.map((plan) => (
               <Cards
                 plans={[plan]}
@@ -58,7 +58,7 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
           </section>
         </section>
       </Styled.MainPageWrapper>
-      {loading ? <MainLoading /> : <MainLoading className='closing' />}
+      {loading ? <MainLoading /> : <MainLoading className="closing" />}
     </>
   );
 }
