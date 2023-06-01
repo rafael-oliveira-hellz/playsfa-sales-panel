@@ -1,11 +1,4 @@
 /** @type {import('next').NextConfig} */
-const redirects = () => {
-  return [
-    process.env.MAINTENANCE_MODE === "1"
-      ? { source: "/((?!maintenance).*)", destination: "/maintenance.html", permanent: false }
-      : null,
-  ].filter(Boolean);
-};
 
 const nextConfig = {
   reactStrictMode: true,
@@ -13,7 +6,15 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
-  redirects: redirects(),
+  // adds rewrites for the redirects
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "/:path*",
+      },
+    ];
+  }
 };
 
 module.exports = nextConfig;
