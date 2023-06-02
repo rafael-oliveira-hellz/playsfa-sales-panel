@@ -12,19 +12,26 @@ const client = new Client({
   },
 });
 
+const delayCallback = (callback: OnPaymentResponse, message: string, delay: number) => {
+  setTimeout(() => {
+    callback(message);
+  }, delay);
+};
+
+
 const connect = (onPaymentResponse: OnPaymentResponse, type: Type) => {
   client.onConnect = (frame: Frame) => {
     console.log('Conectado: ' + frame);
 
     if (type === 'pix') {
       client.subscribe('/topic/response', (message: IMessage) => {
-        onPaymentResponse(message.body);
+        delayCallback(onPaymentResponse, message.body, 15000);
       });
     }
 
     if (type === 'card') {
       client.subscribe('/topic/notifications', (message: IMessage) => {
-        onPaymentResponse(message.body);
+        delayCallback(onPaymentResponse, message.body, 15000);
       });
     }
   };
