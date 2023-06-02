@@ -35,9 +35,12 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       const body = { email, plan, cpf };
       console.log({ ...body });
       setLoader(true);
-      const res = await axios.post("https://api.comprar.vip/plans/pix/requestData", {
-        ...body,
-      });
+      const res = await axios.post(
+        "https://api.comprar.vip/plans/pix/requestData",
+        {
+          ...body,
+        }
+      );
       console.log(res.data);
       setQr(res.data.qrcode.linkVisualizacao);
       window.open(res.data.qrcode.linkVisualizacao, "_blank");
@@ -72,6 +75,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         setConfirmed(true);
       }
     }, "pix");
+    console.log(paymentConfirmation);
   }, [paymentConfirmation]);
 
   useEffect(() => {
@@ -114,23 +118,16 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         <PixPaymentLoading className="closing" />
       )}
 
-      {qrcodeReceived && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close">&times;</span>
-            <p>
-              {confirmed ? (
-                <WaitingPayment
-                  confirmed
-                  paymentConfirmationStatus={paymentConfirmation}
-                />
-              ) : (
-                <WaitingPayment />
-              )}
-            </p>
-          </div>
-        </div>
-      )}
+      {qrcodeReceived ? (
+        paymentConfirmation === "PAGAMENTO RECEBIDO" ? (
+          <WaitingPayment
+            accepted
+            paymentConfirmationStatus={paymentConfirmation}
+          />
+        ) : (
+          <WaitingPayment paymentConfirmationStatus={paymentConfirmation} />
+        )
+      ) : null}
     </>
   );
 };

@@ -261,13 +261,15 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
           <div className="modal-content">
             <span className="close">&times;</span>
             <p>
-              {paymentConfirmation === "paid" ? (
+              {paymentConfirmation === "PAGAMENTO RECEBIDO" ? (
                 <WaitingPayment
-                  confirmed
+                  accepted
                   paymentConfirmationStatus={paymentConfirmation}
                 />
               ) : (
-                <WaitingPayment />
+                <WaitingPayment
+                  paymentConfirmationStatus={paymentConfirmation}
+                />
               )}
             </p>
           </div>

@@ -4,27 +4,31 @@ import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
 
 interface IProps {
-  confirmed?: boolean;
+  accepted?: boolean;
   paymentConfirmationStatus?: string;
 }
 export const WaitingPayment = ({
-  confirmed,
+  accepted,
   paymentConfirmationStatus,
 }: IProps) => {
   return (
     <>
-      {!confirmed ? (
+      {accepted ? (
         <Styled.WaitingPaymentWrapper>
-          <h2>{paymentConfirmationStatus === 'unpaid' && "Aguardando pagamento..."}</h2>
+          <h2>{paymentConfirmationStatus}</h2>
           <div className="image-wrapper">
-            <Image src={Deadpool} alt="deadpool" />
+            <Image src={Chuck} alt="chuck" />
           </div>
         </Styled.WaitingPaymentWrapper>
       ) : (
         <Styled.WaitingPaymentWrapper>
-          <h2>{paymentConfirmationStatus}</h2>
+          <h2>
+            {(paymentConfirmationStatus === "REALIZADO" ||
+              paymentConfirmationStatus === "") &&
+              "Aguardando pagamento..."}
+          </h2>
           <div className="image-wrapper">
-            <Image src={Chuck} alt="deadpool" />
+            <Image src={Deadpool} alt="deadpool" />
           </div>
         </Styled.WaitingPaymentWrapper>
       )}
