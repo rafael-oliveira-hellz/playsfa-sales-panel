@@ -25,13 +25,13 @@ const connect = (onPaymentResponse: OnPaymentResponse, type: Type) => {
 
     if (type === 'pix') {
       client.subscribe('/topic/response', (message: IMessage) => {
-        delayCallback(onPaymentResponse, message.body, 15000);
+        delayCallback(onPaymentResponse, message.body, 5000);
       });
     }
 
     if (type === 'card') {
       client.subscribe('/topic/notifications', (message: IMessage) => {
-        delayCallback(onPaymentResponse, message.body, 15000);
+        delayCallback(onPaymentResponse, message.body, 5000);
       });
     }
   };
