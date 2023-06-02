@@ -15,7 +15,7 @@ export const WaitingPayment = ({
     <>
       {!confirmed ? (
         <Styled.WaitingPaymentWrapper>
-          <h2>Aguardando pagamento</h2>
+          <h2>{paymentConfirmationStatus === 'unpaid' && "Aguardando pagamento..."}</h2>
           <div className="image-wrapper">
             <Image src={Deadpool} alt="deadpool" />
           </div>

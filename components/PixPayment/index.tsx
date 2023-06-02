@@ -11,6 +11,7 @@ interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
 }
+
 export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [cpf, setCpf] = useState("");
   const [qr, setQr] = useState("");
@@ -20,27 +21,29 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [invalidCpf, setInvalidCpf] = useState(false);
   const [loader, setLoader] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [qrcodeReceived, setQrcodeReceived] = useState(false);
 
   const generatePix = async (email: string, plan: Plan, cpf: string) => {
     try {
       setLoading(true);
       if (!cpf || !email) {
         setError(true);
+        return;
       }
 
       const body = { email, plan, cpf };
       console.log({ ...body });
       setLoader(true);
-      await axios
-        .post("https://api.comprar.vip/plans/pix/requestData", {
-          ...body,
-        })
-        .then((res: any) => {
-          console.log(res.data);
-          setQr(res.data.qrcode.linkVisualizacao);
-          window.open(res.data.qrcode.linkVisualizacao, "_blank");
-          setLoader(false);
-        });
+      const res = await axios.post("https://api.comprar.vip/plans/pix/requestData", {
+        ...body,
+      });
+      console.log(res.data);
+      setQr(res.data.qrcode.linkVisualizacao);
+      window.open(res.data.qrcode.linkVisualizacao, "_blank");
+      setQrcodeReceived(true);
+      setConfirmed(false);
+      setLoader(false);
     } catch (error: any) {
       if (error.response) {
         console.error("Mensagem de Erro: ", error.response);
@@ -55,16 +58,27 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           setInvalidCpf(false);
         }
       }
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     connect((paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
+
       setPaymentConfirmation(paymentResponse);
+
+      if (paymentResponse === "PAGAMENTO RECEBIDO") {
+        setConfirmed(true);
+      }
     }, "pix");
   }, [paymentConfirmation]);
+
+  useEffect(() => {
+    if (qrcodeReceived) {
+      setConfirmed(false);
+    }
+  }, [qrcodeReceived]);
 
   return (
     <>
@@ -100,12 +114,12 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         <PixPaymentLoading className="closing" />
       )}
 
-      {paymentConfirmation !== "" && (
+      {qrcodeReceived && (
         <div className="modal">
           <div className="modal-content">
             <span className="close">&times;</span>
             <p>
-              {paymentConfirmation === "paid" ? (
+              {confirmed ? (
                 <WaitingPayment
                   confirmed
                   paymentConfirmationStatus={paymentConfirmation}

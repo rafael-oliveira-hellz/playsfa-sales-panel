@@ -256,7 +256,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         </form>
       </Styled.FormContainer>
       {loading && <PaymentLoading />}
-      {paymentConfirmation !== "" && (
+      {paymentConfirmation && (
         <div className="modal">
           <div className="modal-content">
             <span className="close">&times;</span>
