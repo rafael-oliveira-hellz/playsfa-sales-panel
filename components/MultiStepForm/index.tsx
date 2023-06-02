@@ -211,6 +211,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       setPaymentConfirmation(paymentResponse);
     }, "card");
   }, [paymentConfirmation]);
+
   return (
     <>
       <Styled.FormContainer>
