@@ -19,6 +19,7 @@ export const FormContainer = styled.div`
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(2.5px);
     -webkit-backdrop-filter: blur(2.5px);
+
     & form {
       display: flex;
       flex-direction: column;
@@ -27,6 +28,7 @@ export const FormContainer = styled.div`
       background-color: #fff;
       border-radius: 10px;
       width: 50%;
+      min-height: 90%;
       height: 90%;
       backdrop-filter: blur(6px);
       background-color: rgba(39, 14, 108, 1);
@@ -96,21 +98,36 @@ export const FormContainer = styled.div`
     @media all and (min-width: 150px) and (max-width: 220px) {
       & form {
         width: 95%;
+        height: 98%;
       }
 
       & form .actions .button-wrapper {
         flex-direction: column;
         gap: 0.5rem;
       }
+      & form .actions .button-wrapper {
+        flex-wrap: nowrap;
+        align-self: baseline;
+        margin-top: 1rem;
+      }
+      & form .actions .button-wrapper button {
+        height: 50%;
+        align-self: center;
+      }
     }
     @media all and (min-width: 221px) and (max-width: 369px) {
       & form {
         width: 90%;
+        height: 98%;
+      }
+      & form .actions .button-wrapper {
+        margin-top: 0.8rem;
       }
     }
     @media all and (min-width: 370px) and (max-width: 549px) {
       & form {
         width: 90%;
+        height: 98%;
       }
 
       & form .actions .button-wrapper {
@@ -119,7 +136,6 @@ export const FormContainer = styled.div`
         align-items: center;
         width: ${theme.sizes.fullPercentWidth};
         height: fit-content;
-        padding: 1rem;
       }
       & form .actions .button-wrapper button {
         gap: 1.5rem;
@@ -129,6 +145,14 @@ export const FormContainer = styled.div`
       & form {
         width: 60%;
         max-width: 70%;
+      }
+      & form {
+        height: 99%;
+      }
+    }
+    @media all and (min-width: 941px) and (max-width: 1100px) {
+      & form {
+        height: 98%;
       }
     }
   `}

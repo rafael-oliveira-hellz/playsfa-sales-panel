@@ -62,7 +62,7 @@ export default function ChoosePayment() {
     <>
       <Styled.ChoosePaymentWrapper>
         <h2>Escolha a forma de Pagamento</h2>
-        <form>
+        <form className="payment-select">
           <div className="wrapper">
             <div className="wrapper__pix">
               <label htmlFor="pix">PIX</label>

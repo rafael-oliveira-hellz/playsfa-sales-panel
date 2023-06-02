@@ -119,5 +119,10 @@ export const CardsWrapper = styled.section`
         font-size: 0.8rem !important;
       }
     }
+    @media all and (max-width: 520px) {
+      & button {
+        font-size: 1rem;
+      }
+    }
   `}
 `;

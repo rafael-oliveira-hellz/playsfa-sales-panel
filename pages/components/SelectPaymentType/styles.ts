@@ -58,5 +58,21 @@ export const ChoosePaymentWrapper = styled.main`
       color: ${theme.colors.fonts};
       font-size: 2rem;
     }
+
+    @media all and (max-width: 340px) {
+      & h2 {
+        font-size: 2.5rem;
+        margin-top: 1rem;
+      }
+      & .payment-select {
+        width: 100%;
+      }
+
+      & form .wrapper .wrapper__card label {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        text-align: center;
+      }
+    }
   `}
 `;

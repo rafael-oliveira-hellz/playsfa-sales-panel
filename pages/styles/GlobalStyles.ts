@@ -51,7 +51,10 @@ input:disabled {
   background-color: #c0c0c0;
 }
 input::placeholder{
-  color:rgba(47, 47, 47, 0.322)
+  color:rgba(47, 47, 47, 0.322);
+}
+select, option{
+  color:rgba(47, 47, 47);
 }
 button span{
   margin-right: 0.5rem;

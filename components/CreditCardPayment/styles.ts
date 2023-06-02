@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const CreditCardDataWrapper = styled.div`
   ${({ theme }) => css`
@@ -55,6 +55,27 @@ export const CreditCardDataWrapper = styled.div`
       }
       & label input {
         width: ${theme.sizes.fullPercentWidth};
+      }
+    }
+    @media all and (min-width: 221px) and (max-width: 350px) {
+      & h2 {
+        font-size: 2rem;
+        margin-top: 2rem;
+        line-height: 1.2;
+      }
+      & label {
+        font-size: 1.5rem;
+      }
+    }
+    @media all and (min-width: 370px) and (max-width: 1100px) {
+      & {
+        height: 99%;
+      }
+      & h2 {
+        font-size: 2rem;
+      }
+      & label {
+        font-size: 1.5rem;
       }
     }
   `}
@@ -124,7 +145,7 @@ export const ClientDataWrapper = styled.div`
         align-self: center;
         font-size: 1.4rem !important;
       }
-      & #nasc input[type='date'] {
+      & #nasc input[type="date"] {
         width: 85%;
       }
     }
@@ -196,7 +217,7 @@ export const AddressDataWrapper = styled.div`
       }
     }
 
-    @media all and (min-width: 250px) and (max-width: 310px) {
+    @media all and (min-width: 250px) and (max-width: 390px) {
       & {
         height: 44rem;
       }
