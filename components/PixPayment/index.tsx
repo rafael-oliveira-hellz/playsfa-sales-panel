@@ -71,9 +71,10 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
 
       setPaymentConfirmation(paymentResponse);
 
-      if (paymentResponse === "PAGAMENTO RECEBIDO") {
+      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO") {
         setConfirmed(true);
       }
+
     }, "pix");
     console.log(paymentConfirmation);
   }, [paymentConfirmation]);
@@ -121,7 +122,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       {qrcodeReceived ? (
         confirmed ? (
           <WaitingPayment
-            accepted
+            accepted={true}
             paymentConfirmationStatus={paymentConfirmation}
           />
         ) : (

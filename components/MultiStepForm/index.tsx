@@ -32,6 +32,8 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [selectRadio, setSelectRadio] = useState<"Sim" | "Não">("Não");
   const [isRecurrency, setIsRecurrency] = useState(false);
   const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
+  const [confirmed, setConfirmed] = useState(false);
+
   const [cardPaymentTokenDTO, setCardPaymentTokenDTO] = useState<CardData>({
     brand: "",
     number: "",
@@ -209,6 +211,10 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     connect((paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
       setPaymentConfirmation(paymentResponse);
+
+      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO") {
+        setConfirmed(true);
+      }
     }, "card");
   }, [paymentConfirmation]);
 
@@ -260,9 +266,9 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       {paymentConfirmation && (
         <div className="modal">
           <div className="modal-content">
-            {paymentConfirmation === "PAGAMENTO RECEBIDO" ? (
+            {confirmed ? (
               <WaitingPayment
-                accepted
+                accepted={true}
                 paymentConfirmationStatus={paymentConfirmation}
               />
             ) : (

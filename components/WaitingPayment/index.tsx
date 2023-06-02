@@ -23,8 +23,7 @@ export const WaitingPayment = ({
       ) : (
         <Styled.WaitingPaymentWrapper>
           <h2>
-            {paymentConfirmationStatus !== "PAGAMENTO RECEBIDO" &&
-              "AGUARDANDO PAGAMENTO..."}
+          {!accepted && paymentConfirmationStatus !== "PAGAMENTO RECEBIDO" && "AGUARDANDO PAGAMENTO..."}
           </h2>
           <div className="image-wrapper">
             <Image src={Deadpool} alt="deadpool" />
