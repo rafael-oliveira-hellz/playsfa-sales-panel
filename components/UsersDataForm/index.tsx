@@ -17,13 +17,10 @@ export const UsersDataForm: React.FC<UsersDataFormProps> = ({
 
   const handleInputMail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    console.log(email);
   };
 
   const handleSearch = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log('Pesquisando...');
-
     try {
       setLoading(true);
       const response = await apiUser.post('/user', { email });
@@ -34,8 +31,6 @@ export const UsersDataForm: React.FC<UsersDataFormProps> = ({
       console.error('Erro:', error);
     }
   };
-
-  console.log(user);
 
   return (
     <>

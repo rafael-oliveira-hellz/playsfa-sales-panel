@@ -19,18 +19,13 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
     setPlans(plans);
   }, [plans, error, loading]);
 
-  // TODO: se tiver dúvidas aqui me chame
-
   const planContext = useContext(PlanContext);
 
   if (!planContext) {
-    console.error("PlanContext not found");
     return null;
   }
 
   const { selectedPlan, setSelectedPlan } = planContext;
-
-  // TODO: se tiver dúvidas aqui me chame
 
   const handleClick = (plan: Plan) => {
     setSelectedPlan(plan);

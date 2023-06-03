@@ -16,7 +16,6 @@ export const ChoosenPlan = () => {
   const userContext = useContext(UserContext);
 
   if (!planContext || !userContext) {
-    console.error("A context was not found");
     return null;
   }
 
@@ -27,7 +26,6 @@ export const ChoosenPlan = () => {
   const { user, setUser } = userContext;
 
   if (!selectedPlan) {
-    console.error("A plan was not found");
     router.push("/");
   }
 
@@ -35,14 +33,12 @@ export const ChoosenPlan = () => {
     setUser(data);
   };
 
-  console.log(selectedPlan);
-
   const handleClick = () => {
-    console.log(selectedPlan);
-    console.log(user);
     setClick(!click);
 
-    router.push("/payment");
+    if (user) {
+      router.push("/payment");
+    }
   };
 
   return (

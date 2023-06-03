@@ -39,7 +39,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       }
 
       const body = { email, plan, cpf };
-      console.log({ ...body });
+
       setLoader(true);
       setTimeout(async () => {
         const res = await axios.post(
@@ -48,9 +48,6 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
             ...body,
           }
         );
-
-        console.log(res.data);
-
         setQr(res.data.qrcode.linkVisualizacao);
         window.open(res.data.qrcode.linkVisualizacao, "_blank");
         setQrcodeReceived(true);

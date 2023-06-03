@@ -10,7 +10,6 @@ export default function Payment() {
   const userContext = useContext(UserContext);
 
   if (!planContext || !userContext) {
-    console.error('A context was not found');
     return null;
   }
 
@@ -18,15 +17,10 @@ export default function Payment() {
   const { user } = userContext;
 
   if (!selectedPlan) {
-    console.error('A plan was not found');
     router.push('/');
   } else if (!user) {
-    console.error('A user was not found');
     router.push('/checkout');
   }
-
-  console.log(selectedPlan);
-  console.log(user);
 
     return (
         <>

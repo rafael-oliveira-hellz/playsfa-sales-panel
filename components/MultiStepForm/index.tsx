@@ -26,7 +26,6 @@ interface IProps {
   user: UserContextData;
 }
 export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
-  const [data, setData] = useState({});
   const [loading, setLoading] = useState<boolean>(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState("");
   const [selectRadio, setSelectRadio] = useState<"Sim" | "Não">("Não");
@@ -73,7 +72,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     }
 
     setCustomUser({ ...customUser, [name]: updatedValue });
-    console.log("handleUserChange: ", customUser.birth_date);
   };
 
   const handleCreditCardDataChange = (
@@ -104,8 +102,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
 
     if (name === "number" || name === "cep") {
       updatedValue = value.replace(/[^0-9]/g, "");
-
-      console.log("updatedValue: ", updatedValue);
     }
     setCustomAddress((prevState) => ({
       ...prevState,
@@ -162,8 +158,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         plan: selectedPlan,
         cardPaymentTokenDTO: cardPaymentTokenDTO,
       };
-
-      console.log("body: ", { ...body });
 
       setLoading(true);
       setTimeout(async () => {

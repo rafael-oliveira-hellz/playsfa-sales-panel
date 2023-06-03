@@ -17,8 +17,6 @@ export const WaitingPayment = ({
   showModal,
   handleCloseModal,
 }: IProps) => {
-  console.log({ accepted, paymentConfirmationStatus, showModal });
-
   return (
     <>
       {showModal && (
