@@ -3,8 +3,9 @@ import * as Styled from './styles';
 
 interface IProps {
   loading: boolean;
+  paymentStatus: string
 }
-export const Thanks = ({ loading }: IProps) => {
+export const Thanks = ({ loading, paymentStatus }: IProps) => {
   return (
     <>
       <Styled.AppreciationWrapper>
@@ -16,7 +17,7 @@ export const Thanks = ({ loading }: IProps) => {
           </>
         ) : (
           <>
-            <h2>Pagamento efetuado com sucesso</h2>
+            <h2>{paymentStatus}</h2>
           </>
         )}
       </Styled.AppreciationWrapper>
