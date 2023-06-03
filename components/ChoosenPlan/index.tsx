@@ -64,6 +64,13 @@ export const ChoosenPlan = () => {
               }}
             />
           </div>
+
+
+          <div className="plan-cards__info">
+              <div className="plan-cards__info__title">
+                <h3>Pesquise seu e-mail antes de prosseguir...</h3>
+              </div>
+            </div>
         </section>
         <section className="user-search">
           <div className="title-wrapper">

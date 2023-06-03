@@ -29,6 +29,13 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
     setShowModal(false);
   };
 
+  const openPixLink = (link: string) => {
+    const newWindow = window.open(link, "_blank");
+    if (newWindow) {
+      newWindow.opener = null; // Impede que a nova janela acesse o objeto window do navegador pai
+    }
+  };
+
   const generatePix = async (email: string, plan: Plan, cpf: string) => {
     try {
       setLoading(true);
@@ -49,7 +56,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           }
         );
         setQr(res.data.qrcode.linkVisualizacao);
-        window.open(res.data.qrcode.linkVisualizacao, "_blank");
+        openPixLink(res.data.qrcode.linkVisualizacao);
         setQrcodeReceived(true);
         setConfirmed(false);
         setLoader(false);

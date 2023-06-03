@@ -6,6 +6,7 @@ import { UserProvider, PlanProvider } from "../contexts/Provider";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/Theme";
 import { GlobalStyles } from "./styles/GlobalStyles";
+import { Header } from "../components/Header";
 
 function App({Component, pageProps}: AppProps) {
   const [render, setRender] = useState(false);
@@ -17,6 +18,7 @@ function App({Component, pageProps}: AppProps) {
       <GlobalStyles />
       <UserProvider>
         <PlanProvider>
+          <Header />
           <Component {...pageProps} />
           <Analytics />
         </PlanProvider>

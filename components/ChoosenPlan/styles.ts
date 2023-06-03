@@ -4,7 +4,6 @@ export const ChoosenPlanWrapper = styled.section`
   ${({ theme }) => css`
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: ${theme.colors.home};
     columns: 2;
     width: ${theme.sizes.fullPercentWidth};
@@ -46,6 +45,32 @@ export const ChoosenPlanWrapper = styled.section`
       width: ${theme.sizes.fullPercentWidth};
       height: ${theme.sizes.fullPercentHeight};
     }
+
+    & .plan-cards__info {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  & .plan-cards__info__title {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    & .plan-cards__info {
+      padding: 10px;
+    }
+
+    & .plan-cards__info__title {
+      font-size: 16px;
+    }
+  }
 
     & .user-search {
       display: flex;

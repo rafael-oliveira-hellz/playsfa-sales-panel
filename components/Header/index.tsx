@@ -6,7 +6,7 @@ export const Header = () => {
     <>
       <Styled.HeaderWrapper>
         <header>
-          <h1>Play Séries, Filmes e Animes</h1>
+          <h1>Central+</h1>
         </header>
       </Styled.HeaderWrapper>
     </>
