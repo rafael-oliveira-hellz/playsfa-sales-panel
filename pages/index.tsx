@@ -2,7 +2,7 @@ import { Plan } from "../types/Plan";
 import MainPage from "./components/Main";
 
 export async function getStaticProps() {
-  const plansUrl = "https://psadns.xyz/plans.php";
+  const plansUrl = "https://api.comprar.vip/plans/plansAll";
 
   const plansResponse = await fetch(plansUrl);
 

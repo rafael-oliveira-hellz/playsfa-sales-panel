@@ -38,9 +38,10 @@ export const Cards = ({
               whiteSpace: "pre-line",
               hyphens: "none",
               wordBreak: "keep-all",
+              lineHeight: "1.5",
             }}
           >
-            {plans && plans.length > 0 && plans[0]?.description}
+            {plans && plans.length > 0 && plans[0]?.description_web}
           </p>
         </div>
         <div className="payment-methods-wrapper">

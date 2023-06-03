@@ -40,7 +40,10 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
       <MainPageWrapper>
         <section className="content-wrapper">
           <div className="content-wrapper__title-wrapper">
-            <h2>Escolha o seu plano</h2>
+            <h2 style={{
+              whiteSpace: "pre-line",
+              hyphens: "none",
+              wordBreak: "keep-all", lineHeight: "1.5"}}>Escolha o seu plano</h2>
           </div>
           <section className="content-wrapper__boxes-wrapper">
             {newPlans?.map((plan) => (

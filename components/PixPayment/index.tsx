@@ -28,8 +28,9 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const handleCloseModal = () => {
     setShowModal(false);
 
-    if (paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA") {
+    if (paymentConfirmation === "AGUARDANDO PAGAMENTO") {
       setTimeout(() => {
+        sessionStorage.clear();
         window.location.href = "/";
       }
       , 3000);
