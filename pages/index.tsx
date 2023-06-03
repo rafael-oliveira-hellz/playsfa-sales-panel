@@ -1,42 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
+import { Plan } from "../types/Plan";
+import MainPage from "./components/Main";
 
-const Container = styled.div`
-  display: grid;
-  place-items: center;
-  height: 100vh;
-`;
+export async function getStaticProps() {
+  const plansUrl = "https://psadns.xyz/plans.php";
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+  const plansResponse = await fetch(plansUrl);
 
-const Heading = styled.h1`
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-`;
+  const plans: Plan[] = await plansResponse.json();
 
-const Subheading = styled.p`
-  font-size: 16px;
-  color: #666;
-`;
+  return {
+    props: {
+      plans,
+    },
+  };
+}
 
-export default function Home() {
+type Props = {
+  plans: Plan[];
+};
+
+export default function Home({ plans }: Props) {
   return (
-    <Container>
-      <Card>
-        <Heading>EM MANUTENÇÃO!!!</Heading>
-        <Subheading>Desculpe pelo transtorno.</Subheading>
-      </Card>
-    </Container>
+    <>
+      <MainPage plans={plans} />;
+    </>
   );
 }
