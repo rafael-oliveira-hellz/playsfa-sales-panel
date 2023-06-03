@@ -27,6 +27,13 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+
+    if (paymentConfirmation === "AGUARDANDO PAGAMENTO") {
+      setTimeout(() => {
+        window.location.href = "/";
+      }
+      , 3000);
+    }
   };
 
   const openPixLink = (link: string) => {
@@ -55,7 +62,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
             ...body,
           }
         );
-        setQr(res.data.qrcode.linkVisualizacao);
+        setQr(res.data.qrcode.qrcode);
         openPixLink(res.data.qrcode.linkVisualizacao);
         setQrcodeReceived(true);
         setConfirmed(false);
