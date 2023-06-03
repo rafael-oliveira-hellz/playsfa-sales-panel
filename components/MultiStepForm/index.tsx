@@ -166,7 +166,8 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       console.log("body: ", { ...body });
 
       setLoading(true);
-      await axios
+      setTimeout(async () => {
+        await axios
         .post("https://api.comprar.vip/card/transaction", {
           ...body,
         })
@@ -174,6 +175,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
           setLoading(false);
           setShowModal(true);
         });
+      }, 10000);
     } catch (error: any) {
       console.log(error);
     }

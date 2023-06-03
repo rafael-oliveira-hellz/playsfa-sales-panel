@@ -41,19 +41,23 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       const body = { email, plan, cpf };
       console.log({ ...body });
       setLoader(true);
-      const res = await axios.post(
-        "https://api.comprar.vip/plans/pix/requestData",
-        {
-          ...body,
-        }
-      );
-      console.log(res.data);
-      setQr(res.data.qrcode.linkVisualizacao);
-      window.open(res.data.qrcode.linkVisualizacao, "_blank");
-      setQrcodeReceived(true);
-      setConfirmed(false);
-      setLoader(false);
-      setShowModal(true);
+      setTimeout(async () => {
+        const res = await axios.post(
+          "https://api.comprar.vip/plans/pix/requestData",
+          {
+            ...body,
+          }
+        );
+
+        console.log(res.data);
+
+        setQr(res.data.qrcode.linkVisualizacao);
+        window.open(res.data.qrcode.linkVisualizacao, "_blank");
+        setQrcodeReceived(true);
+        setConfirmed(false);
+        setLoader(false);
+        setShowModal(true);
+      }, 10000);
     } catch (error: any) {
       if (error.response) {
         console.error("Mensagem de Erro: ", error.response);
