@@ -9,6 +9,8 @@ interface IProps {
   paymentConfirmationStatus: string;
   showModal: boolean;
   handleCloseModal: () => void;
+  type?: string;
+  pixLink?: string;
 }
 
 export const WaitingPayment = ({
@@ -16,6 +18,8 @@ export const WaitingPayment = ({
   paymentConfirmationStatus,
   showModal,
   handleCloseModal,
+  type,
+  pixLink
 }: IProps) => {
   return (
     <>
@@ -38,6 +42,12 @@ export const WaitingPayment = ({
                 <div className="image-wrapper">
                   <Image src={Deadpool} alt="deadpool" />
                 </div>
+
+                {type === 'pix' && (
+                  <a href={pixLink} target="_blank" rel="noopener noreferrer">
+                    <button className="pay-now-button">Pagar Agora</button>
+                  </a>
+                )}
               </>
             )}
             <Styled.CloseButton onClick={handleCloseModal}>

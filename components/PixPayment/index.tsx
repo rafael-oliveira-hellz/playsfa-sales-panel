@@ -153,6 +153,8 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
             paymentConfirmationStatus={paymentConfirmation}
             handleCloseModal={handleCloseModal}
             showModal={showModal}
+            type="pix"
+            pixLink={qr}
           />
         )
       ) : null}

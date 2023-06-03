@@ -73,6 +73,23 @@ export const ModalContent = styled.div`
     width: 90%;
     text-align: center;
 
+    .pay-now-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f8f8a0;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.pay-now-button:hover {
+  background-color: #ebea70;
+}
+
     h2 {
       color: ${theme.colors.font};
       font-size: 1.5rem;
