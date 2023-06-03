@@ -4,7 +4,7 @@ import { Plan } from "../../types/Plan";
 import { UserContextData } from "../../types/User";
 import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
-import { connect, getSession } from "../../hooks/websocket-client";
+import { connect } from "../../hooks/websocket-client";
 import { WaitingPayment } from "../WaitingPayment";
 
 interface IProps {
@@ -25,18 +25,6 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [qrcodeReceived, setQrcodeReceived] = useState(false);
   const [showModal, setShowModal] = useState(true);
   const [sessionId, setSessionId] = useState("");
-
-  const [count, setCount] = useState(11);
-
-  useEffect(() => {
-    if (loader) {
-      const timer = setTimeout(() => {
-        setCount((prevCount) => prevCount - 1);
-      }, 11000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [count, loader]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -69,7 +57,6 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       const body = { email, plan, cpf };
 
       setLoader(true);
-
       setTimeout(async () => {
         const res = await axios.post(
           "https://api.comprar.vip/plans/pix/requestData",
@@ -103,11 +90,6 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   };
 
   useEffect(() => {
-    getSession((paymentResponse: string) => {
-      console.log("Resposta do pagamento recebida: " + paymentResponse);
-        setSessionId(paymentResponse);
-      });
-
     connect((paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
 
@@ -123,8 +105,8 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         setConfirmed(false);
       }
 
-    }, "pix", sessionId);
-  }, [paymentConfirmation, confirmed, sessionId]);
+    }, "pix", user.user.id.toString());
+  }, [paymentConfirmation, confirmed, user.user.id]);
 
   useEffect(() => {
     if (qrcodeReceived) {
@@ -161,10 +143,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         </button>
       </Styled.PixPaymentWrapper>
       {loader ? (
-        <>
-          <p>{count}</p>
-          <PixPaymentLoading />
-        </>
+        <PixPaymentLoading />
       ) : (
         <PixPaymentLoading className="closing" />
       )}

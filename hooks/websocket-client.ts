@@ -1,5 +1,4 @@
 import { Client, Frame, IMessage } from '@stomp/stompjs';
-import { useState } from 'react';
 import SockJS from 'sockjs-client';
 
 type OnPaymentResponse = (message: string) => void;
@@ -19,23 +18,17 @@ const delayCallback = (callback: OnPaymentResponse, message: string, delay: numb
   }, delay);
 };
 
-const getSession = (onPaymentResponse: OnPaymentResponse) => {
-  client.onConnect = (frame: Frame) => {
-    console.log('Conectado: ' + frame);
-
-    client.subscribe('/topic/sessionId/', (message: IMessage) => {
-      onPaymentResponse(message.body);
-    });
-  }
-};
-
-
 const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: string) => {
   client.onConnect = (frame: Frame) => {
     console.log('Conectado: ' + frame);
 
     if (type === 'pix') {
-      client.subscribe(`/user/${sessionId}/topic/response/`, (message: IMessage) => {
+      const destination = '/topic/sessionId';
+      const body = JSON.stringify({ sessionId });
+
+      client.publish({ destination, body });
+
+      client.subscribe(`/user/${sessionId}/topic/response`, (message: IMessage) => {
         delayCallback(onPaymentResponse, message.body, 5000);
       });
     }
@@ -60,4 +53,4 @@ const disconnect = () => {
   }
 };
 
-export { connect, disconnect, getSession };
+export { connect, disconnect };

@@ -18,7 +18,7 @@ import {
 import { PaymentLoading } from "../PaymentLoading";
 import cardValidator from "card-validator";
 import axios, { AxiosResponse } from "axios";
-import { connect, disconnect, getSession } from "../../hooks/websocket-client";
+import { connect, disconnect } from "../../hooks/websocket-client";
 import { WaitingPayment } from "../WaitingPayment";
 
 interface IProps {
@@ -33,20 +33,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
   const [confirmed, setConfirmed] = useState(false);
   const [showModal, setShowModal] = useState(true);
-
-  const [sessionId, setSessionId] = useState("");
-
-  const [count, setCount] = useState(3);
-
-  useEffect(() => {
-    if (loading) {
-      const timer = setTimeout(() => {
-        setCount((prevCount) => prevCount - 1);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [count, loading]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -224,11 +210,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     useForm(formComponents);
 
   useEffect(() => {
-    getSession((paymentResponse: string) => {
-      console.log("Resposta do pagamento recebida: " + paymentResponse);
-        setSessionId(paymentResponse);
-      });
-
     connect((paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
       setPaymentConfirmation(paymentResponse);
@@ -242,8 +223,8 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         || paymentConfirmation === "AGUARDANDO PAGAMENTO" || paymentResponse === "AGUARDANDO PAGAMENTO") {
         setConfirmed(false);
       }
-    }, "card", sessionId);
-  }, [paymentConfirmation, sessionId]);
+    }, "card", user.user.id.toString());
+  }, [paymentConfirmation, user.user.id]);
 
   return (
     <>
@@ -289,7 +270,6 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
           </div>
         </form>
       </Styled.FormContainer>
-      <p>{count}</p>
       {loading && <PaymentLoading />}
       {paymentConfirmation && (
         <div className="modal">

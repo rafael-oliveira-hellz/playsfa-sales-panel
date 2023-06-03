@@ -1,28 +1,42 @@
-import { Plan } from "../types/Plan";
-import MainPage from "./components/Main";
+import React from 'react';
+import styled from 'styled-components';
 
-export async function getStaticProps() {
-  const plansUrl = "https://api.comprar.vip/plans/plansAll";
+const Container = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+`;
 
-  const plansResponse = await fetch(plansUrl);
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
 
-  const plans: Plan[] = await plansResponse.json();
+const Heading = styled.h1`
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+`;
 
-  return {
-    props: {
-      plans,
-    },
-  };
-}
+const Subheading = styled.p`
+  font-size: 16px;
+  color: #666;
+`;
 
-type Props = {
-  plans: Plan[];
-};
-
-export default function Home({ plans }: Props) {
+export default function Home() {
   return (
-    <>
-      <MainPage plans={plans} />;
-    </>
+    <Container>
+      <Card>
+        <Heading>EM MANUTENÇÃO!!!</Heading>
+        <Subheading>Desculpe pelo transtorno.</Subheading>
+      </Card>
+    </Container>
   );
 }
