@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 
-const theme: DefaultTheme = {
+export const theme: DefaultTheme = {
   colors: {
     home: '#1E1537',
     navbar: '#1E1537',
@@ -17,5 +17,3 @@ const theme: DefaultTheme = {
     fullVW: '100vw'
   }
 };
-
-export default theme;

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 
 *{
   margin: 0;
@@ -67,5 +67,3 @@ polyline {
   align-self: center;
 }
 `;
-
-export default GlobalStyles;
