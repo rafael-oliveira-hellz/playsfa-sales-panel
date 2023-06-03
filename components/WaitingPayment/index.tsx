@@ -4,6 +4,31 @@ import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
 import { AiOutlineClose } from "react-icons/ai";
 import QRCode from "qrcode.react";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+
+const CopyButton = styled.button`
+  ${({ theme }) => css`
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: ${theme.colors.primary};
+    color: ${theme.colors.font};
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: ${theme.colors.primaryHover};
+    }
+
+    &.copied {
+      background-color: ${theme.colors.success};
+    }
+  `}
+`;
 
 interface IProps {
   accepted: boolean;
@@ -14,6 +39,20 @@ interface IProps {
   pixLink?: string;
 }
 
+const useCopiedState = () => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
+
+  return { isCopied, handleCopy };
+};
+
 export const WaitingPayment = ({
   accepted,
   paymentConfirmationStatus,
@@ -22,6 +61,8 @@ export const WaitingPayment = ({
   type,
   pixLink
 }: IProps) => {
+  const { isCopied, handleCopy } = useCopiedState();
+
   return (
     <>
       {showModal && (
@@ -51,6 +92,12 @@ export const WaitingPayment = ({
                         <h3>Para concluir o pagamento.</h3>
                         <h4 style={{color: "#333", fontWeight: "900", fontSize: "1.2rem"}}>Scaneie o QR Code abaixo:</h4>
                         <QRCode value={pixLink as string} />
+
+                        <div className="pix-link">
+                          <CopyButton className={isCopied ? "copied" : ""} onClick={() => handleCopy(pixLink as string)}>
+                            {isCopied ? "Copiado!" : "Copiar"}
+                          </CopyButton>
+                        </div>
                       </>
                     )}
                   </div>
