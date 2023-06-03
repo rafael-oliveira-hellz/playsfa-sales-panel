@@ -26,15 +26,28 @@ export const WaitingPayment = ({
   return (
     <>
       {showModal && (
-        <Styled.WaitingPaymentWrapper>
-          <h2>{accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? "PAGAMENTO RECEBIDO" : paymentConfirmationStatus}</h2>
-          <div className="image-wrapper">
-            <Image src={accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? Chuck : Deadpool} alt={accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? "chuck" : "deadpool"} />
-          </div>
-          <Styled.CloseButton onClick={handleCloseModal}>
-            Fechar
-          </Styled.CloseButton>
-        </Styled.WaitingPaymentWrapper>
+        <Styled.ModalOverlay>
+          <Styled.ModalContent>
+            {accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? (
+              <>
+                <h2>PAGAMENTO RECEBIDO</h2>
+                <div className="image-wrapper">
+                  <Image src={Chuck} alt="chuck" />
+                </div>
+              </>
+            ) : (
+              <>
+                <h2>{paymentConfirmationStatus}</h2>
+                <div className="image-wrapper">
+                  <Image src={Deadpool} alt="deadpool" />
+                </div>
+              </>
+            )}
+            <Styled.CloseButton onClick={handleCloseModal}>
+              Fechar
+            </Styled.CloseButton>
+          </Styled.ModalContent>
+        </Styled.ModalOverlay>
       )}
     </>
   );

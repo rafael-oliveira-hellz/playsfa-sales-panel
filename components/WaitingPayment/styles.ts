@@ -49,45 +49,63 @@ export const WaitingPaymentWrapper = styled.div`
   `}
 `;
 
-export const CloseButton = styled.button`
+export const ModalOverlay = styled.div`
   ${({ theme }) => css`
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
+  `}
+`;
 
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      width: 1.2rem;
-      height: 2px;
-      background-color: ${theme.colors.fonts};
+export const ModalContent = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.background};
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+
+    h2 {
+      color: ${theme.colors.font};
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
 
-    &::before {
-      transform: rotate(45deg);
-    }
+    .image-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
 
-    &::after {
-      transform: rotate(-45deg);
+      img {
+        border-radius: 8px;
+        max-height: 200px;
+        max-width: 100%;
+      }
     }
+  `}
+`;
 
-    &::before,
-    &::after {
-      transition: background-color 0.3s ease;
-    }
+export const CloseButton = styled.button`
+  ${({ theme }) => css`
+    background-color: transparent;
+    border: none;
+    color: ${theme.colors.font};
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    transition: opacity 0.3s ease;
 
-    &:hover::before,
-    &:hover::after {
-      background-color: ${theme.colors.accent};
+    &:hover {
+      opacity: 0.7;
     }
 
     &:focus {
