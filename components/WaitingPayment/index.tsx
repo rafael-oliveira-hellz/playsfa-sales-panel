@@ -17,37 +17,24 @@ export const WaitingPayment = ({
 
   const router = useRouter();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowModal(false);
-      router.push("/checkout");
-    }, 10000);
+  const handleCloseModal = () => {
+    setShowModal(false);
+    router.push("/checkout");
+  };
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [router]);
 
   return (
     <>
       {showModal && (
-        <>
-          {accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? (
-            <Styled.WaitingPaymentWrapper>
-              <h2>PAGAMENTO RECEBIDO</h2>
-              <div className="image-wrapper">
-                <Image src={Chuck} alt="chuck" />
-              </div>
-            </Styled.WaitingPaymentWrapper>
-          ) : (
-            <Styled.WaitingPaymentWrapper>
-              <h2>{paymentConfirmationStatus}</h2>
-              <div className="image-wrapper">
-                <Image src={Deadpool} alt="deadpool" />
-              </div>
-            </Styled.WaitingPaymentWrapper>
-          )}
-        </>
+        <Styled.WaitingPaymentWrapper>
+          <h2>{accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? "PAGAMENTO RECEBIDO" : paymentConfirmationStatus}</h2>
+          <div className="image-wrapper">
+            <Image src={accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? Chuck : Deadpool} alt={accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? "chuck" : "deadpool"} />
+          </div>
+          <Styled.CloseButton onClick={handleCloseModal}>
+            Fechar
+          </Styled.CloseButton>
+        </Styled.WaitingPaymentWrapper>
       )}
     </>
   );
