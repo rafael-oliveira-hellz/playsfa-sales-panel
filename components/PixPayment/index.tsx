@@ -103,9 +103,9 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   };
 
   useEffect(() => {
-    getSession((paymmentResponse: string) => {
-      console.log("Resposta do pagamento recebida: " + paymmentResponse);
-        setSessionId(paymmentResponse);
+    getSession((paymentResponse: string) => {
+      console.log("Resposta do pagamento recebida: " + paymentResponse);
+        setSessionId(paymentResponse);
       });
 
     connect((paymentResponse: string) => {
