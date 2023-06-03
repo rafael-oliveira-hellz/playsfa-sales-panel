@@ -40,7 +40,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const openPixLink = (link: string) => {
     const newWindow = window.open(link, "_blank");
     if (newWindow) {
-      newWindow.opener = null; // Impede que a nova janela acesse o objeto window do navegador pai
+      newWindow.opener = null;
     }
   };
 
