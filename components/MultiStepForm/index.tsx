@@ -209,7 +209,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       opcaoSelecionada={opcaoSelecionada}
       key={1}
     />,
-    <Thanks loading={loading} key={1} paymentStatus={paymentConfirmation} />,
+    <Thanks loading={loading} key={1} />,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
