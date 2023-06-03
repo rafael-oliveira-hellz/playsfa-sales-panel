@@ -100,9 +100,12 @@ export const CloseButton = styled.button`
     border: none;
     color: ${theme.colors.font};
     cursor: pointer;
-    font-size: 1.2rem;
     padding: 0.5rem;
     transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 
     &:hover {
       opacity: 0.7;

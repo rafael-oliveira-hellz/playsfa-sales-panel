@@ -4,6 +4,7 @@ import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
   accepted?: boolean;
@@ -19,8 +20,16 @@ export const WaitingPayment = ({
 
   const handleCloseModal = () => {
     setShowModal(false);
-    router.push("/checkout");
+    // router.push("/checkout");
   };
+
+  const resetModal = () => {
+    setShowModal(true);
+  };
+
+  useEffect(() => {
+    resetModal();
+  }, [accepted, paymentConfirmationStatus]);
 
 
   return (
@@ -44,7 +53,7 @@ export const WaitingPayment = ({
               </>
             )}
             <Styled.CloseButton onClick={handleCloseModal}>
-              Fechar
+              <AiOutlineClose />
             </Styled.CloseButton>
           </Styled.ModalContent>
         </Styled.ModalOverlay>
