@@ -24,9 +24,12 @@ export const WaitingPayment = ({
       {showModal && (
         <Styled.ModalOverlay>
           <Styled.ModalContent>
-            {accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? (
+            {(accepted &&
+              paymentConfirmationStatus === "PAGAMENTO RECEBIDO") ||
+              (accepted && paymentConfirmationStatus === "ENTREGA DO PREMIUM EM ANDAMENTO") ||
+              (accepted && paymentConfirmationStatus === "ENTREGA DO PREMIUM CONCLUIDA") ? (
               <>
-                <h2>PAGAMENTO RECEBIDO</h2>
+                <h2>{paymentConfirmationStatus}</h2>
                 <div className="image-wrapper">
                   <Image src={Chuck} alt="chuck" />
                 </div>

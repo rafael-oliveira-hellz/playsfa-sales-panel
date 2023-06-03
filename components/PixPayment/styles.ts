@@ -156,6 +156,8 @@ export const PixPaymentWrapper = styled.form`
       min-width: 12rem;
       width: 40%;
       height: 4rem;
+      font-size: 2rem;
+      font-weight: bold;
       cursor: pointer;
       backdrop-filter: blur(0px);
       background-color: rgba(255, 255, 255, 0.1);

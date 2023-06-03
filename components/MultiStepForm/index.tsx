@@ -33,6 +33,11 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [isRecurrency, setIsRecurrency] = useState(false);
   const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
   const [confirmed, setConfirmed] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const [cardPaymentTokenDTO, setCardPaymentTokenDTO] = useState<CardData>({
     brand: "",
@@ -167,6 +172,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         })
         .then(() => {
           setLoading(false);
+          setShowModal(true);
         });
     } catch (error: any) {
       console.log(error);
@@ -212,8 +218,14 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
       setPaymentConfirmation(paymentResponse);
 
-      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO") {
+      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO" ||
+        paymentConfirmation === "ENTREGA DO PREMIUM EM ANDAMENTO" || paymentResponse === "ENTREGA DO PREMIUM EM ANDAMENTO"
+        || paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA" || paymentResponse === "ENTREGA DO PREMIUM CONCLUIDA") {
         setConfirmed(true);
+      } else if (paymentConfirmation === "FALHA NA TRANSAÇÃO" || paymentResponse === "FALHA NA TRANSAÇÃO"
+        || paymentConfirmation === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" || paymentResponse === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO"
+        || paymentConfirmation === "AGUARDANDO PAGAMENTO" || paymentResponse === "AGUARDANDO PAGAMENTO") {
+        setConfirmed(false);
       }
     }, "card");
   }, [paymentConfirmation]);
@@ -267,13 +279,20 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         <div className="modal">
           <div className="modal-content">
             {confirmed ? (
-              <WaitingPayment
-                accepted={true}
-                paymentConfirmationStatus={paymentConfirmation}
-              />
-            ) : (
-              <WaitingPayment paymentConfirmationStatus={paymentConfirmation} />
-            )}
+          <WaitingPayment
+            accepted={true}
+            paymentConfirmationStatus={paymentConfirmation}
+            handleCloseModal={handleCloseModal}
+            showModal={showModal}
+          />
+        ) : (
+          <WaitingPayment
+            accepted={false}
+            paymentConfirmationStatus={paymentConfirmation}
+            handleCloseModal={handleCloseModal}
+            showModal={showModal}
+          />
+        )}
           </div>
         </div>
       )}

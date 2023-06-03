@@ -78,8 +78,14 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
 
       setPaymentConfirmation(paymentResponse);
 
-      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO") {
+      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO" ||
+        paymentConfirmation === "ENTREGA DO PREMIUM EM ANDAMENTO" || paymentResponse === "ENTREGA DO PREMIUM EM ANDAMENTO"
+        || paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA" || paymentResponse === "ENTREGA DO PREMIUM CONCLUIDA") {
         setConfirmed(true);
+      } else if (paymentConfirmation === "FALHA NA TRANSAÇÃO" || paymentResponse === "FALHA NA TRANSAÇÃO"
+        || paymentConfirmation === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" || paymentResponse === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO"
+        || paymentConfirmation === "AGUARDANDO PAGAMENTO" || paymentResponse === "AGUARDANDO PAGAMENTO") {
+        setConfirmed(false);
       }
 
     }, "pix");
