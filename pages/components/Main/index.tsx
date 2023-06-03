@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import * as Styled from "./styles";
+import MainPageWrapper from "./styles";
 // import { useNavigate } from 'react-router-dom';
 import { Plan } from "../../../types/Plan";
 import { Cards } from "../../../components/Cards";
@@ -37,7 +37,7 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
 
   return (
     <>
-      <Styled.MainPageWrapper>
+      <MainPageWrapper>
         <section className="content-wrapper">
           <div className="content-wrapper__title-wrapper">
             <h2>Escolha o seu plano</h2>
@@ -52,7 +52,7 @@ export default function MainPage({ plans }: { plans: Plan[] }) {
             ))}
           </section>
         </section>
-      </Styled.MainPageWrapper>
+      </MainPageWrapper>
       {loading ? <MainLoading /> : <MainLoading className="closing" />}
     </>
   );

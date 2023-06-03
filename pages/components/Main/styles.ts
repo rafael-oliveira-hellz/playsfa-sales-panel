@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const MainPageWrapper = styled.main`
+const MainPageWrapper = styled.main`
   ${({ theme }) => css`
     position: relative;
     display: flex;
@@ -72,5 +72,8 @@ export const MainPageWrapper = styled.main`
         flex-direction: row;
       }
     }
+    }
   `}
 `;
+
+export default MainPageWrapper;

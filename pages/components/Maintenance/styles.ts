@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const MaintenanceWrapper = styled.main`
+const MaintenanceWrapper = styled.main`
   ${({ theme }) => css`
     position: fixed;
     display: flex;
@@ -63,3 +63,5 @@ export const MaintenanceWrapper = styled.main`
     }
   `}
 `;
+
+export default MaintenanceWrapper;

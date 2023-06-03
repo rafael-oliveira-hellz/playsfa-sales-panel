@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import * as Styled from "./styles";
+import ChoosePaymentWrapper, * as Styled from "./styles";
 import { PixPayment } from "../../../components/PixPayment";
 import { MultiStepForm } from "../../../components/MultiStepForm";
 import { useRouter } from "next/router";
@@ -57,7 +57,7 @@ export default function ChoosePayment() {
 
   return (
     <>
-      <Styled.ChoosePaymentWrapper>
+      <ChoosePaymentWrapper>
         <h2>Escolha a forma de Pagamento</h2>
         <form className="payment-select">
           <div className="wrapper">
@@ -86,7 +86,7 @@ export default function ChoosePayment() {
           </div>
         </form>
         {renderPaymentForm()}
-      </Styled.ChoosePaymentWrapper>
+      </ChoosePaymentWrapper>
     </>
   );
 }

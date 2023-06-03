@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const ChoosePaymentWrapper = styled.main`
+const ChoosePaymentWrapper = styled.main`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -76,3 +76,5 @@ export const ChoosePaymentWrapper = styled.main`
     }
   `}
 `;
+
+export default ChoosePaymentWrapper;

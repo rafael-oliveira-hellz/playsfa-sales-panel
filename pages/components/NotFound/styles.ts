@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const NotFoundWrapper = styled.main`
+const NotFoundWrapper = styled.main`
   ${({ theme }) => css`
     position: fixed;
     display: flex;
@@ -63,3 +63,5 @@ export const NotFoundWrapper = styled.main`
     }
   `}
 `;
+
+export default NotFoundWrapper;
