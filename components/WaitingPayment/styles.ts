@@ -96,7 +96,7 @@ export const ModalContent = styled.div`
 
 export const CloseButton = styled.button`
   ${({ theme }) => css`
-    background-color: transparent;
+    background-color: ${theme.colors.lightBackground};
     border: none;
     color: ${theme.colors.font};
     cursor: pointer;
@@ -105,9 +105,13 @@ export const CloseButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+
+    svg {
+      font-size: 1.5rem;
+    }
 
     &:hover {
+      background-color: ${theme.colors.hoverBackground};
       opacity: 0.7;
     }
 

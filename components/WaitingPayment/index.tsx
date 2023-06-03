@@ -5,6 +5,7 @@ import Chuck from "../../pages/assets/loading/chuck.gif";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
   accepted?: boolean;
@@ -15,6 +16,7 @@ export const WaitingPayment = ({
   paymentConfirmationStatus,
 }: IProps) => {
   const [showModal, setShowModal] = useState(true);
+  const key = uuidv4();
 
   const router = useRouter();
 
@@ -29,13 +31,13 @@ export const WaitingPayment = ({
 
   useEffect(() => {
     resetModal();
-  }, [accepted, paymentConfirmationStatus]);
+  }, [showModal, paymentConfirmationStatus]);
 
 
   return (
     <>
       {showModal && (
-        <Styled.ModalOverlay>
+        <Styled.ModalOverlay key={key}>
           <Styled.ModalContent>
             {accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? (
               <>
