@@ -2,42 +2,27 @@ import Image from "next/image";
 import * as Styled from "./styles";
 import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
-import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
-  accepted?: boolean;
-  paymentConfirmationStatus?: string;
+  accepted: boolean;
+  paymentConfirmationStatus: string;
+  showModal: boolean;
+  handleCloseModal: () => void;
 }
+
 export const WaitingPayment = ({
   accepted,
   paymentConfirmationStatus,
+  showModal,
+  handleCloseModal,
 }: IProps) => {
-  const [showModal, setShowModal] = useState(true);
-  const key = uuidv4();
-
-  const router = useRouter();
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    // router.push("/checkout");
-  };
-
-  const resetModal = () => {
-    setShowModal(true);
-  };
-
-  useEffect(() => {
-    resetModal();
-  }, [showModal, paymentConfirmationStatus]);
-
+  console.log({ accepted, paymentConfirmationStatus, showModal });
 
   return (
     <>
       {showModal && (
-        <Styled.ModalOverlay key={key}>
+        <Styled.ModalOverlay>
           <Styled.ModalContent>
             {accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO" ? (
               <>
@@ -55,7 +40,7 @@ export const WaitingPayment = ({
               </>
             )}
             <Styled.CloseButton onClick={handleCloseModal}>
-              <AiOutlineClose />
+              <AiOutlineClose style={{fontSize: "24px", fontWeight: "bold"}} /> <span style={{fontSize: "18px", fontWeight: "bold", color: "white"}} >Fechar</span>
             </Styled.CloseButton>
           </Styled.ModalContent>
         </Styled.ModalOverlay>

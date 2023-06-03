@@ -69,7 +69,7 @@ export const ModalContent = styled.div`
     background-color: ${theme.colors.background};
     border-radius: 8px;
     padding: 2rem;
-    max-width: 500px;
+    max-width: 300px;
     width: 90%;
     text-align: center;
 

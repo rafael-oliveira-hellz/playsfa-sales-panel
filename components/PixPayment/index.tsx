@@ -23,10 +23,16 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [paymentConfirmation, setPaymentConfirmation] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [qrcodeReceived, setQrcodeReceived] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const generatePix = async (email: string, plan: Plan, cpf: string) => {
     try {
       setLoading(true);
+
       if (!cpf || !email) {
         setError(true);
         return;
@@ -47,6 +53,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       setQrcodeReceived(true);
       setConfirmed(false);
       setLoader(false);
+      setShowModal(true);
     } catch (error: any) {
       if (error.response) {
         console.error("Mensagem de Erro: ", error.response);
@@ -76,8 +83,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       }
 
     }, "pix");
-    console.log(paymentConfirmation);
-  }, [paymentConfirmation]);
+  }, [paymentConfirmation, confirmed]);
 
   useEffect(() => {
     if (qrcodeReceived) {
@@ -124,9 +130,16 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           <WaitingPayment
             accepted={true}
             paymentConfirmationStatus={paymentConfirmation}
+            handleCloseModal={handleCloseModal}
+            showModal={showModal}
           />
         ) : (
-          <WaitingPayment paymentConfirmationStatus={paymentConfirmation} />
+          <WaitingPayment
+            accepted={false}
+            paymentConfirmationStatus={paymentConfirmation}
+            handleCloseModal={handleCloseModal}
+            showModal={showModal}
+          />
         )
       ) : null}
     </>
