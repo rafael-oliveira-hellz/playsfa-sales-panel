@@ -98,9 +98,10 @@ export const WaitingPayment = ({
                     <h2>
                       {paymentConfirmationStatus &&
                       paymentConfirmationStatus !==
-                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
-                        ? paymentConfirmationStatus
-                        : "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"}
+                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" &&
+                      paymentConfirmationStatus !== "AGUARDANDO PAGAMENTO"
+                        ? "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
+                        : paymentConfirmationStatus}
                     </h2>
                     {type === "pix" && (
                       <>
