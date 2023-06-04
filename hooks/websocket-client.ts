@@ -29,7 +29,7 @@ const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: st
     }
 
     if (type === 'card') {
-      client.subscribe('/topic/notifications', (message: IMessage) => {
+      client.subscribe(`/user/${sessionId}/topic/notifications`, (message: IMessage) => {
         delayCallback(onPaymentResponse, message.body, 5000);
       });
     }
