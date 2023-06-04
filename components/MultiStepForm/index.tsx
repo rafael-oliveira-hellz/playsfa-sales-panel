@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import * as Styled from "./styles";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { ClientData } from "../CreditCardPayment/ClientData";
@@ -25,6 +25,7 @@ interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
 }
+
 export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState("");
@@ -34,44 +35,73 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [confirmed, setConfirmed] = useState(false);
   const [showModal, setShowModal] = useState(true);
 
+  const initialState = {
+    customUser: {
+      name: "",
+      cpf: "",
+      phone: "",
+      email: user.user.email,
+      birth_date: "",
+    },
+
+    customAddress: {
+      street: "",
+      number: "",
+      neighborhood: "",
+      cep: "",
+      city: "",
+      state: "",
+    },
+    cardPaymentTokenDTO: {
+      brand: "",
+      number: "",
+      cvv: "",
+      expiration_month: "",
+      expiration_year: "",
+    },
+  };
+
+  const reducer = (state: any, action: any) => {
+    switch (action.type) {
+      case "UPDATE_CUSTOM_USER":
+        return {
+          ...state,
+          customUser: { ...state.customUser, ...action.payload },
+        };
+      case "UPDATE_CUSTOM_ADDRESS":
+        return {
+          ...state,
+          customAddress: { ...state.customAddress, ...action.payload },
+        };
+      case "UPDATE_CARD_PAYMENT_TOKEN":
+        return {
+          ...state,
+          cardPaymentTokenDTO: {
+            ...state.cardPaymentTokenDTO,
+            ...action.payload,
+          },
+        };
+      default:
+        return state;
+    }
+  };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  const [cardPaymentTokenDTO, setCardPaymentTokenDTO] = useState<CardData>({
-    brand: "",
-    number: "",
-    cvv: "",
-    expiration_month: "",
-    expiration_year: "",
-  });
-
-  const [customUser, setCustomUser] = useState<CustomUser>({
-    name: "",
-    cpf: "",
-    phone: "",
-    email: user.user.email,
-    birth_date: "",
-  });
-
-  const [customAddress, setCustomAddress] = useState<CustomAddress>({
-    street: "",
-    number: "",
-    neighborhood: "",
-    cep: "",
-    city: "",
-    state: "",
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { customUser, customAddress, cardPaymentTokenDTO } = state;
 
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+
     let updatedValue = value;
 
     if (name === "phone" || name === "cpf") {
       updatedValue = value.replaceAll(/[^\w\s]|_/g, "").replaceAll(/\s+/g, "");
     }
-
-    setCustomUser({ ...customUser, [name]: updatedValue });
+    dispatch({ type: "UPDATE_CUSTOM_USER", payload: { [name]: updatedValue } });
   };
 
   const handleCreditCardDataChange = (
@@ -84,29 +114,33 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       updatedValue = value.replace(/[^0-9]/g, "");
     }
 
-    setCardPaymentTokenDTO((prevState) => ({
-      ...prevState,
-      [name]: updatedValue,
-    }));
+    dispatch({
+      type: "UPDATE_CARD_PAYMENT_TOKEN",
+      payload: { [name]: updatedValue },
+    });
   };
 
   const handleName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomUser({ ...customUser, [event.target.name]: event.target.value });
+    dispatch({
+      type: "UPDATE_CUSTOM_USER",
+      payload: { [event.target.name]: event.target.value },
+    });
   };
-
   const handleCustomAddressChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = event.target;
+
     let updatedValue = value;
 
     if (name === "number" || name === "cep") {
       updatedValue = value.replace(/[^0-9]/g, "");
     }
-    setCustomAddress((prevState) => ({
-      ...prevState,
-      [name]: updatedValue,
-    }));
+
+    dispatch({
+      type: "UPDATE_CUSTOM_ADDRESS",
+      payload: { [name]: updatedValue },
+    });
   };
 
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -117,18 +151,15 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = event.target;
-
     const cardValidation = cardValidator.number(value);
     const brand = cardValidation.card?.type || "";
 
-    setCardPaymentTokenDTO((prevState) => ({
-      ...prevState,
-      [name]: value,
-      brand,
-    }));
+    dispatch({
+      type: "UPDATE_CARD_PAYMENT_TOKEN",
+      payload: { [name]: value, brand },
+    });
   };
 
-  // ================================================
   const onRadioSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
     if (event === "Sim") {
@@ -160,6 +191,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       };
 
       setLoading(true);
+
       setTimeout(async () => {
         await axios
           .post("https://api.comprar.vip/card/transaction", {
@@ -169,7 +201,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
             setLoading(false);
             setShowModal(true);
           });
-      }, 10000);
+      }, 3000);
     } catch (error: any) {
       console.log(error);
     }
@@ -222,7 +254,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       setConfirmed(acceptedResponses.includes(paymentResponse));
     };
 
-    connect(connectCallback, "pix", user.user.id.toString(), (event: any) => {
+    connect(connectCallback, "card", user.user.id.toString(), (event: any) => {
       console.log("Conexão com o websocket estabelecida!");
       console.log("Evento: " + event);
     });
