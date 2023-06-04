@@ -6,14 +6,18 @@ import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
 import { connect, disconnect } from "../../hooks/websocket-client";
 import { WaitingPayment } from "../WaitingPayment";
- interface IProps {
+interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
 }
- export const PixPayment = ({ selectedPlan, user }: IProps) => {
+export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [cpf, setCpf] = useState("");
   const [qr, setQr] = useState("");
-  const [error, setError] = useState({ status: false, message: "", invalidCpf: false });
+  const [error, setError] = useState({
+    status: false,
+    message: "",
+    invalidCpf: false,
+  });
   const [loading, setLoading] = useState(false);
   const [loader, setLoader] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState("");
@@ -21,67 +25,72 @@ import { WaitingPayment } from "../WaitingPayment";
   const [qrcodeReceived, setQrcodeReceived] = useState(false);
   const [showModal, setShowModal] = useState(true);
 
-   const handleCloseModal = () => {
+  const handleCloseModal = () => {
     setShowModal(false);
 
-     if (paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA") {
+    if (paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA") {
       setTimeout(() => {
         sessionStorage.clear();
         window.location.href = "/";
       }, 3000);
     }
   };
-   const openPixLink = (link: string) => {
-    const newWindow = window.open(link, "_blank");
-    if (newWindow) {
-      newWindow.opener = null;
-    }
-  };
-   const generatePix = useCallback(async (email: string, plan: Plan, cpf: string) => {
-    try {
-      setLoading(true);
-       if (!cpf || !email) {
-        setError({ status: true, message: "", invalidCpf: false });
-        return;
+
+  //  const openPixLink = (link: string) => {
+  //   const newWindow = window.open(link, "_blank");
+  //   if (newWindow) {
+  //     newWindow.opener = null;
+  //   }
+  // };
+
+  const generatePix = useCallback(
+    async (email: string, plan: Plan, cpf: string) => {
+      try {
+        setLoading(true);
+        if (!cpf || !email) {
+          setError({ status: true, message: "", invalidCpf: false });
+          return;
+        }
+
+        const body = { email, plan, cpf };
+
+        setLoader(true);
+
+        const timer = setTimeout(async () => {
+          const res = await axios.post(
+            "https://api.comprar.vip/plans/pix/requestData",
+            {
+              ...body,
+            }
+          );
+
+          setQr(res.data.qrcode.qrcode);
+          // openPixLink(res.data.qrcode.linkVisualizacao);
+          setQrcodeReceived(true);
+          setConfirmed(false);
+          setLoader(false);
+          setShowModal(true);
+        }, 3000);
+        return () => {
+          clearTimeout(timer);
+        };
+      } catch (error: any) {
+        if (error.response) {
+          console.error("Mensagem de Erro: ", error.response);
+          setError({
+            status: true,
+            message: Array.isArray(error.response.data)
+              ? error.response.data[0].defaultMessage
+              : error.response.data.message,
+            invalidCpf: Array.isArray(error.response.data),
+          });
+        }
+        setLoading(false);
       }
-
-       const body = { email, plan, cpf };
-
-       setLoader(true);
-
-      const timer = setTimeout(async () => {
-        const res = await axios.post(
-          "https://api.comprar.vip/plans/pix/requestData",
-          {
-            ...body,
-          }
-        );
-
-        setQr(res.data.qrcode.qrcode);
-        openPixLink(res.data.qrcode.linkVisualizacao);
-        setQrcodeReceived(true);
-        setConfirmed(false);
-        setLoader(false);
-        setShowModal(true);
-      }, 3000);
-       return () => {
-        clearTimeout(timer);
-      };
-    } catch (error: any) {
-      if (error.response) {
-        console.error("Mensagem de Erro: ", error.response);
-         setError({
-          status: true,
-          message: Array.isArray(error.response.data)
-            ? error.response.data[0].defaultMessage
-            : error.response.data.message,
-          invalidCpf: Array.isArray(error.response.data),
-        });
-      }
-      setLoading(false);
-    }
-  }, []);
-   useEffect(() => {
+    },
+    []
+  );
+  useEffect(() => {
     const acceptedResponses = [
       "PAGAMENTO RECEBIDO",
       "ENTREGA DO PREMIUM EM ANDAMENTO",
@@ -95,22 +104,22 @@ import { WaitingPayment } from "../WaitingPayment";
     };
 
     connect(connectCallback, "pix", user.user.id.toString(), (event: any) => {
-        console.log("Conexão com o websocket estabelecida!");
-        console.log("Evento: " + event);
+      console.log("Conexão com o websocket estabelecida!");
+      console.log("Evento: " + event);
     });
 
-     return () => {
+    return () => {
       disconnect();
     };
   }, [user.user.id]);
 
-   useEffect(() => {
+  useEffect(() => {
     if (qrcodeReceived) {
       setConfirmed(false);
     }
   }, [qrcodeReceived]);
 
-   return (
+  return (
     <>
       <Styled.PixPaymentWrapper>
         <h2>Formulário para Preenchimento dos dados PIX!</h2>
@@ -143,7 +152,7 @@ import { WaitingPayment } from "../WaitingPayment";
       ) : (
         <PixPaymentLoading className="closing" />
       )}
-       {qrcodeReceived ? (
+      {qrcodeReceived ? (
         confirmed ? (
           <WaitingPayment
             accepted={true}
