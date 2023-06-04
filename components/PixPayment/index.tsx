@@ -24,7 +24,6 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
   const [confirmed, setConfirmed] = useState(false);
   const [qrcodeReceived, setQrcodeReceived] = useState(false);
   const [showModal, setShowModal] = useState(true);
-  const [sessionId, setSessionId] = useState("");
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -70,7 +69,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         setConfirmed(false);
         setLoader(false);
         setShowModal(true);
-      }, 10000);
+      }, 3000);
     } catch (error: any) {
       if (error.response) {
         console.error("Mensagem de Erro: ", error.response);

@@ -23,11 +23,6 @@ const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: st
     console.log('Conectado: ' + frame);
 
     if (type === 'pix') {
-      const destination = '/topic/sessionId';
-      const body = JSON.stringify({ sessionId });
-
-      client.publish({ destination, body });
-
       client.subscribe(`/user/${sessionId}/topic/response`, (message: IMessage) => {
         delayCallback(onPaymentResponse, message.body, 5000);
       });

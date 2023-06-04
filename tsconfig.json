@@ -25,7 +25,7 @@
     "./**/*.tsx",
     "./**/**/*.ts",
     "./**/**/*.tsx"
-, "pages/index.tsx.mantainance"  ],
+, "pages/index.tsx.mantainance", "pages/index.tsx.man"  ],
   "exclude": [
     "node_modules"
   ]

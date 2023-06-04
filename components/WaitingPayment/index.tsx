@@ -90,7 +90,7 @@ export const WaitingPayment = ({
                     {type === "pix" && (
                       <>
                         <h3>Para concluir o pagamento.</h3>
-                        <h4 style={{color: "#333", fontWeight: "900", fontSize: "1.2rem"}}>Scaneie o QR Code abaixo:</h4>
+                        <h4 style={{color: "#333", fontWeight: "900", fontSize: "1.2rem"}}>Escaneie o QR Code abaixo:</h4>
                         <QRCode value={pixLink as string} />
 
                         <div className="pix-link">
