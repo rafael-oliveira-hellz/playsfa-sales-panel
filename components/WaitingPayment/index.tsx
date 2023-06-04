@@ -84,10 +84,10 @@ export const WaitingPayment = ({
       paymentConfirmationStatus === undefined ||
       paymentConfirmationStatus === null ||
       paymentConfirmationStatus === "" ||
-      paymentConfirmationStatus === "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" ||
+      paymentConfirmationStatus === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" ||
       paymentConfirmationStatus === "AGUARDANDO PAGAMENTO"
     ) {
-      return "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO";
+      return "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO";
     }
     return paymentConfirmationStatus;
   };
