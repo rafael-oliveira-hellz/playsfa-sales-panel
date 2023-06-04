@@ -72,14 +72,19 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           return () => {
             clearTimeout(timer);
           };
-        } catch (error) {
-          console.error("Erro na chamada da API:", error);
+        } catch (error: any) {
+          setError({
+            status: true,
+            message: Array.isArray(error.response.data)
+              ? error.response.data[0].defaultMessage
+              : error.response.data.message,
+            invalidCpf: Array.isArray(error.response.data),
+          });
           setLoading(false);
           window.location.href = "/404";
         }
       } catch (error: any) {
         if (error.response) {
-          console.error("Mensagem de Erro: ", error.response);
           setError({
             status: true,
             message: Array.isArray(error.response.data)

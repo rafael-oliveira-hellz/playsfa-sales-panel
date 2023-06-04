@@ -34,6 +34,11 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState<string>("");
   const [confirmed, setConfirmed] = useState(false);
   const [showModal, setShowModal] = useState(true);
+  const [error, setError] = useState({
+    status: false,
+    message: "",
+    invalidCpf: false,
+  });
 
   const initialState = {
     customUser: {
@@ -212,8 +217,14 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
               setLoading(false);
               setShowModal(true);
             });
-        } catch (error) {
-          console.error("Erro na chamada da API:", error);
+        } catch (error: any) {
+          setError({
+            status: true,
+            message:
+              "Ocorreu um erro ao processar o pagamento. Verifique os dados informados e tente novamente.",
+            invalidCpf: false,
+          });
+
           setLoading(false);
           window.location.href = "/404";
         }
