@@ -162,13 +162,13 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       setLoading(true);
       setTimeout(async () => {
         await axios
-        .post("https://api.comprar.vip/card/transaction", {
-          ...body,
-        })
-        .then(() => {
-          setLoading(false);
-          setShowModal(true);
-        });
+          .post("https://api.comprar.vip/card/transaction", {
+            ...body,
+          })
+          .then(() => {
+            setLoading(false);
+            setShowModal(true);
+          });
       }, 10000);
     } catch (error: any) {
       console.log(error);
@@ -210,21 +210,27 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     useForm(formComponents);
 
   useEffect(() => {
-    connect((paymentResponse: string) => {
+    const acceptedResponses = [
+      "PAGAMENTO RECEBIDO",
+      "ENTREGA DO PREMIUM EM ANDAMENTO",
+      "ENTREGA DO PREMIUM CONCLUIDA",
+    ];
+
+    const connectCallback = (paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
       setPaymentConfirmation(paymentResponse);
+      setConfirmed(acceptedResponses.includes(paymentResponse));
+    };
 
-      if (paymentConfirmation === "PAGAMENTO RECEBIDO" || paymentResponse === "PAGAMENTO RECEBIDO" ||
-        paymentConfirmation === "ENTREGA DO PREMIUM EM ANDAMENTO" || paymentResponse === "ENTREGA DO PREMIUM EM ANDAMENTO"
-        || paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA" || paymentResponse === "ENTREGA DO PREMIUM CONCLUIDA") {
-        setConfirmed(true);
-      } else if (paymentConfirmation === "FALHA NA TRANSAÇÃO" || paymentResponse === "FALHA NA TRANSAÇÃO"
-        || paymentConfirmation === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" || paymentResponse === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO"
-        || paymentConfirmation === "AGUARDANDO PAGAMENTO" || paymentResponse === "AGUARDANDO PAGAMENTO") {
-        setConfirmed(false);
-      }
-    }, "card", user.user.id.toString());
-  }, [paymentConfirmation, user.user.id]);
+    connect(connectCallback, "pix", user.user.id.toString(), (event: any) => {
+      console.log("Conexão com o websocket estabelecida!");
+      console.log("Evento: " + event);
+    });
+
+    return () => {
+      disconnect();
+    };
+  }, [user.user.id]);
 
   return (
     <>
@@ -275,20 +281,20 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         <div className="modal">
           <div className="modal-content">
             {confirmed ? (
-          <WaitingPayment
-            accepted={true}
-            paymentConfirmationStatus={paymentConfirmation}
-            handleCloseModal={handleCloseModal}
-            showModal={showModal}
-          />
-        ) : (
-          <WaitingPayment
-            accepted={false}
-            paymentConfirmationStatus={paymentConfirmation}
-            handleCloseModal={handleCloseModal}
-            showModal={showModal}
-          />
-        )}
+              <WaitingPayment
+                accepted={true}
+                paymentConfirmationStatus={paymentConfirmation}
+                handleCloseModal={handleCloseModal}
+                showModal={showModal}
+              />
+            ) : (
+              <WaitingPayment
+                accepted={false}
+                paymentConfirmationStatus={paymentConfirmation}
+                handleCloseModal={handleCloseModal}
+                showModal={showModal}
+              />
+            )}
           </div>
         </div>
       )}

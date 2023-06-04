@@ -20,7 +20,7 @@ const delayCallback = (callback: OnPaymentResponse, message: string, delay: numb
   }, delay);
 };
 
-const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: string, onConnectCallback: () => void) => {
+const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: string, onConnectCallback: (frame: Frame) => void) => {
   client.onConnect = (frame: Frame) => {
     console.log('Conectado: ' + frame);
 
@@ -32,7 +32,7 @@ const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: st
       subscribeToCardTopic();
     }
 
-    onConnectCallback();
+    onConnectCallback(frame);
   };
 
   client.onStompError = (frame: Frame) => {

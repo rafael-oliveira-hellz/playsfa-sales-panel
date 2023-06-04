@@ -4,7 +4,7 @@ import { Plan } from "../../types/Plan";
 import { UserContextData } from "../../types/User";
 import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
-import { connect } from "../../hooks/websocket-client";
+import { connect, disconnect } from "../../hooks/websocket-client";
 import { WaitingPayment } from "../WaitingPayment";
  interface IProps {
   selectedPlan: Plan;
@@ -82,32 +82,27 @@ import { WaitingPayment } from "../WaitingPayment";
     }
   }, []);
    useEffect(() => {
-    connect((paymentResponse: string) => {
+    const acceptedResponses = [
+      "PAGAMENTO RECEBIDO",
+      "ENTREGA DO PREMIUM EM ANDAMENTO",
+      "ENTREGA DO PREMIUM CONCLUIDA",
+    ];
+
+    const connectCallback = (paymentResponse: string) => {
       console.log("Resposta do pagamento recebida: " + paymentResponse);
-       setPaymentConfirmation(paymentResponse);
-       if (
-        paymentConfirmation === "PAGAMENTO RECEBIDO" ||
-        paymentResponse === "PAGAMENTO RECEBIDO" ||
-        paymentConfirmation === "ENTREGA DO PREMIUM EM ANDAMENTO" ||
-        paymentResponse === "ENTREGA DO PREMIUM EM ANDAMENTO" ||
-        paymentConfirmation === "ENTREGA DO PREMIUM CONCLUIDA" ||
-        paymentResponse === "ENTREGA DO PREMIUM CONCLUIDA"
-      ) {
-        setConfirmed(true);
-      } else if (
-        paymentConfirmation === "FALHA NA TRANSAÇÃO" ||
-        paymentResponse === "FALHA NA TRANSAÇÃO" ||
-        paymentConfirmation === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" ||
-        paymentResponse === "AGUARDANDO CONFIRMAÇÃO DO PAGAMENTO" ||
-        paymentConfirmation === "AGUARDANDO PAGAMENTO" ||
-        paymentResponse === "AGUARDANDO PAGAMENTO"
-      ) {
-        setConfirmed(false);
-      }
-    }, "pix", user.user.id.toString(), () => {
-      console.log("Conexão com o websocket estabelecida!");
+      setPaymentConfirmation(paymentResponse);
+      setConfirmed(acceptedResponses.includes(paymentResponse));
+    };
+
+    connect(connectCallback, "pix", user.user.id.toString(), (event: any) => {
+        console.log("Conexão com o websocket estabelecida!");
+        console.log("Evento: " + event);
     });
-  }, [paymentConfirmation, confirmed, user.user.id]);
+
+     return () => {
+      disconnect();
+    };
+  }, [user.user.id]);
 
    useEffect(() => {
     if (qrcodeReceived) {

@@ -63,15 +63,21 @@ export const WaitingPayment = ({
 }: IProps) => {
   const { isCopied, handleCopy } = useCopiedState();
 
+  const acceptedResponses = [
+    "PAGAMENTO RECEBIDO",
+    "ENTREGA DO PREMIUM EM ANDAMENTO",
+    "ENTREGA DO PREMIUM CONCLUIDA",
+  ];
+
   return (
     <>
       {showModal && (
         <Styled.ModalOverlay>
           <Styled.ModalContent>
             <Styled.Card>
-              {(accepted && paymentConfirmationStatus === "PAGAMENTO RECEBIDO") ||
-              (accepted && paymentConfirmationStatus === "ENTREGA DO PREMIUM EM ANDAMENTO") ||
-              (accepted && paymentConfirmationStatus === "ENTREGA DO PREMIUM CONCLUIDA") ? (
+              {(accepted && paymentConfirmationStatus === acceptedResponses[0]) ||
+              (accepted && paymentConfirmationStatus === acceptedResponses[1]) ||
+              (accepted && paymentConfirmationStatus === acceptedResponses[2]) ? (
                 <>
                   <div className="image-wrapper">
                     <Image src={Chuck} alt="chuck" />
@@ -86,7 +92,7 @@ export const WaitingPayment = ({
                     <Image src={Deadpool} alt="deadpool" />
                   </div>
                   <div className="payment-details">
-                    <h2>{paymentConfirmationStatus}</h2>
+                    <h2>AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO</h2>
                     {type === "pix" && (
                       <>
                         <h3>Para concluir o pagamento.</h3>
