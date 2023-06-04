@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const NotFoundWrapper = styled.main`
   ${({ theme }) => css`
@@ -23,6 +23,7 @@ const NotFoundWrapper = styled.main`
       color: ${theme.colors.fonts};
       text-align: center;
       font-size: 5rem;
+      margin-bottom: 2rem;
     }
     & .img-wrapper {
       display: flex;
