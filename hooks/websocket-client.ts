@@ -7,6 +7,8 @@ type Type = 'pix' | 'card';
 const client = new Client({
   webSocketFactory: () => new SockJS('https://api.comprar.vip/ws'),
   reconnectDelay: 5000,
+  heartbeatIncoming: 4000,
+  heartbeatOutgoing: 4000,
   debug: (str: string) => {
     console.log(str);
   },
@@ -18,29 +20,48 @@ const delayCallback = (callback: OnPaymentResponse, message: string, delay: numb
   }, delay);
 };
 
-const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: string) => {
+const connect = (onPaymentResponse: OnPaymentResponse, type: Type, sessionId: string, onConnectCallback: () => void) => {
   client.onConnect = (frame: Frame) => {
     console.log('Conectado: ' + frame);
 
     if (type === 'pix') {
-      client.subscribe(`/user/${sessionId}/topic/response`, (message: IMessage) => {
-        delayCallback(onPaymentResponse, message.body, 5000);
-      });
+      subscribeToPixTopic();
     }
 
     if (type === 'card') {
-      client.subscribe(`/user/${sessionId}/topic/notifications`, (message: IMessage) => {
-        delayCallback(onPaymentResponse, message.body, 5000);
-      });
+      subscribeToCardTopic();
     }
+
+    onConnectCallback();
   };
 
   client.onStompError = (frame: Frame) => {
     console.log('Erro no servidor STOMP: ' + frame.body);
   };
 
+  const subscribeToPixTopic = () => {
+    if (client.connected) {
+      client.subscribe(`/user/${sessionId}/topic/response`, (message: IMessage) => {
+        delayCallback(onPaymentResponse, message.body, 5000);
+      });
+    } else {
+      setTimeout(subscribeToPixTopic, 1000);
+    }
+  };
+
+  const subscribeToCardTopic = () => {
+    if (client.connected) {
+      client.subscribe(`/user/${sessionId}/topic/notifications`, (message: IMessage) => {
+        delayCallback(onPaymentResponse, message.body, 5000);
+      });
+    } else {
+      setTimeout(subscribeToCardTopic, 1000);
+    }
+  };
+
   client.activate();
 };
+
 
 const disconnect = () => {
   if (client.connected) {

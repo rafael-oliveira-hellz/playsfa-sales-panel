@@ -104,7 +104,9 @@ import { WaitingPayment } from "../WaitingPayment";
       ) {
         setConfirmed(false);
       }
-    }, "pix", user.user.id.toString());
+    }, "pix", user.user.id.toString(), () => {
+      console.log("Conexão com o websocket estabelecida!");
+    });
   }, [paymentConfirmation, confirmed, user.user.id]);
 
    useEffect(() => {
