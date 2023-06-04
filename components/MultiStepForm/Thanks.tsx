@@ -19,6 +19,7 @@ export const Thanks = ({ loading }: IProps) => {
         ) : (
           <>
             <h2>Pagamento enviado com sucesso</h2>
+            <h3>Você receberá um e-mail com o status do seu pedido</h3>
           </>
         )}
       </Styled.AppreciationWrapper>
