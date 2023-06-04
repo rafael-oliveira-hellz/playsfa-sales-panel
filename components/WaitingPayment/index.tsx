@@ -68,6 +68,29 @@ export const WaitingPayment = ({
     "ENTREGA DO PREMIUM EM ANDAMENTO",
     "ENTREGA DO PREMIUM CONCLUIDA",
   ];
+  /**
+ * {paymentConfirmationStatus === undefined ||
+                      paymentConfirmationStatus === null ||
+                      paymentConfirmationStatus === "" ||
+                      paymentConfirmationStatus ===
+                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" ||
+                      paymentConfirmationStatus === "AGUARDANDO PAGAMENTO"
+                        ? "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
+                        : paymentConfirmationStatus}
+ * @returns
+ */
+  const validatePaymentStatus = () => {
+    if (
+      paymentConfirmationStatus === undefined ||
+      paymentConfirmationStatus === null ||
+      paymentConfirmationStatus === "" ||
+      paymentConfirmationStatus === "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" ||
+      paymentConfirmationStatus === "AGUARDANDO PAGAMENTO"
+    ) {
+      return "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO";
+    }
+    return paymentConfirmationStatus;
+  };
 
   return (
     <>
@@ -95,14 +118,7 @@ export const WaitingPayment = ({
                     <Image src={Deadpool} alt="deadpool" />
                   </div>
                   <div className="payment-details">
-                    <h2>
-                      {paymentConfirmationStatus &&
-                      paymentConfirmationStatus !==
-                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" &&
-                      paymentConfirmationStatus !== "AGUARDANDO PAGAMENTO"
-                        ? "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
-                        : paymentConfirmationStatus}
-                    </h2>
+                    <h2>{validatePaymentStatus()}</h2>
                     {type === "pix" && (
                       <>
                         <h3>Para concluir o pagamento.</h3>
