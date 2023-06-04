@@ -36,19 +36,17 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
     }
   };
 
-  //  const openPixLink = (link: string) => {
-  //   const newWindow = window.open(link, "_blank");
-  //   if (newWindow) {
-  //     newWindow.opener = null;
-  //   }
-  // };
-
   const generatePix = useCallback(
     async (email: string, plan: Plan, cpf: string) => {
       try {
         setLoading(true);
+
         if (!cpf || !email) {
-          setError({ status: true, message: "", invalidCpf: false });
+          setError({
+            status: true,
+            message: "E-mail/CPF inválido!",
+            invalidCpf: true,
+          });
           return;
         }
 
@@ -56,24 +54,28 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
 
         setLoader(true);
 
-        const timer = setTimeout(async () => {
-          const res = await axios.post(
-            "https://api.comprar.vip/plans/pix/requestData",
-            {
-              ...body,
-            }
-          );
+        try {
+          const timer = setTimeout(async () => {
+            const res = await axios.post(
+              "https://api.comprar.vip/plans/pix/requestData",
+              {
+                ...body,
+              }
+            );
 
-          setQr(res.data.qrcode.qrcode);
-          // openPixLink(res.data.qrcode.linkVisualizacao);
-          setQrcodeReceived(true);
-          setConfirmed(false);
-          setLoader(false);
-          setShowModal(true);
-        }, 3000);
-        return () => {
-          clearTimeout(timer);
-        };
+            setQr(res.data.qrcode.qrcode);
+            setQrcodeReceived(true);
+            setConfirmed(false);
+            setLoader(false);
+            setShowModal(true);
+          }, 3000);
+          return () => {
+            clearTimeout(timer);
+          };
+        } catch (error) {
+          console.error("Erro na chamada da API:", error);
+          setLoading(false);
+        }
       } catch (error: any) {
         if (error.response) {
           console.error("Mensagem de Erro: ", error.response);

@@ -68,17 +68,7 @@ export const WaitingPayment = ({
     "ENTREGA DO PREMIUM EM ANDAMENTO",
     "ENTREGA DO PREMIUM CONCLUIDA",
   ];
-  /**
- * {paymentConfirmationStatus === undefined ||
-                      paymentConfirmationStatus === null ||
-                      paymentConfirmationStatus === "" ||
-                      paymentConfirmationStatus ===
-                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO" ||
-                      paymentConfirmationStatus === "AGUARDANDO PAGAMENTO"
-                        ? "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
-                        : paymentConfirmationStatus}
- * @returns
- */
+
   const validatePaymentStatus = () => {
     if (
       paymentConfirmationStatus === undefined ||

@@ -61,7 +61,17 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     },
   };
 
-  const reducer = (state: any, action: any) => {
+  interface FormState {
+    customUser: CustomUser;
+    customAddress: CustomAddress;
+    cardPaymentTokenDTO: CardData;
+  }
+  type FormAction =
+    | { type: "UPDATE_CUSTOM_USER"; payload: Partial<CustomUser> }
+    | { type: "UPDATE_CUSTOM_ADDRESS"; payload: Partial<CustomAddress> }
+    | { type: "UPDATE_CARD_PAYMENT_TOKEN"; payload: Partial<CardData> };
+
+  const reducer = (state: FormState, action: FormAction) => {
     switch (action.type) {
       case "UPDATE_CUSTOM_USER":
         return {
@@ -193,14 +203,19 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
       setLoading(true);
 
       setTimeout(async () => {
-        await axios
-          .post("https://api.comprar.vip/card/transaction", {
-            ...body,
-          })
-          .then(() => {
-            setLoading(false);
-            setShowModal(true);
-          });
+        try {
+          await axios
+            .post("https://api.comprar.vip/card/transaction", {
+              ...body,
+            })
+            .then(() => {
+              setLoading(false);
+              setShowModal(true);
+            });
+        } catch (error) {
+          console.error("Erro na chamada da API:", error);
+          setLoading(false);
+        }
       }, 3000);
     } catch (error: any) {
       console.log(error);
