@@ -215,6 +215,7 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         } catch (error) {
           console.error("Erro na chamada da API:", error);
           setLoading(false);
+          window.location.href = "/404";
         }
       }, 3000);
     } catch (error: any) {

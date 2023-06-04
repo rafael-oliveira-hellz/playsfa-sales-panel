@@ -18,9 +18,10 @@ export const Thanks = ({ loading }: IProps) => {
           </>
         ) : (
           <>
-            <h2>Pagamento enviado com sucesso</h2>
+            <h2>Processando os dados de pagamento</h2>
             <h3 style={{ fontSize: "16px" }}>
-              Você receberá um e-mail com o status do seu pedido
+              Se a transação for bem-sucedida, você receberá um e-mail com o
+              status do seu pedido
             </h3>
           </>
         )}

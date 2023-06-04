@@ -75,6 +75,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         } catch (error) {
           console.error("Erro na chamada da API:", error);
           setLoading(false);
+          window.location.href = "/404";
         }
       } catch (error: any) {
         if (error.response) {
