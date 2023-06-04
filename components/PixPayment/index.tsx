@@ -90,6 +90,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
     },
     []
   );
+
   useEffect(() => {
     const acceptedResponses = [
       "PAGAMENTO RECEBIDO",
