@@ -96,9 +96,8 @@ export const WaitingPayment = ({
                   </div>
                   <div className="payment-details">
                     <h2>
-                      {paymentConfirmationStatus &&
-                      paymentConfirmationStatus !==
-                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
+                      {paymentConfirmationStatus !==
+                      "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
                         ? paymentConfirmationStatus
                         : "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"}
                     </h2>
