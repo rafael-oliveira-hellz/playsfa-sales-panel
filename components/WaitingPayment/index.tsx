@@ -59,7 +59,7 @@ export const WaitingPayment = ({
   showModal,
   handleCloseModal,
   type,
-  pixLink
+  pixLink,
 }: IProps) => {
   const { isCopied, handleCopy } = useCopiedState();
 
@@ -75,9 +75,12 @@ export const WaitingPayment = ({
         <Styled.ModalOverlay>
           <Styled.ModalContent>
             <Styled.Card>
-              {(accepted && paymentConfirmationStatus === acceptedResponses[0]) ||
-              (accepted && paymentConfirmationStatus === acceptedResponses[1]) ||
-              (accepted && paymentConfirmationStatus === acceptedResponses[2]) ? (
+              {(accepted &&
+                paymentConfirmationStatus === acceptedResponses[0]) ||
+              (accepted &&
+                paymentConfirmationStatus === acceptedResponses[1]) ||
+              (accepted &&
+                paymentConfirmationStatus === acceptedResponses[2]) ? (
                 <>
                   <div className="image-wrapper">
                     <Image src={Chuck} alt="chuck" />
@@ -92,15 +95,32 @@ export const WaitingPayment = ({
                     <Image src={Deadpool} alt="deadpool" />
                   </div>
                   <div className="payment-details">
-                    <h2>AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO</h2>
+                    <h2>
+                      {paymentConfirmationStatus &&
+                      paymentConfirmationStatus !==
+                        "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"
+                        ? paymentConfirmationStatus
+                        : "AGUARDANDO CONFIRMAÇÂO DO PAGAMENTO"}
+                    </h2>
                     {type === "pix" && (
                       <>
                         <h3>Para concluir o pagamento.</h3>
-                        <h4 style={{color: "#333", fontWeight: "900", fontSize: "1.2rem"}}>Escaneie o QR Code abaixo:</h4>
+                        <h4
+                          style={{
+                            color: "#333",
+                            fontWeight: "900",
+                            fontSize: "1.2rem",
+                          }}
+                        >
+                          Escaneie o QR Code abaixo:
+                        </h4>
                         <QRCode value={pixLink as string} />
 
                         <div className="pix-link">
-                          <CopyButton className={isCopied ? "copied" : ""} onClick={() => handleCopy(pixLink as string)}>
+                          <CopyButton
+                            className={isCopied ? "copied" : ""}
+                            onClick={() => handleCopy(pixLink as string)}
+                          >
                             {isCopied ? "Copiado!" : "Copiar"}
                           </CopyButton>
                         </div>
@@ -111,8 +131,14 @@ export const WaitingPayment = ({
               )}
             </Styled.Card>
             <Styled.CloseButton onClick={handleCloseModal}>
-              <AiOutlineClose style={{ fontSize: "24px", fontWeight: "bold" }} />{" "}
-              <span style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>Fechar</span>
+              <AiOutlineClose
+                style={{ fontSize: "24px", fontWeight: "bold" }}
+              />{" "}
+              <span
+                style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}
+              >
+                Fechar
+              </span>
             </Styled.CloseButton>
           </Styled.ModalContent>
         </Styled.ModalOverlay>
