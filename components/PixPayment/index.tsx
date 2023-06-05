@@ -5,7 +5,7 @@ import { UserContextData } from "../../types/User";
 import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
 import { connect, disconnect } from "../../hooks/websocket-client";
-import { WaitingPayment } from "../WaitingPayment";
+import Payment from "../WaitingPayment";
 interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
@@ -163,14 +163,14 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       )}
       {qrcodeReceived ? (
         confirmed ? (
-          <WaitingPayment
+          <Payment
             accepted={true}
             paymentConfirmationStatus={paymentConfirmation}
             handleCloseModal={handleCloseModal}
             showModal={showModal}
           />
         ) : (
-          <WaitingPayment
+          <Payment
             accepted={false}
             paymentConfirmationStatus={paymentConfirmation}
             handleCloseModal={handleCloseModal}

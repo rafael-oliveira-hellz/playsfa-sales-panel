@@ -22,7 +22,7 @@ type Props = {
 export default function Home({ plans }: Props) {
   return (
     <>
-      <MainPage plans={plans} />;
+      <MainPage plans={plans} />
     </>
   );
 }
