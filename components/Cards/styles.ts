@@ -92,7 +92,10 @@ export const CardsWrapper = styled.section`
         inset 0px 11px 28px 0px rgb(255, 255, 255);
     }
 
-    @media all and (max-width: 260px) {
+    @media all and (max-width: 300px) {
+      & {
+        width: 95%;
+      }
       & .title-wrapper h3 {
         font-size: 1.8rem;
         word-break: break-all;
@@ -103,7 +106,10 @@ export const CardsWrapper = styled.section`
         word-break: break-all;
       }
       & .paragraph-wrapper p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.1rem;
         word-wrap: break-word;
         word-break: break-all;
       }
@@ -120,6 +126,9 @@ export const CardsWrapper = styled.section`
       }
     }
     @media all and (max-width: 520px) {
+      & {
+        width: 95%;
+      }
       & button {
         font-size: 1rem;
       }

@@ -59,19 +59,21 @@ const MainPageWrapper = styled.main`
       height: ${theme.sizes.fullPercentHeight};
       padding: 1rem;
     }
-    @media all and (max-width:280px) {
-      & .content-wrapper .content-wrapper__title-wrapper h2 {
-    font-size: 2.5rem;
-
-      }
-    @media all and (min-width: 750px) {
-      & .content-wrapper {
-        width: 95%;
-      }
+    @media all and (max-width: 280px) {
       & .content-wrapper .content-wrapper__boxes-wrapper {
-        flex-direction: row;
+        padding: 0;
       }
-    }
+      & .content-wrapper .content-wrapper__title-wrapper h2 {
+        font-size: 2.5rem;
+      }
+      @media all and (min-width: 750px) {
+        & .content-wrapper {
+          width: 95%;
+        }
+        & .content-wrapper .content-wrapper__boxes-wrapper {
+          flex-direction: row;
+        }
+      }
     }
   `}
 `;
