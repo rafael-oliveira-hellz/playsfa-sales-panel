@@ -27,23 +27,31 @@ export const WaitingPaymentWrapper = styled.div`
       font-weight: 900;
       font-size: 1.2rem;
     }
-    & .close-modal {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      width: 100%;
-      height: 3rem;
-      padding: 1rem;
-    }
     & .content-wrapper {
+      display: flex;
       flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
       background-color: ${theme.colors.fonts};
       border-radius: 1rem;
       width: 70%;
       min-height: 90vh;
       height: 95%;
+      gap: 5rem;
     }
-    & .content-wrapper .title-wrapper {
+
+    & .content-wrapper .close-modal {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: ${theme.sizes.full};
+      height: 3rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* & .content-wrapper .title-wrapper {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -52,8 +60,8 @@ export const WaitingPaymentWrapper = styled.div`
       height: 8%;
       margin-bottom: 3rem;
       padding: 1rem;
-    }
-    & .content-wrapper .title-wrapper h2,
+    } */
+    /* & .content-wrapper .title-wrapper h2, */
     & .content-wrapper .payment-status-content .payment-details h2 {
       color: ${theme.colors.footer};
       font-size: 3.5rem;
@@ -83,18 +91,22 @@ export const WaitingPaymentWrapper = styled.div`
     }
 
     @media all and (max-width: 750px) {
+      & {
+        overflow-x: hidden;
+      }
       & .content-wrapper {
         height: 99%;
         width: 90%;
+        gap: 1rem;
       }
-      & .content-wrapper .title-wrapper {
+      /* & .content-wrapper .title-wrapper {
         height: fit-content;
         padding: 0.2rem;
         margin-bottom: 0;
-      }
-      & .content-wrapper .title-wrapper h2 {
+      } */
+      /* & .content-wrapper .title-wrapper h2 {
         font-size: 2.3rem;
-      }
+      } */
       & .content-wrapper .payment-status-content {
         flex-direction: column;
         align-items: center;
@@ -103,6 +115,7 @@ export const WaitingPaymentWrapper = styled.div`
       }
       & .content-wrapper .payment-status-content .image-wrapper {
         height: 40%;
+        margin-bottom: 1rem;
         padding-left: 0;
       }
       & .content-wrapper .payment-status-content .image-wrapper img {

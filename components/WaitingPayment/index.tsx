@@ -58,9 +58,7 @@ const Payment = ({
                 }}
               />
             </div>
-            <div className="title-wrapper">
-              <h2>Pagamento Pix</h2>
-            </div>
+ 
             <div className="payment-status-content">
               {(accepted &&
                 paymentConfirmationStatus === acceptedResponses[0]) ||
