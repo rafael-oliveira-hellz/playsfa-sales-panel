@@ -19,7 +19,7 @@ import { PaymentLoading } from "../PaymentLoading";
 import cardValidator from "card-validator";
 import axios, { AxiosResponse } from "axios";
 import { connect, disconnect } from "../../hooks/websocket-client";
-import { WaitingPayment } from "../WaitingPayment";
+import Payment from "../WaitingPayment";
 
 interface IProps {
   selectedPlan: Plan;
@@ -340,14 +340,14 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
         <div className="modal">
           <div className="modal-content">
             {confirmed ? (
-              <WaitingPayment
+              <Payment
                 accepted={true}
                 paymentConfirmationStatus={paymentConfirmation}
                 handleCloseModal={handleCloseModal}
                 showModal={showModal}
               />
             ) : (
-              <WaitingPayment
+              <Payment
                 accepted={false}
                 paymentConfirmationStatus={paymentConfirmation}
                 handleCloseModal={handleCloseModal}
