@@ -75,7 +75,11 @@ export const WaitingPaymentWrapper = styled.div`
       height: 85%;
     }
     & .content-wrapper .payment-status-content .image-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: fit-content;
+      width: 50%;
       padding-left: 2rem;
     }
     & .content-wrapper .payment-status-content .payment-details {
@@ -83,17 +87,32 @@ export const WaitingPaymentWrapper = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      width: 50%;
       gap: 2rem;
     }
 
     & .content-wrapper .payment-status-content .pix-link {
       height: fit-content;
     }
-
-    @media all and (max-width: 750px) {
-      & {
-        overflow-x: hidden;
+    @media all and (max-width: 340px) {
+      & .content-wrapper .payment-status-content .image-wrapper {
+        height: 30%;
+        width: fit-content;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        margin-top: 5rem;
       }
+      & .content-wrapper .payment-status-content .image-wrapper img {
+        width: 90%;
+        height: 90% !important;
+      }
+      & .content-wrapper .payment-status-content .payment-details {
+        width: ${theme.sizes.fullPercentWidth};
+        height: ${theme.sizes.fullPercentHeight} !important;
+        border: 1px solid red;
+      }
+    }
+    @media all and (max-width: 750px) {
       & .content-wrapper {
         height: 99%;
         width: 90%;
@@ -114,7 +133,8 @@ export const WaitingPaymentWrapper = styled.div`
         height: 50rem;
       }
       & .content-wrapper .payment-status-content .image-wrapper {
-        height: 40%;
+        height: 45%;
+        width: fit-content;
         margin-bottom: 1rem;
         padding-left: 0;
       }
