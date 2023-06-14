@@ -146,7 +146,13 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           </label>
           <label htmlFor="mail">
             E-MAIL
-            <input id="mail" type="email" value={user?.user.email} disabled />
+            <input
+              id="mail"
+              type="email"
+              value={user?.user.email}
+              disabled
+              style={{ width: "20vw" }}
+            />
           </label>
         </div>
         <button
