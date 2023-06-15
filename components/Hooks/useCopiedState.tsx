@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const useCopiedState = () => {
   const [isCopied, setIsCopied] = useState(false);
-
+  const [error, setError] = useState(false);
   const handleCopy = (text: string) => {
     navigator.permissions
       .query({
@@ -10,7 +10,8 @@ export const useCopiedState = () => {
       })
       .then((result) => {
         console.log(result.state);
-        if (result.state === "prompt") {
+        if (result.state === "granted") {
+          setError(false);
           navigator.clipboard
             .writeText(text)
             .then(() => {
@@ -21,7 +22,8 @@ export const useCopiedState = () => {
               setIsCopied(false);
             });
         } else {
-          <p>{text}</p>;
+          setIsCopied(false);
+          setError(true);
         }
       });
     // // Será 'granted', 'denied' or 'prompt':
@@ -46,5 +48,5 @@ export const useCopiedState = () => {
     }, 2000);
   };
 
-  return { isCopied, handleCopy };
+  return { isCopied, handleCopy, error };
 };

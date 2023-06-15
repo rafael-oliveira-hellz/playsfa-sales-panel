@@ -1,11 +1,12 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as Styled from "./styles";
 import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
 import QRCode from "qrcode.react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useCopiedState } from "../Hooks/useCopiedState";
+import { PixText } from "./PixCode";
 
 interface IProps {
   accepted?: boolean;
@@ -23,7 +24,9 @@ const Payment = ({
   type,
   pixLink,
 }: IProps) => {
-  const { isCopied, handleCopy } = useCopiedState();
+  const { isCopied, handleCopy, error } = useCopiedState();
+
+  const [modal, setModal] = useState(true);
 
   const acceptedResponses = [
     "PAGAMENTO RECEBIDO",
@@ -43,6 +46,7 @@ const Payment = ({
     }
     return paymentConfirmationStatus;
   };
+
   return (
     <>
       {showModal && (
@@ -92,6 +96,12 @@ const Payment = ({
                             {isCopied ? "Copiado!" : "Copiar"}
                           </Styled.CopyButton>
                         </div>
+                        {/* <PixText modal={modal} setModal={setModal}>
+                            <p>
+                              Click aqui!
+                              {pixLink}
+                            </p>
+                          </PixText> */}
                       </>
                     )}
                   </div>

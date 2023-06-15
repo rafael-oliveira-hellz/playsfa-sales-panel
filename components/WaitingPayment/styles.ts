@@ -37,7 +37,7 @@ export const WaitingPaymentWrapper = styled.div`
       border-radius: 1rem;
       width: 70%;
       min-height: 90vh;
-      height: 95%;
+      /* height: 98%; */
       gap: 5rem;
     }
 
@@ -92,9 +92,16 @@ export const WaitingPaymentWrapper = styled.div`
     }
 
     & .content-wrapper .payment-status-content .pix-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: fit-content;
     }
+    & .content-wrapper .payment-status-content .pix-link .pix-code-wrapper {
+
     @media all and (max-width: 340px) {
+
       & .content-wrapper .payment-status-content .image-wrapper {
         height: 30%;
         width: fit-content;
@@ -112,7 +119,7 @@ export const WaitingPaymentWrapper = styled.div`
         border: 1px solid red;
       }
     }
-    @media all and (max-width: 750px) {
+    @media all and (max-width: 760px) {
       & .content-wrapper {
         height: 99%;
         width: 90%;
@@ -132,6 +139,7 @@ export const WaitingPaymentWrapper = styled.div`
         justify-content: center;
         height: 50rem;
       }
+
       & .content-wrapper .payment-status-content .image-wrapper {
         height: 45%;
         width: fit-content;
@@ -153,6 +161,38 @@ export const WaitingPaymentWrapper = styled.div`
     }
   `}
 `;
+
+export const PixCodeWrapper = styled.div`
+  ${({ theme }) => css`
+    position: absolute;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border: 1px solid red;
+    /* top: 50%; */
+    align-self: center;
+    z-index: 9999999;
+
+    & strong {
+      color: #000;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 0 1rem;
+    }
+    & p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      padding: 0 1rem;
+      word-break: break-all;
+    }
+  `}
+`;
+
 export const CopyButton = styled.button`
   ${({ theme }) => css`
     display: inline-block;
