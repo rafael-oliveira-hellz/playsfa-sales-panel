@@ -4,8 +4,15 @@ export const useCopiedState = () => {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setIsCopied(true);
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setIsCopied(true);
+      })
+      .catch(() => {
+        setIsCopied(false);
+      });
+
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
