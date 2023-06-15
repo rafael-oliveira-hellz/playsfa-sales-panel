@@ -6,10 +6,11 @@ export const useCopiedState = () => {
   const handleCopy = (text: string) => {
     navigator.permissions
       .query({
-        name: "push",
+        name: "notifications" || "persistent-storage",
       })
       .then((result) => {
-        if (result.state === "granted") {
+        console.log(result.state);
+        if (result.state === "prompt") {
           navigator.clipboard
             .writeText(text)
             .then(() => {
@@ -20,7 +21,7 @@ export const useCopiedState = () => {
               setIsCopied(false);
             });
         } else {
-          alert("Permissão negada!");
+          <p>{text}</p>;
         }
       });
     // // Será 'granted', 'denied' or 'prompt':
