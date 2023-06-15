@@ -6,7 +6,7 @@ export const useCopiedState = () => {
   const handleCopy = (text: string) => {
     navigator.permissions
       .query({
-        name: "persistent-storage",
+        name: "push",
       })
       .then((result) => {
         if (result.state === "granted") {
