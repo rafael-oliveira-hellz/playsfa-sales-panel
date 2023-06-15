@@ -9,7 +9,8 @@ export const useCopiedState = () => {
       .then(() => {
         setIsCopied(true);
       })
-      .catch(() => {
+      .catch((e) => {
+        alert(`Ocorreu um erro! Tente novamente mais tarde. ${e}`);
         setIsCopied(false);
       });
 
