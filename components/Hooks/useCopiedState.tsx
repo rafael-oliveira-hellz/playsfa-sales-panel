@@ -10,8 +10,6 @@ export const useCopiedState = () => {
       })
       .then((result) => {
         if (result.state === "granted") {
-          alert("Permissão negada!");
-        } else {
           navigator.clipboard
             .writeText(text)
             .then(() => {
@@ -21,6 +19,8 @@ export const useCopiedState = () => {
               alert(`Ocorreu um erro! Tente novamente mais tarde. ${e}`);
               setIsCopied(false);
             });
+        } else {
+          alert("Permissão negada!");
         }
       });
     // // Será 'granted', 'denied' or 'prompt':
