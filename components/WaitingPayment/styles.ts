@@ -132,6 +132,7 @@ export const WaitingPaymentWrapper = styled.div`
         max-width: 84rem;
         height: 99%;
       }
+
       & .content-wrapper .close-modal svg {
         font-size: 2.5rem !important;
       }
