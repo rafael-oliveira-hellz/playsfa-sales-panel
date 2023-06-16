@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const useCopiedState = () => {
   const [isCopied, setIsCopied] = useState(false);
+  const [error, setError] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
+
+  // useEffect(() => {
+  //   window.addEventListener(
+  //     "click",
+  //     () => {
+  //       // console.log(openModal);
+  //       setOpenModal(false);
+  //     },
+  //     { capture: true }
+  //   );
+  // }, [openModal]);
 
   const handleCopy = (text: string) => {
     navigator.permissions
@@ -11,6 +24,7 @@ export const useCopiedState = () => {
       .then((result) => {
         console.log(result.state);
         if (result.state === "prompt") {
+          setError(false);
           navigator.clipboard
             .writeText(text)
             .then(() => {
@@ -21,7 +35,9 @@ export const useCopiedState = () => {
               setIsCopied(false);
             });
         } else {
-          <p>{text}</p>;
+          setIsCopied(false);
+          setError(true);
+          // setOpenModal(true);
         }
       });
     // // Será 'granted', 'denied' or 'prompt':
@@ -46,5 +62,5 @@ export const useCopiedState = () => {
     }, 2000);
   };
 
-  return { isCopied, handleCopy };
+  return { isCopied, handleCopy, error };
 };

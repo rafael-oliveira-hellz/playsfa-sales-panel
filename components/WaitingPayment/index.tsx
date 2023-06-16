@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as Styled from "./styles";
 import Deadpool from "../../pages/assets/loading/deadpool.gif";
 import Chuck from "../../pages/assets/loading/chuck.gif";
@@ -23,7 +23,7 @@ const Payment = ({
   type,
   pixLink,
 }: IProps) => {
-  const { isCopied, handleCopy } = useCopiedState();
+  const { isCopied, handleCopy, error } = useCopiedState();
 
   const acceptedResponses = [
     "PAGAMENTO RECEBIDO",
@@ -43,6 +43,7 @@ const Payment = ({
     }
     return paymentConfirmationStatus;
   };
+
   return (
     <>
       {showModal && (
@@ -74,7 +75,7 @@ const Payment = ({
               ) : (
                 <>
                   <div className="image-wrapper">
-                    <Image src={Deadpool} alt="Chuck Norris" />
+                    <Image src={Deadpool} alt="Deadpool" />
                   </div>
                   <div className="payment-details">
                     <h2>{validatePaymentStatus()}</h2>
@@ -92,6 +93,21 @@ const Payment = ({
                             {isCopied ? "Copiado!" : "Copiar"}
                           </Styled.CopyButton>
                         </div>
+                        {error && (
+                          <div className="pix-code-wrapper">
+                            <strong>
+                              Erro no botão copiar. Copie manualmente o seu
+                              código abaixo.
+                            </strong>
+                            <span>{pixLink}</span>
+                          </div>
+                        )}
+                        {/* <PixText modal={modal} setModal={setModal}>
+                            <p>
+                              Click aqui!
+                              {pixLink}
+                            </p>
+                          </PixText> */}
                       </>
                     )}
                   </div>
