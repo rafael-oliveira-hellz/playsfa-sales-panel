@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import "../styles/globals.css";
 import { UserProvider, PlanProvider } from "../contexts/Provider";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./styles/Theme";
-import GlobalStyles from "./styles/GlobalStyles";
+import { theme } from "../styles/Theme";
+import GlobalStyles from "../styles/GlobalStyles";
 import { Header } from "../components/Header";
 
 function App({ Component, pageProps }: AppProps) {

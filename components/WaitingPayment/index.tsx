@@ -6,6 +6,7 @@ import Chuck from "../../pages/assets/loading/chuck.gif";
 import QRCode from "qrcode.react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useCopiedState } from "../Hooks/useCopiedState";
+import { PixText } from "./PixCode";
 
 interface IProps {
   accepted?: boolean;
@@ -24,6 +25,8 @@ const Payment = ({
   pixLink,
 }: IProps) => {
   const { isCopied, handleCopy, error } = useCopiedState();
+
+  // const [modal, setModal] = useState(true);
 
   const acceptedResponses = [
     "PAGAMENTO RECEBIDO",
