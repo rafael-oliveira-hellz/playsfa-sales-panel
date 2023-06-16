@@ -24,7 +24,6 @@ export const WaitingPaymentWrapper = styled.div`
       padding: 0 1rem;
       background-color: ${theme.colors.fonts};
       height: ${theme.sizes.fullPercentHeight};
-      /* border: 1px solid red; */
     }
 
     & .content-wrapper .close-modal {
@@ -33,7 +32,6 @@ export const WaitingPaymentWrapper = styled.div`
       align-items: center;
       width: ${theme.sizes.fullPercentWidth};
       padding: 1rem;
-      /* border: 1px solid yellowgreen; */
     }
 
     & .content-wrapper .payment-status-content {
@@ -42,14 +40,12 @@ export const WaitingPaymentWrapper = styled.div`
       justify-content: flex-start;
       align-items: center;
       height: ${theme.sizes.fullPercentHeight};
-      /* border: 2px solid blue; */
     }
     & .content-wrapper .payment-status-content .image-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       height: auto;
-      /* border: 2px solid darkgreen; */
     }
     & .content-wrapper .payment-status-content .image-wrapper img {
       width: 50%;
@@ -61,7 +57,6 @@ export const WaitingPaymentWrapper = styled.div`
       align-items: center;
       height: ${theme.sizes.fullPercentHeight};
       gap: 1rem;
-      /* border: 2px solid black; */
     }
     & .content-wrapper .payment-status-content .payment-details h2 {
       color: ${theme.colors.footer};
@@ -78,14 +73,12 @@ export const WaitingPaymentWrapper = styled.div`
     & .content-wrapper .payment-status-content .payment-details canvas {
       width: 18rem !important;
       height: 18rem !important;
-      /* border: 2px solid red; */
     }
     & .content-wrapper .payment-status-content .payment-details .pix-link {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 50%;
-      /* border: 1px solid blue; */
     }
     &
       .content-wrapper
@@ -98,7 +91,6 @@ export const WaitingPaymentWrapper = styled.div`
       align-items: center;
       width: ${theme.sizes.fullPercentWidth};
       height: ${theme.sizes.fullPercentHeight};
-      /* border: 2px solid darkred; */
     }
     &
       .content-wrapper
@@ -163,8 +155,6 @@ export const CopyButton = styled.button`
     cursor: pointer;
     text-decoration: none;
     max-width: 16rem;
-
-    /* margin-top: 10px; */
 
     &:hover {
       background-color: ${theme.colors.primaryHover};
