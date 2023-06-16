@@ -126,16 +126,25 @@ export const WaitingPaymentWrapper = styled.div`
       color: ${theme.colors.footer};
     }
     @media all and (min-width: 750px) {
-      & .content-wrapper .close-modal svg {
-        font-size: 2.5rem !important;
-      }
       & .content-wrapper {
         width: 80%;
         border-radius: 1rem;
         max-width: 84rem;
+        height: 99%;
+      }
+      & .content-wrapper .close-modal svg {
+        font-size: 2.5rem !important;
       }
       & .content-wrapper .payment-status-content .image-wrapper img {
         width: 70%;
+      }
+      & .content-wrapper .payment-status-content .payment-details canvas {
+        width: 16rem !important;
+        height: 16rem !important;
+      }
+      & .content-wrapper .payment-status-content .payment-details .pix-link {
+        width: 100%;
+        transform: translateY(-0.5rem);
       }
     }
   `}
@@ -153,6 +162,7 @@ export const CopyButton = styled.button`
     cursor: pointer;
     text-decoration: none;
     max-width: 16rem;
+
     /* margin-top: 10px; */
 
     &:hover {
@@ -161,6 +171,15 @@ export const CopyButton = styled.button`
 
     &.copied {
       background-color: ${theme.colors.success};
+    }
+
+    @media all and (min-width: 750px) {
+      & {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+      }
     }
   `}
 `;
