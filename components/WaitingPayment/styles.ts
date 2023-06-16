@@ -139,14 +139,15 @@ export const WaitingPaymentWrapper = styled.div`
         align-items: center;
         width: ${theme.sizes.fullPercentHeight};
         transform: translateY(-0.5rem);
+        cursor: text;
       }
-      & .content-wrapper
+      &
+        .content-wrapper
         .payment-status-content
         .payment-details
         .pix-code-wrapper {
         display: none;
       }
-    }
     }
   `}
 `;
