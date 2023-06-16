@@ -10,7 +10,7 @@ export const useCopiedState = () => {
       })
       .then((result) => {
         console.log(result.state);
-        if (result.state === "granted") {
+        if (result.state === "prompt") {
           setError(false);
           navigator.clipboard
             .writeText(text)

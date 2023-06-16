@@ -26,7 +26,7 @@ const Payment = ({
 }: IProps) => {
   const { isCopied, handleCopy, error } = useCopiedState();
 
-  const [modal, setModal] = useState(true);
+  // const [modal, setModal] = useState(true);
 
   const acceptedResponses = [
     "PAGAMENTO RECEBIDO",
@@ -96,12 +96,6 @@ const Payment = ({
                             {isCopied ? "Copiado!" : "Copiar"}
                           </Styled.CopyButton>
                         </div>
-                        {/* <PixText modal={modal} setModal={setModal}>
-                            <p>
-                              Click aqui!
-                              {pixLink}
-                            </p>
-                          </PixText> */}
                       </>
                     )}
                   </div>
