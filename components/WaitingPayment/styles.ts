@@ -75,10 +75,7 @@ export const WaitingPaymentWrapper = styled.div`
       height: 18rem !important;
     }
     & .content-wrapper .payment-status-content .payment-details .pix-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50%;
+      display: none;
     }
     &
       .content-wrapper
@@ -117,6 +114,7 @@ export const WaitingPaymentWrapper = styled.div`
       line-height: 1.2;
       color: ${theme.colors.footer};
     }
+
     @media all and (min-width: 750px) {
       & .content-wrapper {
         width: 80%;
@@ -136,9 +134,19 @@ export const WaitingPaymentWrapper = styled.div`
         height: 16rem !important;
       }
       & .content-wrapper .payment-status-content .payment-details .pix-link {
-        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: ${theme.sizes.fullPercentHeight};
         transform: translateY(-0.5rem);
       }
+      & .content-wrapper
+        .payment-status-content
+        .payment-details
+        .pix-code-wrapper {
+        display: none;
+      }
+    }
     }
   `}
 `;

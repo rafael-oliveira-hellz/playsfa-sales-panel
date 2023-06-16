@@ -93,11 +93,18 @@ const Payment = ({
                             {isCopied ? "Copiado!" : "Copiar"}
                           </Styled.CopyButton>
                         </div>
-                        {error && (
+                        {error ? (
                           <div className="pix-code-wrapper">
                             <strong>
                               Erro no botão copiar. Copie manualmente o seu
                               código abaixo.
+                            </strong>
+                            <span>{pixLink}</span>
+                          </div>
+                        ) : (
+                          <div className="pix-code-wrapper">
+                            <strong>
+                              Seu código Pix foi gerado com sucesso!
                             </strong>
                             <span>{pixLink}</span>
                           </div>
