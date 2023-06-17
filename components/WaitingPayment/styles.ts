@@ -6,153 +6,152 @@ export const WaitingPaymentWrapper = styled.div`
     opacity: 1;
     position: fixed;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: ${theme.sizes.fullPercentWidth};
-    min-height: ${theme.sizes.fullVH};
-    height: ${theme.sizes.fullPercentHeight};
     background: rgba(0, 0, 0, 0.78);
     z-index: 9999;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    gap: 3rem;
     transition: all 250ms ease-in-out;
 
-    p {
-      color: #333;
-      font-weight: 900;
-      font-size: 1.2rem;
-    }
     & .content-wrapper {
       display: flex;
-      flex-wrap: wrap;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1rem;
       background-color: ${theme.colors.fonts};
-      border-radius: 1rem;
-      width: 70%;
-      min-height: 90vh;
-      height: 95%;
-      gap: 5rem;
+      height: ${theme.sizes.fullPercentHeight};
     }
 
     & .content-wrapper .close-modal {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
-      width: ${theme.sizes.full};
-      height: 3rem;
+      width: ${theme.sizes.fullPercentWidth};
       padding: 1rem;
-      margin-top: 1rem;
     }
 
-    /* & .content-wrapper .title-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: ${theme.sizes.fullPercentWidth};
-      height: 8%;
-      margin-bottom: 3rem;
-      padding: 1rem;
-    } */
-    /* & .content-wrapper .title-wrapper h2, */
-    & .content-wrapper .payment-status-content .payment-details h2 {
-      color: ${theme.colors.footer};
-      font-size: 3.5rem;
-      line-height: 1.2;
-    }
     & .content-wrapper .payment-status-content {
       display: flex;
-      justify-content: center;
-      width: ${theme.sizes.fullPercentWidth};
-      min-height: fit-content;
-      height: 85%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: ${theme.sizes.fullPercentHeight};
     }
     & .content-wrapper .payment-status-content .image-wrapper {
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: fit-content;
+      align-items: center;
+      height: auto;
+    }
+    & .content-wrapper .payment-status-content .image-wrapper img {
       width: 50%;
-      padding-left: 2rem;
     }
     & .content-wrapper .payment-status-content .payment-details {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      width: 50%;
-      gap: 2rem;
+      height: ${theme.sizes.fullPercentHeight};
+      gap: 1rem;
+    }
+    & .content-wrapper .payment-status-content .payment-details h2 {
+      color: ${theme.colors.footer};
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      line-height: 1.2;
+    }
+    & .content-wrapper .payment-status-content .payment-details p {
+      color: #333;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    & .content-wrapper .payment-status-content .payment-details canvas {
+      width: 18rem !important;
+      height: 18rem !important;
+    }
+    & .content-wrapper .payment-status-content .payment-details .pix-link {
+      display: none;
+    }
+    &
+      .content-wrapper
+      .payment-status-content
+      .payment-details
+      .pix-code-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      width: ${theme.sizes.fullPercentWidth};
+      height: ${theme.sizes.fullPercentHeight};
+    }
+    &
+      .content-wrapper
+      .payment-status-content
+      .payment-details
+      .pix-code-wrapper
+      strong {
+      word-wrap: break-word;
+      color: ${theme.colors.footer};
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+    }
+    &
+      .content-wrapper
+      .payment-status-content
+      .payment-details
+      .pix-code-wrapper
+      span {
+      word-wrap: break-word;
+      word-break: break-all;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      color: ${theme.colors.footer};
     }
 
-    & .content-wrapper .payment-status-content .pix-link {
-      height: fit-content;
-    }
-    @media all and (max-width: 340px) {
-      & .content-wrapper .payment-status-content .image-wrapper {
-        height: 30%;
-        width: fit-content;
-        margin-bottom: 1rem;
-        padding-left: 0;
-        margin-top: 5rem;
-      }
-      & .content-wrapper .payment-status-content .image-wrapper img {
-        width: 90%;
-        height: 90% !important;
-      }
-      & .content-wrapper .payment-status-content .payment-details {
-        width: ${theme.sizes.fullPercentWidth};
-        height: ${theme.sizes.fullPercentHeight} !important;
-        border: 1px solid red;
-      }
-    }
-    @media all and (max-width: 750px) {
+    @media all and (min-width: 750px) {
       & .content-wrapper {
+        width: 80%;
+        border-radius: 1rem;
+        max-width: 84rem;
         height: 99%;
-        width: 90%;
-        gap: 1rem;
       }
-      /* & .content-wrapper .title-wrapper {
-        height: fit-content;
-        padding: 0.2rem;
-        margin-bottom: 0;
-      } */
-      /* & .content-wrapper .title-wrapper h2 {
-        font-size: 2.3rem;
-      } */
-      & .content-wrapper .payment-status-content {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 50rem;
-      }
-      & .content-wrapper .payment-status-content .image-wrapper {
-        height: 45%;
-        width: fit-content;
-        margin-bottom: 1rem;
-        padding-left: 0;
+
+      & .content-wrapper .close-modal svg {
+        font-size: 2.5rem !important;
       }
       & .content-wrapper .payment-status-content .image-wrapper img {
-        height: ${theme.sizes.fullPercentHeight};
+        width: 70%;
       }
-      & .content-wrapper .payment-status-content .payment-details {
-        height: 60%;
+      & .content-wrapper .payment-status-content .payment-details canvas {
+        width: 16rem !important;
+        height: 16rem !important;
       }
-      & .content-wrapper .payment-status-content .payment-details h2 {
-        font-size: 2rem;
+      & .content-wrapper .payment-status-content .payment-details .pix-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: ${theme.sizes.fullPercentHeight};
+        transform: translateY(-0.5rem);
+        cursor: text;
       }
-      & .content-wrapper .payment-status-content .payment-details p {
-        text-align: center;
+      &
+        .content-wrapper
+        .payment-status-content
+        .payment-details
+        .pix-code-wrapper {
+        display: none;
       }
     }
   `}
 `;
+
 export const CopyButton = styled.button`
   ${({ theme }) => css`
     display: inline-block;
@@ -164,7 +163,7 @@ export const CopyButton = styled.button`
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    /* margin-top: 10px; */
+    max-width: 16rem;
 
     &:hover {
       background-color: ${theme.colors.primaryHover};
@@ -172,6 +171,15 @@ export const CopyButton = styled.button`
 
     &.copied {
       background-color: ${theme.colors.success};
+    }
+
+    @media all and (min-width: 750px) {
+      & {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+      }
     }
   `}
 `;
