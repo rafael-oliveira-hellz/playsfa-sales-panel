@@ -55,23 +55,23 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
         setLoader(true);
 
         try {
-          const timer = setTimeout(async () => {
-            const res = await axios.post(
-              "https://api.comprar.vip/plans/pix/requestData",
-              {
-                ...body,
-              }
-            );
+          // const timer = setTimeout(async () => {
+          const res = await axios.post(
+            "https://api.comprar.vip/plans/pix/requestData",
+            {
+              ...body,
+            }
+          );
 
-            setQr(res.data.qrcode.qrcode);
-            setQrcodeReceived(true);
-            setConfirmed(false);
-            setLoader(false);
-            setShowModal(true);
-          }, 3000);
-          return () => {
-            clearTimeout(timer);
-          };
+          setQr(res.data.qrcode.qrcode);
+          setQrcodeReceived(true);
+          setConfirmed(false);
+          setLoader(false);
+          setShowModal(true);
+          // }, 3000);
+          // return () => {
+          //   clearTimeout(timer);
+          // };
         } catch (error: any) {
           setError({
             status: true,

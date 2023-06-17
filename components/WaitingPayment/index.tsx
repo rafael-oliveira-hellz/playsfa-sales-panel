@@ -58,7 +58,7 @@ const Payment = ({
                 }}
               />
             </div>
- 
+
             <div className="payment-status-content">
               {(accepted &&
                 paymentConfirmationStatus === acceptedResponses[0]) ||
