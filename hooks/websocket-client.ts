@@ -78,9 +78,10 @@ const connect = (
 };
 
 const disconnect = () => {
-  if (client.connected) {
+  if (client.connected || client.active) {
     client.deactivate();
   }
 };
 
 export { connect, disconnect };
+
