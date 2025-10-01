@@ -49,7 +49,7 @@ const connect = (
   };
 
   const subscribeToPixTopic = () => {
-    if (client.connected) {
+    if (client.connected || client.active) {
       client.subscribe(
         `/user/${sessionId}/topic/response`,
         (message: IMessage) => {
@@ -62,7 +62,7 @@ const connect = (
   };
 
   const subscribeToCardTopic = () => {
-    if (client.connected) {
+    if (client.connected || client.active) {
       client.subscribe(
         `/user/${sessionId}/topic/notifications`,
         (message: IMessage) => {
@@ -78,9 +78,10 @@ const connect = (
 };
 
 const disconnect = () => {
-  if (client.connected) {
+  if (client.connected || client.active) {
     client.deactivate();
   }
 };
 
 export { connect, disconnect };
+
