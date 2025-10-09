@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "playsfa-nextjs-app",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,9 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "pm2": "pm2 start yarn --name \"psfa-painel-de-vendas\" --interpreter bash -- start"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   },
   "dependencies": {
     "@emotion/styled": "^11.10.5",

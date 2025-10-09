@@ -6,7 +6,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
-  // adds rewrites for the redirects
   async rewrites() {
     return [
       {
