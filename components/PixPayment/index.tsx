@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from "react";
-import * as Styled from "./styles";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { connect, disconnect } from "../../hooks/websocket-client";
 import { Plan } from "../../types/Plan";
 import { UserContextData } from "../../types/User";
-import axios from "axios";
 import { PixPaymentLoading } from "../PixLoader";
-import { connect, disconnect } from "../../hooks/websocket-client";
 import Payment from "../WaitingPayment";
+import * as Styled from "./styles";
 interface IProps {
   selectedPlan: Plan;
   user: UserContextData;
@@ -41,7 +41,9 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
       try {
         setLoading(true);
 
-        if (!cpf || !email) {
+        const cleanCpf = cpf.replace(/[^\d]/g, "");
+
+        if (!cleanCpf || !email) {
           setError({
             status: true,
             message: "E-mail/CPF inválido!",
@@ -50,7 +52,7 @@ export const PixPayment = ({ selectedPlan, user }: IProps) => {
           return;
         }
 
-        const body = { email, plan, cpf };
+        const body = { email, plan, cpf: cleanCpf };
 
         setLoader(true);
 

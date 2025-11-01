@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useReducer } from "react";
-import * as Styled from "./styles";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import { ClientData } from "../CreditCardPayment/ClientData";
-import { CreditCardData } from "../CreditCardPayment";
-import { Thanks } from "./Thanks";
-import { AddressData } from "../CreditCardPayment/AddressData";
-import { RecurrencyData } from "../CreditCardPayment/RecurrencyData";
+import axios from "axios";
+import cardValidator from "card-validator";
+import React, { useEffect, useReducer, useState } from "react";
 import { FiSend } from "react-icons/fi";
-import { useForm } from "../Hooks/useForm";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { connect, disconnect } from "../../hooks/websocket-client";
 import {
   CardData,
+  CustomAddress,
+  CustomUser,
   Plan,
   UserContextData,
-  CustomUser,
-  CustomAddress,
 } from "../../types/";
+import { CreditCardData } from "../CreditCardPayment";
+import { AddressData } from "../CreditCardPayment/AddressData";
+import { ClientData } from "../CreditCardPayment/ClientData";
+import { RecurrencyData } from "../CreditCardPayment/RecurrencyData";
+import { useForm } from "../Hooks/useForm";
 import { PaymentLoading } from "../PaymentLoading";
-import cardValidator from "card-validator";
-import axios, { AxiosResponse } from "axios";
-import { connect, disconnect } from "../../hooks/websocket-client";
 import Payment from "../WaitingPayment";
+import * as Styled from "./styles";
+import { Thanks } from "./Thanks";
 
 interface IProps {
   selectedPlan: Plan;
@@ -197,9 +197,15 @@ export const MultiStepForm = ({ selectedPlan, user }: IProps) => {
     cardPaymentTokenDTO: CardData
   ) => {
     try {
+      const cleanedUser = {
+        ...customUser,
+        cpf: customUser.cpf?.replace(/[^\d]/g, "") || "",
+        phone: customUser.phone?.replace(/[^\d]/g, "") || "",
+      };
+
       const body = {
         recurrency: opcaoSelecionada,
-        customUser,
+        customUser: cleanedUser,
         customAddress: customAddress,
         plan: selectedPlan,
         cardPaymentTokenDTO: cardPaymentTokenDTO,
